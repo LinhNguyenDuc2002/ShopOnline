@@ -1,0 +1,135 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+p {
+    padding: 0px;
+    margin: 0px 0px;
+}
+div {
+    padding: 0px;
+    margin: 0px;
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+p#contact {
+    width: fit-content;
+    height: 50px;
+    color: white;
+    font: message-box;
+    margin: 0px 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+.direct-button {
+    margin: 0px 150px;
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.direct-button button {
+    background-color: black;
+    color: white;
+    border: 0px;
+    height: 100%;
+    padding: 0px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100px;
+}
+.direct-button button:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.body {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+}
+.header-body {
+    width: 100%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content-body {
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2px;
+    border-top: 2px solid lightgrey;
+}
+.left-content {
+    margin: 0px 150px;
+    width: fit-content;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left-content button {
+    width: 120px;
+    height: 100%;
+    background-color: white;
+    border: 0px;
+    padding: 0px 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.left-content button:hover {
+    background-color: red;
+}
+.right-content {
+    margin: 0px 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.search {
+    margin: 0px 20px;
+    height: 30px;
+    display: flex;
+}
+input#search-text {
+    height: 100%;
+    width: 400px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    font-size: 15px;
+}
+.right-content i {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right-content i {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+    cursor: pointer;
+}
