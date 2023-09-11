@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="./style/signup.css">
 </head>
 <body>
+
     <%@ include file="header.jsp" %>
+
     <div class="content">
         <div class="content-title">
             <p id="content-title">Create a new account</p>
@@ -33,7 +35,7 @@
                 
                 <div class="signup-right">
                     <p>Birthday</p>
-                    <input type="text">
+                    <input type="date">
                     <p>Phone number</p>
                     <input type="text">
                     <p>Email</p>
@@ -42,9 +44,12 @@
             </form>
             <div class="signup-button">
                 <button class="create-account">Sign up</button>
-                <button class="back">Back</button>
+                <button class="back"><i class="fa-solid fa-reply"></i>Back</button>
             </div>
         </div>
     </div>
+
+    <%@ include file="footer.jsp" %>
+
 </body>
 </html>
