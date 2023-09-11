@@ -55,7 +55,7 @@ public class test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("signup.jsp").forward(request, response);
+        request.getRequestDispatcher("editPersonal.jsp").forward(request, response);
     } 
 
     /** 

@@ -17,13 +17,24 @@
         <link rel="stylesheet" href="./css/all.min.css">
     </head>
     <body>
-        <div class="header">
+        <div class="header1">
             <p id="contact">Hotline: 1900.1001</p>
             
-            <div class="direct-button">
+            <div class="avatar">
                 <button class="signup">Sign up</button>
                 <button class="login">Log in</button>
                 <button class="contact">Contact</button>
+            </div>
+        </div>
+
+        <div class="header2">
+            <p id="contact">Hotline: 1900.1001</p>
+            
+            <div class="avatar">
+                <p>Hello, Linh Nguyen Duc</p>
+                <div class="avt">
+                    <i class="fa-solid fa-user fa-xl"></i>
+                </div>
             </div>
         </div>
 

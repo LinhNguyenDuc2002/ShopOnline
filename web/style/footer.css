@@ -1,0 +1,48 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+p {
+    padding: 0px;
+    margin: 0px 0px;
+}
+div {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    width: 100%;
+}
+
+.footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+    position: absolute;
+    font-family: sans-serif;
+}
+.footer-form {
+    margin: 50px 200px;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+}
+.footer-title {
+    width: fit-content;
+    padding: 5px 0px;
+    border-bottom: 2px solid white;
+    font-weight: bold;
+}
+.footer-content {
+    margin: 40px 0px;
+}
+.footer-content p {
+    margin: 20px 0px;
+}
+.footer-follow i {
+    margin-right: 40px;
+}
+.footer-contact i {
+    margin-right: 20px;
+}
