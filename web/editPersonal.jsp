@@ -54,7 +54,7 @@
                         <p>Country</p>
                         <input type="text">
                         <p>Note</p>
-                        <textarea name="" id="" width="500px" height="100px"></textarea>
+                        <textarea ></textarea>
                     </div>
                 </form>
 
