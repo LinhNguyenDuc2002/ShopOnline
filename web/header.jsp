@@ -20,7 +20,7 @@
         <div class="header1">
             <p id="contact">Hotline: 1900.1001</p>
             
-            <div class="avatar">
+            <div class="avatar1">
                 <button class="signup">Sign up</button>
                 <button class="login">Log in</button>
                 <button class="contact">Contact</button>
@@ -30,7 +30,7 @@
         <div class="header2">
             <p id="contact">Hotline: 1900.1001</p>
             
-            <div class="avatar">
+            <div class="avatar2">
                 <p>Hello, Linh Nguyen Duc</p>
                 <div class="avt">
                     <i class="fa-solid fa-user fa-xl"></i>
