@@ -42,6 +42,7 @@ body {
 }
 .footer-follow i {
     margin-right: 40px;
+    cursor: pointer;
 }
 .footer-contact i {
     margin-right: 20px;
