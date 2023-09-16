@@ -12,6 +12,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.User;
+import service.UserService;
 
 /**
  *
@@ -19,6 +25,14 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="SignUp", urlPatterns={"/signup"})
 public class SignUp extends HttpServlet {
+    private UserService userService;
+    
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        userService = new UserService();
+    }
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -68,7 +82,24 @@ public class SignUp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String fullname = request.getParameter("fullname");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String birthday = request.getParameter("birthday");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        
+        try {
+            boolean check = userService.addUser(fullname, username, password, birthday, email, phone);
+            if(check) {
+                System.out.println("ok");
+            }
+            else {
+
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     /** 
