@@ -59,8 +59,18 @@ p#content-title {
     font-family: sans-serif;
     font-size: 15px;
 }
+
+.policy {
+    margin: 20px 50px;
+}
+.policy p {
+    font-size: 12px;
+    font-weight: normal;
+    margin: 5px 0px;
+}
+
 .signup-button {
-    margin: 40px 50px;
+    margin: 30px 50px;
     align-items: center;
     justify-content: space-between;
     display: flex;
@@ -86,4 +96,39 @@ p#content-title {
 }
 .signup-button i {
     margin: 0px 5px;
+}
+
+.success-form {
+    margin: 30px 450px;
+}
+.success-content p {
+    padding: 5px 0px;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+.success-content i {
+    margin-right: 5px;
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+}
+button.login-account {
+    width: 120px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    border: 0px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: pointer;
+    margin: 30px 0px;
+}
+button.login-account:hover {
+    background-color: white;
+    color: blue;
+    border: 1px solid red;
 }
