@@ -13,18 +13,18 @@ import java.util.Date;
  * @author LinhNguyenDuc
  */
 public class DateUtil {
-    public Date convertDateFromString(String date) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Định dạng của chuỗi ngày
+    public static Date convertDateFromString(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
         try {
-            Date result = dateFormat.parse(date); // Chuyển chuỗi thành đối tượng ngày
+            Date result = dateFormat.parse(date);
             return result;
         } catch (ParseException e) {
             throw new ParseException("Date format is wrong", 0);
         }
     }
     
-    public Date getDateNow() {
-        return null;
+    public static Date getDateNow() {
+        return new Date();
     }
 }
