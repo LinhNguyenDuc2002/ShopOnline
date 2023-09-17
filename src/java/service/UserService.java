@@ -6,6 +6,7 @@ package service;
 
 import config.DBConnection;
 import dao.UserDAO;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import util.DateUtil;
@@ -16,18 +17,19 @@ import util.DateUtil;
  */
 public class UserService {
     private UserDAO userDAO;
-    
-    private DateUtil dateUtil;
 
     public UserService() {
         userDAO = new UserDAO();
-        dateUtil = new DateUtil();
     }
     
     public boolean addUser(String fullname, String username, String password,
             String birthday, String email, String phone) throws ParseException {
-        Date birthdayToDate = dateUtil.convertDateFromString(birthday);
+        Date birthdayToDate = DateUtil.convertDateFromString(birthday);
         
         return userDAO.addUser(fullname, username, password, birthdayToDate, email, phone);
+    }
+    
+    public boolean checkExistUserByUsername(String username) {
+        return userDAO.checkExistUserByUsername(username);
     }
 }
