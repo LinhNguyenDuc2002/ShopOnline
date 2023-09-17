@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="test", urlPatterns={"/test"})
+@WebServlet(name="test", urlPatterns={"/success"})
 public class test extends HttpServlet {
    
     /** 
@@ -55,7 +55,7 @@ public class test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("editPersonal.jsp").forward(request, response);
+        request.getRequestDispatcher("signup_success.jsp").forward(request, response);
     } 
 
     /** 
