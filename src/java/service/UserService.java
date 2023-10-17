@@ -8,7 +8,8 @@ import config.DBConnection;
 import dao.UserDAO;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
+import java.sql.Date;
+import model.User;
 import util.DateUtil;
 
 /**
@@ -24,9 +25,14 @@ public class UserService {
     
     public boolean addUser(String fullname, String username, String password,
             String birthday, String email, String phone) throws ParseException {
-        Date birthdayToDate = DateUtil.convertDateFromString(birthday);
+        Date birthdayToDate = DateUtil.convertStringToDate(birthday);
+        Date now = DateUtil.getDateNow();
         
-        return userDAO.addUser(fullname, username, password, birthdayToDate, email, phone);
+        return userDAO.addUser(fullname, username, password, birthdayToDate, email, phone, now);
+    }
+    
+    public User getUser(long id) {
+        return userDAO.getUser(id);
     }
     
     public boolean checkExistUserByUsername(String username) {

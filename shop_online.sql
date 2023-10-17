@@ -1,13 +1,13 @@
 CREATE DATABASE shop_online;
 
 CREATE TABLE category(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
 
 CREATE TABLE product(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     product_name VARCHAR(255) NOT NULL,
     category_id BIGINT NOT NULL,
     unit VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE product(
 );
 
 CREATE TABLE user(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     fullname VARCHAR(255) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE user(
 );
 
 CREATE TABLE bill(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT NOT NULL,
     order_date DATE NOT NULL,
     delivery_address VARCHAR(255) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE bill(
 );
 
 CREATE TABLE detail_order(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     bill_id BIGINT NOT NULL,
     product_id BIGINT NOT NULL,
     quantity BIGINT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE detail_order(
 );
 
 CREATE TABLE comment(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     product_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     posting_date DATE NOT NULL,

@@ -17,15 +17,17 @@ body {
 
 .general-info {
     margin: 10px 50px;
-    padding: 20px 50px;
-    border: 2px solid black;
+    padding: 20px;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     border-radius: 10px;
+    background-image: url(../image/348318079_595197412721739_9122079256357154697_n.jpg);
 }
 .image {
     height: 150px;
     width: 150px;
+    margin: 0px 30px;
     border-radius: 50%;
     background: whitesmoke;
     display: flex;
@@ -34,10 +36,54 @@ body {
     cursor: pointer;
 }
 div#general-info {
-    margin: 0px 100px;
+    margin: 0px 50px;
 }
 .image i {
     font-size: 100px;
+}
+.button-edit {
+    margin: 0px 30px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.button-edit button {
+    margin: 20px 0px;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.button-edit button:hover {
+    color: blue;
+    background-color: white;
+}
+.nickname {
+    display: flex;
+}
+p#main {
+    margin: 0px 10px;
+    font-size: 30px;
+    height: fit-content;
+}
+p#date {
+    font-weight: normal;
+    font-size: 13px;
+    margin: 15px;
+}
+.bio {
+    margin: 0px 10px;
+    font-size: 15px;
+    color: grey;
+    background: none;
+    border: 0px;
+    pointer-events: none;
+    height: 50px;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-user {
@@ -61,7 +107,7 @@ p#edit-title {
 .edit-form {
     margin-top: 30px;
 }
-.edit-form form {
+.edit {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -101,10 +147,11 @@ p#edit-title {
     font-weight: normal;
 }
 input[type="radio"] {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     margin-right: 20px;
     cursor: pointer;
+    accent-color: blue;
 }
 
 .edit-button {

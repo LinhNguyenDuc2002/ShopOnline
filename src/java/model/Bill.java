@@ -13,15 +13,15 @@ import java.util.Date;
 public class Bill {
     private long id;
     
-    private long userId;
+    private User user;
     
     private Date orderDate;
     
     private String deliveryAddress;
 
-    public Bill(long id, long userId, Date orderDate, String deliveryAddress) {
+    public Bill(long id, User user, Date orderDate, String deliveryAddress) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.orderDate = orderDate;
         this.deliveryAddress = deliveryAddress;
     }
@@ -37,12 +37,12 @@ public class Bill {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getOrderDate() {

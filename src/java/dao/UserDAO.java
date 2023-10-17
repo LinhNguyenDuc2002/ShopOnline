@@ -10,7 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
+import model.User;
 import util.DateUtil;
 
 /**
@@ -25,20 +26,21 @@ public class UserDAO {
     }
     
     public boolean addUser(String fullname, String username, String password,
-            Date birthday, String email, String phone) {
-        String sql = "INSERT INTO user (fullname, username, password, birthday, email, phone, join_date) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            Date birthday, String email, String phone, Date now) {
+        String sql = "INSERT INTO user (fullname, username, password, birthday, email, phone, join_date, role, status) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
-            System.out.println(connection);
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, fullname);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);
-            preparedStatement.setDate(4, (java.sql.Date) birthday);
+            preparedStatement.setDate(4, birthday);
             preparedStatement.setString(5, email);
             preparedStatement.setString(6, phone);
-            preparedStatement.setDate(7, (java.sql.Date) DateUtil.getDateNow());
+            preparedStatement.setDate(7, now);
+            preparedStatement.setString(8, "USER");
+            preparedStatement.setBoolean(9, true);
 
             preparedStatement.executeUpdate();
             return true;
@@ -48,16 +50,50 @@ public class UserDAO {
         }
     }
     
+    public User getUser(long id ) {
+        String sql = "SELECT * FROM User WHERE id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            User user = new User();
+            while (resultSet.next()) {
+                user.setId(resultSet.getLong("id"));
+                user.setFullname(resultSet.getString("fullname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setBirthday(resultSet.getDate("birthday"));
+                user.setCity(resultSet.getString("city"));
+                user.setCountry(resultSet.getString("country"));
+                user.setDetail_address(resultSet.getString("detail_address"));
+                user.setRole(resultSet.getString("role"));
+                user.setNote(resultSet.getString("note"));
+                user.setJoin_date(resultSet.getDate("join_date"));
+                user.setStatus(resultSet.getBoolean("status"));
+                user.setSex(resultSet.getBoolean("sex"));
+                
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public boolean checkExistUserByUsername(String username) {
         String sql = "SELECT * FROM User WHERE username = ?";
         
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
-                System.out.println("A="+resultSet);
                 return true;
             }
             return false;
