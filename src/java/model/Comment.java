@@ -13,9 +13,9 @@ import java.util.Date;
 public class Comment {
     private long id;
     
-    private long productId;
+    private Product product;
     
-    private long userId;
+    private User user;
     
     private Date postingDate;
     
@@ -23,10 +23,10 @@ public class Comment {
     
     private String content;
 
-    public Comment(long id, long productId, long userId, Date postingDate, byte[] image, String content) {
+    public Comment(long id, Product product, User user, Date postingDate, byte[] image, String content) {
         this.id = id;
-        this.productId = productId;
-        this.userId = userId;
+        this.product = product;
+        this.user = user;
         this.postingDate = postingDate;
         this.image = image;
         this.content = content;
@@ -43,20 +43,20 @@ public class Comment {
         this.id = id;
     }
 
-    public long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getPostingDate() {

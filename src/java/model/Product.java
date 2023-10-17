@@ -15,7 +15,7 @@ public class Product {
     
     private String productName;
     
-    private long categoryId;
+    private Category category;
     
     private String unit;
     
@@ -36,10 +36,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String productName, long categoryId, String unit, double price, double discount, long available, long sold, byte[] image, Date updateDay, String description) {
+    public Product(long id, String productName, Category category, String unit, double price, double discount, long available, long sold, byte[] image, Date updateDay, String description) {
         this.id = id;
         this.productName = productName;
-        this.categoryId = categoryId;
+        this.category = category;
         this.unit = unit;
         this.price = price;
         this.discount = discount;
@@ -49,6 +49,8 @@ public class Product {
         this.updateDay = updateDay;
         this.description = description;
     }
+
+    
 
     public long getId() {
         return id;
@@ -66,12 +68,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getUnit() {

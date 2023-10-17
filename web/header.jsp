@@ -31,7 +31,7 @@
         <p id="contact">Hotline: 1900.1001</p>
         
         <div class="avatar2">
-            <p>Hello, Linh Nguyen Duc</p>
+            <p class="user">Hello, ${requestScope.user.getFullname()}</p>
             <div class="avt">
                 <i class="fa-solid fa-user fa-xl"></i>
             </div>
@@ -58,8 +58,38 @@
                 <i class="fa-solid fa-cart-shopping fa-lg"></i>
             </div>
         </div>
+
+        <div class="selection-table">
+            <div class="profile">
+                <p>See all profile</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <p>Cart</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-truck"></i>
+                <p>Purchased orders</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-gear"></i>
+                <p>Setting & privacy</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-question"></i>
+                <p>Help & support</p>
+            </div>
+            <div class="selection">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log out</p>
+            </div>
+        </div>
     </div>
-    
+
     <script src="./script/header.js"></script>
 </body>
 </html>

@@ -14,8 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -103,6 +104,7 @@ public class SignUp extends HttpServlet {
             String errorFullname = InvalidUser.checkFullname(fullname);
             String errorUsername = InvalidUser.checkUsername(username);
             String errorPassword = InvalidUser.checkPassword(password);
+            String errorPhone = InvalidUser.checkPhoneNumber(phone);
             
             if(errorFullname != null) {
                 errors.add(errorFullname);
@@ -113,25 +115,31 @@ public class SignUp extends HttpServlet {
             if(errorPassword != null) {
                 errors.add(errorPassword);
             }
+            if(errorPhone != null) {
+                errors.add(errorPhone);
+            }
         }
         
         if(!errors.isEmpty()) {
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("birthday", birthday);
-            request.setAttribute("phone", phone);
-            request.setAttribute("email", email);
+            Map<String, String> input = new HashMap<>();
+            input.put("fullname", fullname);
+            input.put("username", username);
+            input.put("password", password);
+            input.put("birthday", birthday);
+            input.put("phone", phone);
+            input.put("email", email);
+            
+            request.setAttribute("input", input);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
-        response.sendRedirect("http://localhost:9999/shop/success");
-//        try {
-//            userService.addUser(fullname, username, password, birthday, email, phone);
-//            request.getRequestDispatcher("signup_success.jsp").forward(request, response);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        try {
+            userService.addUser(fullname, username.toLowerCase(), password, birthday, email.toLowerCase(), phone);
+            response.sendRedirect("http://localhost:9999/shop/success");
+        } catch (ParseException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

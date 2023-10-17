@@ -19,6 +19,9 @@ public class InvalidUser {
         if(fullname.equals("") || fullname == null) {
             return "Fullname cannot be empty";
         }
+        if(!invalidFullname(fullname)) {
+            return "Fullname can only contain special characters like 'a-z'";
+        }
         return null;
     }
     
@@ -55,8 +58,25 @@ public class InvalidUser {
         return matcher.matches();
     }
     
+    public static boolean invalidFullname(String fullname) {
+        String allow = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String regex = "^[ " + Pattern.quote(allow) + "]+$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(fullname);
+
+        return matcher.matches();
+    }
+    
     public static boolean checkExistUsername(String username) throws IOException {
         UserService userService = new UserService();
         return userService.checkExistUserByUsername(username.toLowerCase());
+    }
+    
+    public static String checkPhoneNumber(String phone) {
+        if(!phone.matches("[0-9]+")) {
+            return "Invalid phone number";
+        }
+        return null;
     }
 }

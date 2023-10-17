@@ -28,20 +28,20 @@
                 <div class="form">
                     <div class="signup-left">
                         <p>Name</p>
-                        <input type="text" name="fullname" id="fullname" value="${requestScope.fullname}">
+                        <input type="text" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}">
                         <p>Username</p>
-                        <input type="text" name="username" id="username" value="${requestScope.username}">
+                        <input type="text" name="username" id="username" value="${requestScope.input.get("username")}">
                         <p>Password</p>
-                        <input type="text" name="password" id="password" value="${requestScope.password}">
+                        <input type="text" name="password" id="password" value="${requestScope.input.get("password")}">
                     </div>
                     
                     <div class="signup-right">
                         <p>Birthday</p>
-                        <input type="date" name="birthday" id="birthday" value="${requestScope.birthday}">
+                        <input type="date" name="birthday" id="birthday" value="${requestScope.input.get("birthday")}">
                         <p>Phone number</p>
-                        <input type="text" name="phone" id="phone" value="${requestScope.phone}">
+                        <input type="text" name="phone" id="phone" value="${requestScope.input.get("phone")}">
                         <p>Email</p>
-                        <input type="text" name="email" id="email" value="${requestScope.email}">
+                        <input type="text" name="email" id="email" value="${requestScope.input.get("email")}">
                     </div>
                 </div>
 

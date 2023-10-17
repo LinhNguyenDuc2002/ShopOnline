@@ -25,56 +25,71 @@
         <div class="edit-form">
             <div class="general-info">
                 <div class="image"><i class="fa-solid fa-user fa-xl"></i></div>
+
                 <div class="button-edit"> 
+                    <button>Change avatar</button>
+                    <button>Delete account</button>
                 </div>
+
                 <div id="general-info">
-                    <p>Nguyen Duc Linh</p>
-                    <p>Joined: 15/08/2023</p>
+                    <div class="nickname">
+                        <p id="main">Nguyen Duc Linh</p>
+                        <p id="date">Joined: ${requestScope.user.getJoin_date()}</p>
+                    </div>
+
+                    <textarea readonly disabled class="bio">${requestScope.user.getNote()} hellaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalo</textarea>
+                    
                 </div>
             </div>
 
-            <form action="">
-                <div class="edit-left">
-                    <p>Name</p>
-                    <input type="text">
-                    <p>Username</p>
-                    <input type="text">
-                    <p>Password</p>
-                    <input type="text">
-                    <p>Birthday</p>
-                    <input type="date">
-                    <p>Phone number</p>
-                    <input type="text">
-                    <p>Email</p>
-                    <input type="text">
-                </div>
-                
-                <div class="edit-right">
-                    <p>Gender</p>
-                    <div class="radio">
-                        <label for="">
-                                <input type="radio" name="gender" value="male">Male
-                        </label>
-                        <label for=""><input type="radio" name="gender" value="female">Female</label>
+            <form action="http://localhost:9999/shop/user" method="POST">
+                <div class="edit">
+                    <div class="edit-left">
+                        <p>Name</p>
+                        <input type="text" name="fullname" value="${requestScope.user.getFullname()}">
+                        <p>Username</p>
+                        <input type="text" name="username" value="${requestScope.user.getUsername()}">
+                        <p>Password</p>
+                        <input type="text" name="password" value="${requestScope.user.getPassword()}">
+                        <p>Birthday</p>
+                        <input type="date" name="birthday" value="${requestScope.user.getBirthday()}">
+                        <p>Phone number</p>
+                        <input type="text" name="phone" value="${requestScope.user.getPhone()}">
+                        <p>Email</p>
+                        <input type="text" name="email" value="${requestScope.user.getEmail()}">
                     </div>
-                    <p>Detail address</p>
-                    <input type="text">
-                    <p>City</p>
-                    <input type="text">
-                    <p>Country</p>
-                    <input type="text">
-                    <p>Note</p>
-                    <textarea ></textarea>
+                    
+                    <div class="edit-right">
+                        <p>Gender</p>
+                        <div class="radio">
+                            <label for="">
+                                <input type="radio" name="gender" ${requestScope.user.getSex() == "true" ? "checked" : ""}>Male
+                            </label>
+                            <label for="">
+                                <input type="radio" name="gender" ${requestScope.user.getSex() == "false" ? "checked" : ""}>Female
+                            </label>
+                        </div>
+                        <p>Detail address</p>
+                        <input type="text" name="detail_address" value="${requestScope.user.getDetail_address()}">
+                        <p>City</p>
+                        <input type="text" name="city" value="${requestScope.user.getCity()}">
+                        <p>Country</p>
+                        <input type="text" name="country" value="${requestScope.user.getCountry()}">
+                        <p>Note</p>
+                        <textarea name="note">${requestScope.user.getNote()}</textarea>
+                    </div>
+                </div>
+
+                 <div class="edit-button">
+                    <button class="save">Save</button>
+                    <button class="back" onclick="goBack()"><i class="fa-solid fa-reply"></i>Back</button>
                 </div>
             </form>
-
-            <div class="edit-button">
-                <button class="save">Save</button>
-                <button class="back"><i class="fa-solid fa-reply"></i>Back</button>
-            </div>
         </div>
     </div>
 
     <%@ include file="footer.jsp" %>
+
+    <script src="./script/edit_user.js"></script>
 </body>
 </html>

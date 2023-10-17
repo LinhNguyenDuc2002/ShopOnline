@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="test", urlPatterns={"/success"})
-public class test extends HttpServlet {
+@WebServlet(name="VerifySignUp", urlPatterns={"/success"})
+public class VerifySignUp extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -55,7 +55,7 @@ public class test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("signup_success.jsp").forward(request, response);
+        request.getRequestDispatcher("signupSuccess.jsp").forward(request, response);
     } 
 
     /** 

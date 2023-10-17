@@ -21,6 +21,8 @@ public class User {
     
     private Date birthday;
     
+    private Boolean sex;
+    
     private byte [] avatar;
     
     private String phone;
@@ -35,9 +37,11 @@ public class User {
     
     private String role;
     
-    private boolean status;
+    private Boolean status;
     
     private String note;
+    
+    private Date join_date;
 
     public User() {
     }
@@ -171,4 +175,22 @@ public class User {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
+    public Date getJoin_date() {
+        return join_date;
+    }
+
+    public void setJoin_date(Date join_date) {
+        this.join_date = join_date;
+    }
+    
+    
 }

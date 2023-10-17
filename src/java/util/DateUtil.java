@@ -6,25 +6,23 @@ package util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
  * @author LinhNguyenDuc
  */
 public class DateUtil {
-    public static Date convertDateFromString(String date) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public static Date convertStringToDate(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        try {
-            Date result = dateFormat.parse(date);
-            return result;
-        } catch (ParseException e) {
-            throw new ParseException("Date format is wrong", 0);
-        }
+        Date result = new Date(dateFormat.parse(date).getTime());
+        return result;
     }
     
     public static Date getDateNow() {
-        return new Date();
+        Calendar calendar = Calendar.getInstance();
+        return new Date(calendar.getTime().getTime());
     }
 }
