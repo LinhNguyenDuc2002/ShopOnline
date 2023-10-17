@@ -97,27 +97,22 @@ public class SignUp extends HttpServlet {
         String phone = request.getParameter("phone");
 
         List<String> errors = new ArrayList<>();
-        if (fullname == "" || username == "" || password == "" || birthday == "" || email == "" || phone == "") {
-            errors.add("You must enter complete information!");
+        String errorFullname = InvalidUser.checkFullname(fullname);
+        String errorUsername = InvalidUser.checkUsername(username);
+        String errorPassword = InvalidUser.checkPassword(password);
+        String errorPhone = InvalidUser.checkPhoneNumber(phone);
+
+        if(errorFullname != null) {
+            errors.add(errorFullname);
         }
-        else {
-            String errorFullname = InvalidUser.checkFullname(fullname);
-            String errorUsername = InvalidUser.checkUsername(username);
-            String errorPassword = InvalidUser.checkPassword(password);
-            String errorPhone = InvalidUser.checkPhoneNumber(phone);
-            
-            if(errorFullname != null) {
-                errors.add(errorFullname);
-            }
-            if(errorUsername != null) {
-                errors.add(errorUsername);
-            }
-            if(errorPassword != null) {
-                errors.add(errorPassword);
-            }
-            if(errorPhone != null) {
-                errors.add(errorPhone);
-            }
+        if(errorUsername != null) {
+            errors.add(errorUsername);
+        }
+        if(errorPassword != null) {
+            errors.add(errorPassword);
+        }
+        if(errorPhone != null) {
+            errors.add(errorPhone);
         }
         
         if(!errors.isEmpty()) {

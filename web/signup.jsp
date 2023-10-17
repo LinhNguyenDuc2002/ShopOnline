@@ -27,21 +27,33 @@
             <form action="http://localhost:9999/shop/signup" method="POST">
                 <div class="form">
                     <div class="signup-left">
-                        <p>Name</p>
-                        <input type="text" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}">
-                        <p>Username</p>
-                        <input type="text" name="username" id="username" value="${requestScope.input.get("username")}">
-                        <p>Password</p>
-                        <input type="text" name="password" id="password" value="${requestScope.input.get("password")}">
+                        <div class="inputBox">
+                            <input type="text" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required><i>Name</i>
+                        </div>
+                        
+                        <div class="inputBox">
+                            <input type="text" name="username" id="username" value="${requestScope.input.get("username")}" required><i>Username</i>
+                        </div>
+                        
+                        <div class="inputBox">
+                            <input type="text" name="password" id="password" value="${requestScope.input.get("password")}" required><i>Password</i>
+                        </div>
+                        
                     </div>
                     
                     <div class="signup-right">
-                        <p>Birthday</p>
-                        <input type="date" name="birthday" id="birthday" value="${requestScope.input.get("birthday")}">
-                        <p>Phone number</p>
-                        <input type="text" name="phone" id="phone" value="${requestScope.input.get("phone")}">
-                        <p>Email</p>
-                        <input type="text" name="email" id="email" value="${requestScope.input.get("email")}">
+                        <div class="inputBox">
+                            <input type="date" name="birthday" id="birthday" value="${requestScope.input.get("birthday")}"><i>Birthday</i>
+                        </div>
+                        
+                        <div class="inputBox">
+                            <input type="text" name="phone" id="phone" value="${requestScope.input.get("phone")}" required><i>Phone number</i>
+                        </div>
+                        
+                        <div class="inputBox">
+                            <input type="email" name="email" id="email" value="${requestScope.input.get("email")}" required><i>Email</i>
+                        </div>
+                        
                     </div>
                 </div>
 
