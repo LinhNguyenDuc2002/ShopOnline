@@ -1,0 +1,125 @@
+.tong{
+    display: flex;
+    margin: 20px 90px;
+    padding: 20px 20px;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+    font-size: 18px;
+}
+.tieu-de{
+  font-size:25px;
+  border-bottom: 3px solid red;
+  padding: 50px 0 10px 30px;
+  font-weight:1000;
+  margin: auto 100px;
+}
+.left-input{
+    margin: 50px 0;
+}
+.left-input label,.right-input label{
+    display: inline-block;
+    min-width: 150px;
+    font-weight: 700;
+}
+.left-input select{
+    width: 70%;
+    height: 30px;
+}
+.left-input input{
+    height: 30px;
+    width: 70%;
+}
+.left{
+    width: 50%;
+}
+.right{
+    margin-left:100px ;
+    width: 40%;
+    margin-top: 50px;
+}
+.right-input{
+    margin-bottom: 20px;
+}
+/* container */
+.container {
+    margin-left: 30px;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+  }
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  .container input:checked ~ .checkmark {
+    background-color: red;
+  }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+/* ......... */
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.label{
+    text-align: center;
+    padding: 10px 0;
+    width: 200px;
+   
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: red;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: blue;
+}
+.button1{
+  margin-left: 0;
+}
+.nut{
+  display: flex;
+  justify-content: space-between
+}
