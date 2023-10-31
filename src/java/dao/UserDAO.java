@@ -25,20 +25,19 @@ public class UserDAO {
         this.connection = DBConnection.getConnection();
     }
     
-    public boolean addUser(String fullname, String username, String password,
-            Date birthday, String email, String phone, Date now) {
+    public boolean addUser(User user) {
         String sql = "INSERT INTO user (fullname, username, password, birthday, email, phone, join_date, role, status) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, fullname);
-            preparedStatement.setString(2, username);
-            preparedStatement.setString(3, password);
-            preparedStatement.setDate(4, birthday);
-            preparedStatement.setString(5, email);
-            preparedStatement.setString(6, phone);
-            preparedStatement.setDate(7, now);
+            preparedStatement.setString(1, user.getFullname());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setDate(4, (Date) user.getBirthday());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.setDate(7, (Date) user.getJoin_date());
             preparedStatement.setString(8, "USER");
             preparedStatement.setBoolean(9, true);
 
@@ -97,6 +96,46 @@ public class UserDAO {
                 return true;
             }
             return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateUser(User user) {
+        String sql = "UPDATE user SET " +
+                "    username = ?, " +
+                "    password = ?, " +
+                "    fullname = ?, " +
+                "    birthday = ?, " +
+                "    sex = ?, " +
+//                "    avatar = ?, " +
+                "    phone = ?, " +
+                "    email = ?, " +
+                "    detail_address = ?, " +
+                "    city = ?, " +
+                "    country = ?, " +
+                "    note = ? " +
+                "    WHERE id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFullname());
+            preparedStatement.setDate(4, (Date) user.getBirthday());
+            preparedStatement.setBoolean(5, user.getSex());
+//            preparedStatement.setString(6, user.getAvatar());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.setString(7, user.getEmail());
+            preparedStatement.setString(8, user.getDetail_address());
+            preparedStatement.setString(9, user.getCity());
+            preparedStatement.setString(10, user.getCountry());
+            preparedStatement.setString(11, user.getNote());
+            preparedStatement.setLong(12, user.getId());
+
+            preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
