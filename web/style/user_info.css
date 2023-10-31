@@ -192,3 +192,14 @@ textarea {
     width: 500px;
     text-indent: 5px;
 }
+
+.error {
+    font-size: 13px;
+    font-weight: normal;
+    color: red;
+    font-family: sans-serif;
+    margin: 10px 50px;
+}
+.error p {
+    margin: 5px 0px;
+}
