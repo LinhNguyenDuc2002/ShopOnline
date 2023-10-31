@@ -40,7 +40,7 @@ public class UserService {
         User user = new User();
         user.setId(id);
         user.setFullname(map.get("fullname"));
-        user.setUsername(map.get("username"));
+//        user.setUsername(map.get("username"));
         user.setPhone(map.get("phone"));
         user.setEmail(map.get("email"));
         user.setPassword(map.get("password"));

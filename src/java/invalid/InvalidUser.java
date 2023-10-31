@@ -38,6 +38,19 @@ public class InvalidUser {
         return null;
     }
     
+    public static String checkUsernameToUpdate(String username) throws IOException {
+        if(username.equals("") || username == null) {
+            return "Username cannot be empty";
+        }
+        if(!invalidUsername(username)) {
+            return "Username can only contain special characters like 'a-z','0-9', '@', '_', '.'";
+        }
+        if(checkExistUsername(username)) {
+            return "This username already exists, please enter another username!";
+        }
+        return null;
+    }
+    
     public static String checkPassword(String password) {
         if(password.equals("") || password == null) {
             return "Password cannot be empty";

@@ -30,7 +30,7 @@
                 <div class="form">
                     <div class="signup-left">
                         <div class="inputBox">
-                            <input type="text" pattern="^[A-Za-z0-9]+$" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required
+                            <input type="text" pattern="^[A-Za-z0-9 ]+$" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required
                             title="Please enter a username without special characters"><i>Name</i>
                         </div>
                         
