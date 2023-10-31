@@ -24,11 +24,14 @@
         </div>
 
         <div class="signup-form">
-            <form action="http://localhost:9999/shop/signup" method="POST">
+            <form action="/shop/users" method="POST">
+                <input type="hidden" name="action" value="signup">
+
                 <div class="form">
                     <div class="signup-left">
                         <div class="inputBox">
-                            <input type="text" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required><i>Name</i>
+                            <input type="text" pattern="^[A-Za-z0-9]+$" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required
+                            title="Please enter a username without special characters"><i>Name</i>
                         </div>
                         
                         <div class="inputBox">
@@ -36,7 +39,7 @@
                         </div>
                         
                         <div class="inputBox">
-                            <input type="text" name="password" id="password" value="${requestScope.input.get("password")}" required><i>Password</i>
+                            <input type="text" minlength="6" name="password" id="password" value="${requestScope.input.get("password")}" required><i>Password</i>
                         </div>
                         
                     </div>
@@ -47,7 +50,7 @@
                         </div>
                         
                         <div class="inputBox">
-                            <input type="text" name="phone" id="phone" value="${requestScope.input.get("phone")}" required><i>Phone number</i>
+                            <input type="tel" pattern="[0-9]{10,11}" name="phone" id="phone" value="${requestScope.input.get("phone")}" required><i>Phone number</i>
                         </div>
                         
                         <div class="inputBox">

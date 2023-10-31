@@ -14,10 +14,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 import service.UserService;
 
@@ -25,14 +28,14 @@ import service.UserService;
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="UserController", urlPatterns={"/user"})
+@WebServlet(name="UserController", urlPatterns={"/users"})
 public class UserController extends HttpServlet {
     private UserService userService;
-   @Override
-   public void init() throws ServletException {
-        super.init();
-        userService = new UserService();
-   }
+    @Override
+    public void init() throws ServletException {
+         super.init();
+         userService = new UserService();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -68,10 +71,19 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        long id = 1;
-        User user = userService.getUser(id);
-        request.setAttribute("user", user);
-        request.getRequestDispatcher("editPersonal.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        
+        if(action == null) {
+            User user = userService.getUser(1);
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("user_info.jsp").forward(request, response);
+        }
+        else if(action.equals("login")) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        else if(action.equals("signup")) {
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -84,55 +96,25 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        System.out.println("hello");
-        Map<String, String> input = new HashMap<>();
-        input.put("fullname", request.getParameter("fullname"));
-        input.put("username", request.getParameter("username"));
-        input.put("password", request.getParameter("password"));
-//        input.put("sex", request.getParameter("sex"));
-        input.put("birthday", request.getParameter("birthday"));
-        input.put("email", request.getParameter("email"));
-        input.put("phone", request.getParameter("phone"));
-        input.put("detail_address", request.getParameter("detail_address"));
-        input.put("city", request.getParameter("city"));
-        input.put("country", request.getParameter("country"));
-        input.put("note", request.getParameter("note"));
+        String action = request.getParameter("action");
         
-        System.out.println("hello "+input.toString());
-
-//        List<String> errors = new ArrayList<>();
-//        if (fullname == "" || username == "" || password == "" || birthday == "" || email == "" || phone == "") {
-//            errors.add("You must enter complete information!");
-//        }
-//        else {
-//            String errorFullname = InvalidUser.checkFullname(fullname);
-//            String errorUsername = InvalidUser.checkUsername(username);
-//            String errorPassword = InvalidUser.checkPassword(password);
-//            
-//            if(errorFullname != null) {
-//                errors.add(errorFullname);
-//            }
-//            if(errorUsername != null) {
-//                errors.add(errorUsername);
-//            }
-//            if(errorPassword != null) {
-//                errors.add(errorPassword);
-//            }
-//        }
-//        
-//        if(!errors.isEmpty()) {
-//            Map<String, String> input = new HashMap<>();
-//            input.put("fullname", fullname);
-//            input.put("username", username);
-//            input.put("password", password);
-//            input.put("birthday", birthday);
-//            input.put("phone", phone);
-//            input.put("email", email);
-//            
-//            request.setAttribute("input", input);
-//            request.setAttribute("error", errors);
-//            request.getRequestDispatcher("signup.jsp").forward(request, response);
-//        }
+        if(action.equals("login")) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        else if(action.equals("signup")) {
+            try {
+                signup(request, response);
+            } catch (ParseException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(action.equals("update")) {
+            try {
+                update(request, response);
+            } catch (ParseException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /** 
@@ -144,4 +126,50 @@ public class UserController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
+        List<String> errors = new ArrayList<>();
+        
+        String errorUsername = InvalidUser.checkUsername(request.getParameter("username"));
+
+        if(errorUsername != null) {
+            errors.add(errorUsername);
+        }
+        
+        Map<String, String> input = new HashMap<>();
+        input.put("fullname", request.getParameter("fullname"));
+        input.put("username", request.getParameter("username"));
+        input.put("password", request.getParameter("password"));
+        input.put("birthday", request.getParameter("birthday"));
+        input.put("email", request.getParameter("email"));
+        input.put("phone", request.getParameter("phone"));
+        
+        if(!errors.isEmpty()) {
+            request.setAttribute("input", input);
+            request.setAttribute("error", errors);
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        }
+        
+        userService.addUser(input);
+    }
+    
+    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
+        List<String> errors = new ArrayList<>();
+        
+        Map<String, String> input = new HashMap<>();
+        input.put("fullname", request.getParameter("fullname"));
+        input.put("username", request.getParameter("username"));
+        input.put("password", request.getParameter("password"));
+        input.put("birthday", request.getParameter("birthday"));
+        input.put("email", request.getParameter("email"));
+        input.put("phone", request.getParameter("phone"));
+        
+        if(!errors.isEmpty()) {
+            request.setAttribute("user", userService.getUser(1));
+            request.setAttribute("error", errors);
+            request.getRequestDispatcher("user_info.jsp").forward(request, response);
+        }
+        System.out.println(input);
+        userService.updateUser(input, 1);
+        response.sendRedirect("/shop/users");
+    }
 }
