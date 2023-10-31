@@ -33,16 +33,18 @@
 
                 <div id="general-info">
                     <div class="nickname">
-                        <p id="main">Nguyen Duc Linh</p>
+                        <p id="main">${requestScope.user.getFullname()}</p>
                         <p id="date">Joined: ${requestScope.user.getJoin_date()}</p>
                     </div>
 
-                    <textarea readonly disabled class="bio">${requestScope.user.getNote()} hellaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalo</textarea>
+                    <textarea readonly disabled class="bio">${requestScope.user.getNote()}</textarea>
                     
                 </div>
             </div>
 
-            <form action="http://localhost:9999/shop/user" method="POST">
+            <form action="http://localhost:9999/shop/users" method="POST">
+                <input type="hidden" name="action" value="update">
+
                 <div class="edit">
                     <div class="edit-left">
                         <p>Name</p>
@@ -81,7 +83,7 @@
                 </div>
 
                  <div class="edit-button">
-                    <button class="save">Save</button>
+                    <button class="save" type="submit">Save</button>
                     <button class="back" onclick="goBack()"><i class="fa-solid fa-reply"></i>Back</button>
                 </div>
             </form>
