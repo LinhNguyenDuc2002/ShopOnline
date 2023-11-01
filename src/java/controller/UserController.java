@@ -14,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,12 +101,20 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
         
         if(action.equals("login")) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            try {
+                login(request, response);
+            } catch (ParseException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(action.equals("signup")) {
             try {
                 signup(request, response);
             } catch (ParseException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -126,7 +136,7 @@ public class UserController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
+    private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException {
         List<String> errors = new ArrayList<>();
         
         String errorUsername = InvalidUser.checkUsername(request.getParameter("username"));
@@ -150,6 +160,7 @@ public class UserController extends HttpServlet {
         }
         
         userService.addUser(input);
+        request.getRequestDispatcher("signup_success.jsp").forward(request, response);
     }
     
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
@@ -171,5 +182,19 @@ public class UserController extends HttpServlet {
         System.out.println(input);
         userService.updateUser(input, 1);
         response.sendRedirect("/shop/users");
+    }
+    
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        if(userService.authenticate(username, password)) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", username);
+            response.sendRedirect("/shop/users");
+        }
+        
+        request.setAttribute("error", "Username or password is incorrect! Please re-enter ");
+        request.getRequestDispatcher("signup.jsp").forward(request, response);
     }
 }

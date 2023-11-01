@@ -19,11 +19,11 @@ user.addEventListener("click", directUser)
 profile.addEventListener("click", directUser)
 
 signup.addEventListener("click", function(){
-    window.location.href = "http://localhost:9999/shop/signup"
+    window.location.href = "http://localhost:9999/shop/users?action=signup"
 })
 
 login.addEventListener("click", function(){
-    window.location.href = "http://localhost:9999/shop/login"
+    window.location.href = "http://localhost:9999/shop/users?action=login"
 })
 
 function showDropDown() {
@@ -36,5 +36,5 @@ function showDropDown() {
 }
 
 function directUser() {
-    window.location.href = "http://localhost:9999/shop/user"
+    window.location.href = "http://localhost:9999/shop/users"
 }
