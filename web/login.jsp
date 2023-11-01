@@ -36,7 +36,7 @@
                             <a href="">Quên mật khẩu ?</a>
                         </div>
                         <p>Don't have acount yet? Please sign up
-                            <a style="color: #1191e1;" href="http://localhost:9999/shop/signup">here</a>
+                            <a style="color: #1191e1;" href="http://localhost:9999/shop/users?action=signup">here</a>
                         </p>
                     </form>
                 </div>

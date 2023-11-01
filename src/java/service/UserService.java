@@ -6,7 +6,10 @@ package service;
 
 import config.DBConnection;
 import dao.UserDAO;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.sql.Date;
 import java.util.Map;
@@ -24,11 +27,26 @@ public class UserService {
         userDAO = new UserDAO();
     }
     
-    public boolean addUser(Map<String, String> map) throws ParseException {
+    public boolean authenticate(String username, String password) throws ParseException, NoSuchAlgorithmException {
+        boolean checkuser = userDAO.authenticate(username, hashPassWord(password));
+        
+        if(!checkuser) {
+            return false;
+        }
+        return true;
+    }
+    
+    private User getCurrentUser(HttpSession session) {
+        String username = session.getAttribute("username").toString();
+        
+        return userDAO.getCurrentUser(username);
+    }
+    
+    public boolean addUser(Map<String, String> map) throws ParseException, NoSuchAlgorithmException {
         Date birthdayToDate = DateUtil.convertStringToDate(map.get("birthday"));
         Date now = DateUtil.getDateNow();
         
-        User user = new User(map.get("username"), map.get("password"), map.get("fullname"), 
+        User user = new User(map.get("username"), hashPassWord(map.get("password")), map.get("fullname"), 
                             birthdayToDate, map.get("phone"), map.get("email"), now);
         
         return userDAO.addUser(user);
@@ -60,5 +78,19 @@ public class UserService {
     
     public boolean checkExistUserByUsername(String username) {
         return userDAO.checkExistUserByUsername(username);
+    }
+    
+    private String hashPassWord(String password) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            
+        byte[] hash = digest.digest(password.getBytes());
+
+        // Transfer hash to hex form
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+            hexString.append(String.format("%02x", b));
+        }
+
+        return hexString.toString();
     }
 }
