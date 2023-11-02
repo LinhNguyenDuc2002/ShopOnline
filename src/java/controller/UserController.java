@@ -194,7 +194,7 @@ public class UserController extends HttpServlet {
             response.sendRedirect("/shop/users");
         }
         
-        request.setAttribute("error", "Username or password is incorrect! Please re-enter ");
-        request.getRequestDispatcher("signup.jsp").forward(request, response);
+        request.setAttribute("error", "Username or password is incorrect! Please re-enter");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 }
