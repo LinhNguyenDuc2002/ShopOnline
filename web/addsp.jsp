@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <head>
@@ -7,8 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style/header.css">
     <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="addsp-style.css">
+    <link rel="stylesheet" href="./style/home.css">
+    <link rel="stylesheet" href="style/addsp-style.css">
     <link rel="stylesheet" href="product-style.css">
 </head>
 
@@ -76,6 +77,25 @@
             </div>
         </div>
         <div class="right">
+            <!-- <div class="right-input">
+                <label for="">Chá»n size</label>
+                <label class="container">S
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">M
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">L
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">XL
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div> -->
             <div class="right-input">
                 <label for="">Description</label>
                 <textarea name="mo-ta" id="mo-ta" cols="60" rows="10"></textarea>
@@ -84,10 +104,7 @@
                 <input type="file" name="file" id="file" class="inputfile" />
                 <label class="label" for="file" style="font-size: 20px;">Upload</label>
             </div>
-            <div class="nut">
-                <button class="button1" >Submit</button>
-                <button class="button1">Delete</button>
-            </div>
+            <button class="button1">Submit</button>
         </div>
     </div>
 

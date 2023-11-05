@@ -1,3 +1,19 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 5, 2023, 10:44:02 PM
+    Author     : Hue
+*/
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 5, 2023, 10:42:17 PM
+    Author     : Hue
+*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Quicksand&family=Rubik&display=swap');
 
 img {
@@ -10,17 +26,22 @@ img {
     padding: 0;
 }
 
-#wrapper {
-    max-width: 1170px;
-    margin: 0 auto;
-}
 
 body {
     font-size: 14px;
     line-height: 1.15;
     font-family: 'Quicksand', sans-serif;
 }
-
+.all-category{
+    margin-top: 20px;
+    /*text-align: center;*/ 
+}
+.category{
+    font-weight: 500;
+    font-size: 20px;
+    cursor:pointer;  
+   margin-left: 10px
+}
 ul.products {
     list-style: none;
     display: flex;
@@ -140,3 +161,4 @@ footer h3 {
     display: inline-block;
     font-size: 14px;
 }
+
