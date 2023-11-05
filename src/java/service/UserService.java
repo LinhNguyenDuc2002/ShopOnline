@@ -6,6 +6,7 @@ package service;
 
 import config.DBConnection;
 import dao.UserDAO;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -36,9 +37,10 @@ public class UserService {
         return true;
     }
     
-    private User getCurrentUser(HttpSession session) {
+    public User getCurrentUser(HttpServletRequest request) {
+        HttpSession session = getSession(request);
         String username = session.getAttribute("username").toString();
-        
+        System.out.println("session: "+username);
         return userDAO.getCurrentUser(username);
     }
     
@@ -72,14 +74,6 @@ public class UserService {
         return userDAO.updateUser(user);
     }
     
-    public User getUser(long id) {
-        return userDAO.getUser(id);
-    }
-    
-    public boolean checkExistUserByUsername(String username) {
-        return userDAO.checkExistUserByUsername(username);
-    }
-    
     private String hashPassWord(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
             
@@ -92,5 +86,9 @@ public class UserService {
         }
 
         return hexString.toString();
+    }
+    
+    private HttpSession getSession(HttpServletRequest request) {
+        return request.getSession(false);
     }
 }
