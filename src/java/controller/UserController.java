@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
         
         if(action == null) {
-            User user = userService.getUser(1);
+            User user = userService.getCurrentUser(request);
             request.setAttribute("user", user);
             request.getRequestDispatcher("user_info.jsp").forward(request, response);
         }
@@ -85,6 +85,16 @@ public class UserController extends HttpServlet {
         }
         else if(action.equals("signup")) {
             request.getRequestDispatcher("signup.jsp").forward(request, response);
+        }
+        else if(action.equals("logout")) {
+            try {
+                logout(request, response);
+            } catch (ParseException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     } 
 
@@ -140,9 +150,13 @@ public class UserController extends HttpServlet {
         List<String> errors = new ArrayList<>();
         
         String errorUsername = InvalidUser.checkUsername(request.getParameter("username"));
+        String errorEmail = InvalidUser.checkEmail(request.getParameter("email"));
 
         if(errorUsername != null) {
             errors.add(errorUsername);
+        }
+        if(errorEmail != null) {
+            errors.add(errorEmail);
         }
         
         Map<String, String> input = new HashMap<>();
@@ -175,7 +189,7 @@ public class UserController extends HttpServlet {
         input.put("phone", request.getParameter("phone"));
         
         if(!errors.isEmpty()) {
-            request.setAttribute("user", userService.getUser(1));
+            request.setAttribute("user", userService.getCurrentUser(request));
             request.setAttribute("error", errors);
             request.getRequestDispatcher("user_info.jsp").forward(request, response);
         }
@@ -191,10 +205,16 @@ public class UserController extends HttpServlet {
         if(userService.authenticate(username, password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
+            session.setMaxInactiveInterval(3600);
             response.sendRedirect("/shop/users");
         }
         
         request.setAttribute("error", "Username or password is incorrect! Please re-enter");
         request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+    
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
+        HttpSession session = request.getSession(false);
+        session.invalidate();
     }
 }

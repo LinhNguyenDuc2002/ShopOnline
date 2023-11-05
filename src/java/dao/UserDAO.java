@@ -102,6 +102,24 @@ public class UserDAO {
         }
     }
     
+    public boolean checkExistUserByEmail(String email) {
+        String sql = "SELECT * FROM User WHERE email = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean updateUser(User user) {
         String sql = "UPDATE user SET " +
                 "    username = ?, " +

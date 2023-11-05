@@ -82,13 +82,21 @@ public class InvalidUser {
     }
     
     public static boolean checkExistUsername(String username) throws IOException {
-        UserService userService = new UserService();
-        return userService.checkExistUserByUsername(username.toLowerCase());
+        UserDAO userDAO = new UserDAO();
+        return userDAO.checkExistUserByUsername(username);
     }
     
     public static String checkPhoneNumber(String phone) {
         if(!phone.matches("[0-9]+")) {
             return "Invalid phone number";
+        }
+        return null;
+    }
+    
+    public static String checkEmail(String email) {
+        UserDAO userDAO = new UserDAO();
+        if(userDAO.checkExistUserByEmail(email)) {
+            return "This email is already in use";
         }
         return null;
     }
