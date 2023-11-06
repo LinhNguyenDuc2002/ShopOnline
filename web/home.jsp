@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/home.css">
 </head>
-         <%@ include file="header.jsp" %>
+         <%@ include file="Header.jsp" %>
 <body>
    
     <div style="display: flex">
@@ -481,7 +481,7 @@
     </div>
   
     </div>
- <%@ include file="footer.jsp" %>
+ <%@ include file="Footer.jsp" %>
 
 </body>
 

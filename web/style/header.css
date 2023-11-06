@@ -91,7 +91,7 @@ p#contact {
     align-items: center;
     justify-content: center;
 }
-.left-content button {
+.left-content a {
     width: 120px;
     height: 100%;
     background-color: white;
@@ -104,8 +104,10 @@ p#contact {
     font-weight: bold;
     cursor: pointer;
     font-family: sans-serif;
+    text-decoration: none;
+    color: black;
 }
-.left-content button:hover {
+.left-content a:hover {
     color: blue;
 }
 .right-content {
@@ -202,6 +204,7 @@ input#search-text {
     align-items: center;
     border-bottom: 1px solid blue;
     cursor: pointer;
+    text-decoration: none;
 }
 a.selection {
     text-decoration: none;
