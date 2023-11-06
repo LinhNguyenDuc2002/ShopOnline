@@ -15,10 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author LinhNguyenDuc
+ * @author thanh
  */
-@WebServlet(name="Profile", urlPatterns={"/profile"})
-public class Profile extends HttpServlet {
+@WebServlet(name="test", urlPatterns={"/test"})
+public class test extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class Profile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignUp</title>");  
+            out.println("<title>Servlet test</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignUp at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet test at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +55,7 @@ public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
     } 
 
     /** 

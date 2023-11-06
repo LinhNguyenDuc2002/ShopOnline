@@ -1,0 +1,122 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 19, 2023, 9:52:40 PM
+    Author     : thanh
+*/
+
+body{
+  margin:0;
+}
+.logo {
+  width: 100px;
+  margin: 50px 0 50px 0;
+}
+.order {
+  display: flex;
+}
+.order-left {
+  width:60%;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  border-right: 1px #7f8c8d solid;
+  height:595px;
+}
+.main-order-left{
+  margin-top: 70px;
+}
+.nhap{
+  margin-top: 30px;
+}
+.nhap input{
+  margin-bottom: 10px;
+  width: 300px;
+  height: 30px;
+}
+.nhap textarea{
+  width: 300px;
+}
+
+.order-right {
+  width:40%;
+  background-color: #f1f2f6;
+}
+.order-right h2{
+  border-bottom: 1px #ced6e0 solid;
+  padding: 0 0 10px 20px;
+  font-size: 20px;
+}
+.order-right table{
+  margin-left: 20px;
+  width: 300px;
+  text-align: center;
+  font-size: 12px;
+}
+.ma-giam-gia{
+  margin-left: 20px;
+  border-bottom: 1px #ced6e0 solid;
+  width: 300px;
+  padding: 20px 0;
+}
+.anh-sp{
+  border: 1px #ced6e0 solid;
+  border-radius: 8px;
+  position: relative;
+}
+.so-san-pham{
+  position: absolute;
+  top: 65px;
+  right: 380px;
+  border: 1px #ced6e0 solid;
+  border-radius: 50%;
+  background-color: #25CCF7;
+  height: 1.5em;
+  width: 1.5em;
+  color: #ffffff;
+}
+.ma-giam-gia input{
+  width: 200px;
+  height: 30px;
+}
+.ap-dung{
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7bed9f;
+  color: white;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.san-pham{
+  border-bottom: 1px #ced6e0 solid;
+}
+.tam-tinh{
+  border-bottom: 1px #ced6e0 solid;
+  padding-bottom: 10px;
+}
+.previous-link{
+  text-decoration: none;
+  color: #70a1ff;
+}
+.dat-hang-button{
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7bed9f;
+  color: white;
+  cursor: pointer;
+}
+.tong{
+  color:#1e90ff;
+  font-size: 20px;
+}
+button:hover{
+  background-color: #2ed573;
+}
+a:hover{
+  color: #3742fa;
+}
