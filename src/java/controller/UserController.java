@@ -78,13 +78,13 @@ public class UserController extends HttpServlet {
         if(action == null) {
             User user = userService.getCurrentUser(request);
             request.setAttribute("user", user);
-            request.getRequestDispatcher("user_info.jsp").forward(request, response);
+            request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
         }
         else if(action.equals("login")) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
         else if(action.equals("signup")) {
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);
         }
         else if(action.equals("logout")) {
             try {
@@ -94,7 +94,7 @@ public class UserController extends HttpServlet {
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     } 
 
@@ -170,11 +170,11 @@ public class UserController extends HttpServlet {
         if(!errors.isEmpty()) {
             request.setAttribute("input", input);
             request.setAttribute("error", errors);
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            request.getRequestDispatcher("Signup.jsp").forward(request, response);
         }
         
         userService.addUser(input);
-        request.getRequestDispatcher("signup_success.jsp").forward(request, response);
+        request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
     }
     
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
@@ -191,7 +191,7 @@ public class UserController extends HttpServlet {
         if(!errors.isEmpty()) {
             request.setAttribute("user", userService.getCurrentUser(request));
             request.setAttribute("error", errors);
-            request.getRequestDispatcher("user_info.jsp").forward(request, response);
+            request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
         }
         System.out.println(input);
         userService.updateUser(input, 1);
@@ -210,7 +210,7 @@ public class UserController extends HttpServlet {
         }
         
         request.setAttribute("error", "Username or password is incorrect! Please re-enter");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
     
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
