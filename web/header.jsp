@@ -45,9 +45,9 @@
 
         <div class="content-body">
             <div class="left-content">
-                <button id="home">HOME</button>
-                <button id="category">CATEGORY</button>
-                <button id="contact-button">CONTACT</button>
+                <a href="/shop/home">HOME</a>
+                <a href="#">CATEGORY</a>
+                <a href="#">CONTACT</a>
             </div>
 
             <div class="right-content">
@@ -60,11 +60,11 @@
         </div>
 
         <div class="selection-table">
-            <a class="profile">
+            <a href="/shop/users" class="profile">
                 <p>See all profile</p>
             </a>
 
-            <a class="selection" href="#">
+            <a class="selection" href="/shop/home">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </a>

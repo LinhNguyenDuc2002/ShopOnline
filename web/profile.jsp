@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./style/profile.css">
 </head>
 <body>
-    <%@ include file="header.jsp" %>
+    <%@ include file="Header.jsp" %>
 
     <div class="content">
         <div class="content-title">
@@ -52,6 +52,6 @@
         </div>
       </div>
     <script src="./script/profile.js"></script>
-    <%@ include file="footer.jsp" %>
+    <%@ include file="Footer.jsp" %>
 </body>
 </html>
