@@ -29,7 +29,7 @@
 
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="header.jsp" %>
         
         <div class="order">
 
@@ -117,7 +117,7 @@
             </div>
         </div>
         
-        <%@ include file="Footer.jsp" %>
+        <%@ include file="footer.jsp" %>
         <script src="./script/dat_hang.js"></script>
     </body>
 </html>
