@@ -29,6 +29,8 @@
 
     </head>
     <body>
+        <%@ include file="Header.jsp" %>
+        
         <div class="order">
 
             <div class="logo-header">
@@ -114,5 +116,8 @@
 
             </div>
         </div>
+        
+        <%@ include file="Footer.jsp" %>
+        <script src="./script/dat_hang.js"></script>
     </body>
 </html>

@@ -53,15 +53,14 @@ h1 {
 
 /* Điều chỉnh bảng sản phẩm */
 .cart-content-top table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
 }
 
 .cart-content-top th {
-    background-color: #ff6b81;
-    color: #fff;
-    padding: 10px;
+    background-color: #ed1c24;
+    color: white;
     text-align: center;
 }
 
@@ -69,8 +68,6 @@ h1 {
     border: 1px solid #ccc;
     padding: 10px;
 }
-
-
 
 .cart-content-top img {
     display: block; /* Để hình ảnh trở thành một khối độc lập */
@@ -124,9 +121,9 @@ input[type="number"] {
     display: flex;
     justify-content: center; /* Để căn giữa theo chiều ngang */
     align-items: center;
-    -webkit-animation: my 700ms infinite;
+/*    -webkit-animation: my 700ms infinite;
     -moz-animation: my 700ms infinite;
-    -o-animation: my 700ms infinite;
+    -o-animation: my 700ms infinite;*/
     animation: my 700ms infinite;
 }
 
@@ -138,10 +135,10 @@ input[type="number"] {
 
 /* Điều chỉnh phần button */
 #tt, #pay {
-    background-color: #8395a7;
+    background-color: #ed1c24;
     color: #fff;
     padding: 10px 20px;
-    border: none;
+    border: 1px solid #ed1c24;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -151,13 +148,17 @@ input[type="number"] {
 
 /* Hiệu ứng hover */
 #tt:hover {
-    background-color: #555;
-    transform: scale(2.05);
+    background-color: white;
+    color: blue;
+    border: 1px solid red;
+    /*transform: scale(2.05);*/
 }
 
 #pay:hover{
-    background-color: #ff6b6b;
-    transform: scale(2.05);
+    background-color: white;
+    color: blue;
+    border: 1px solid red;
+    /*transform: scale(2.05);*/
 }
 
 .cart-content-top td span:hover {
@@ -187,11 +188,8 @@ h1:hover {
 }
 
 .bang-gia table {
-
     border-collapse: collapse;
     margin-top: 20px;
-
-
 }
 
 .bang-gia td {
@@ -238,3 +236,26 @@ b{
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.3);
 }
 
+.content-title {
+    width: 100%;
+    height: 100px;
+    border-bottom: 2px solid red;
+    position: relative;
+}
+p#content-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+    width: fit-content;
+    position: absolute;
+    bottom: 10px;
+}
+
+article {
+    margin: 0px 150px;
+}
+
+.container {
+    margin: 40px 0px;
+    font-family: sans-serif;
+}
