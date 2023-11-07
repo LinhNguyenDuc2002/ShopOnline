@@ -12,7 +12,7 @@
             <link rel="stylesheet" href="./style/login.css">
             
         </head>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="header.jsp" %>
 
             <body>
 
@@ -49,6 +49,6 @@
                 </div>
                 <script src="./script/login.js"></script>
             </body>
-            <%@ include file="Footer.jsp" %>
+            <%@ include file="footer.jsp" %>
 
         </html>

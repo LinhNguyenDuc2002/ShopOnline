@@ -32,7 +32,7 @@
     </head>
     <body>
 
-        <%@ include file="Header.jsp" %>
+        <%@ include file="header.jsp" %>
 
         <article>
             <div class="content-title">
@@ -86,7 +86,7 @@
             </div>
         </article>
 
-        <%@ include file="Footer.jsp" %>
+        <%@ include file="footer.jsp" %>
         <script src="./script/signup.js"></script>
     </body>
 </html>
