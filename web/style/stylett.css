@@ -1,161 +1,240 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 19, 2023, 9:59:21 PM
-    Author     : thanh
-*/
-
-body{
-  margin:0;
-}
-
-.boxtop{
-  float: left;
-  width:100%;
-  background-color: #333333;
-  height: 50px;
-}
-
-.boxlogo{
-  float: left;
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px #CCCCCC solid;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.boxmenu{
-  float: left;
-  width: 100%;
-  height: 50px;
-  background-color: #EEEEEE;
-}
-
-article{
-  margin: 0px 150px;
-}
-
-footer{
-  float: left;
-  width:100%;
-  background-color: #333333;
-  height: 150px;
-}
-
-.boxcenter{
-  width:70%;
-  margin: 0 auto;
-}
-
-.boxtopleft{
-  float:left;
-  height: 50px;
-  line-height: 50px;
-  color: white;
-}
-
-.boxtopright{
-  float: right;
-  height: 50px;
-  line-height: 50px;
-}
-
-.boxtopright a{
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-}
-/*..........card....*/
 @-webkit-keyframes my {
-	 0% { color: #F8CD0A; } 
-	 50% { color: #fff;  } 
-	 100% { color: #F8CD0A;  } 
- }
- @-moz-keyframes my { 
-	 0% { color: #F8CD0A;  } 
-	 50% { color: #fff;  }
-	 100% { color: #F8CD0A;  } 
- }
- @-o-keyframes my { 
-	 0% { color: #F8CD0A; } 
-	 50% { color: #fff; } 
-	 100% { color: #F8CD0A;  } 
- }
- @keyframes my { 
-	 0% { color: #F8CD0A;  } 
-	 50% { color: #fff;  }
-	 100% { color: #F8CD0A;  } 
- } 
-article h1{
-  margin: 50px auto;
-  margin-left: 0px;
-  width: 200px;
-  text-align: center;
-  -webkit-animation: my 700ms infinite;
-  -moz-animation: my 700ms infinite; 
-  -o-animation: my 700ms infinite; 
-  animation: my 700ms infinite;
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: #fff;
+    }
+    100% {
+        color: #F8CD0A;
+    }
 }
-.cart-content-top table,th,td{
-  width:90%;
-  margin: 50px auto;
-  text-align:center;
-  border: 1px #CCCCCC solid;
-  font-size: 13px;
+@-moz-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: #fff;
+    }
+    100% {
+        color: #F8CD0A;
+    }
 }
-.cart-content-top th{
-  height: 20px;
-  width: 50px;
+@-o-keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: #fff;
+    }
+    100% {
+        color: #F8CD0A;
+    }
 }
-.cart-content-top table img{
-  width:50%;
-  margin-top:10px;
-  padding:0;
-  border-radius: 5px;
+@keyframes my {
+    0% {
+        color: #F8CD0A;
+    }
+    50% {
+        color: #fff;
+    }
+    100% {
+        color: #F8CD0A;
+    }
 }
-.cart-content-top table input{
-  width:100%;
-  font-size: 10px;
+
+/* Điều chỉnh phần tiêu đề */
+h1 {
+    font-size: 30px;
+    margin: 20px 0;
+    text-align: center;
+    color:#747d8c;
 }
-.cart-content-top table p{
-  margin: 0 70px;
+
+/* Điều chỉnh bảng sản phẩm */
+.cart-content-top table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
 }
-.cart-content-top table span{
-  width: 20px;
-  display: block;
-  height: 20px;
-  border: 1px solid #dddddd;
-  cursor: pointer;
-  text-align: center;
-  margin: 0 5px;
+
+.cart-content-top th {
+    background-color: #ff6b81;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }
-.cart-content-bottom table,td{
-  width:40%;
-  height: 30px;
-  margin: 0 auto;
+
+.cart-content-top th, .cart-content-top td {
+    border: 1px solid #ccc;
+    padding: 10px;
 }
-.cart-content-right-button{
-  width:40%;
-  text-align:right;
-  margin: 10px auto;
+
+
+
+.cart-content-top img {
+    display: block; /* Để hình ảnh trở thành một khối độc lập */
+    margin: 0 auto;  /* Căn giữa theo chiều ngang */
+    max-width: 40%; /* Đảm bảo hình ảnh không vượt quá kích thước ô */
+    height: auto;
 }
-.cart-content-right-button button{
-  width: 200px;
-  height: 40px;
-  text-align:center;
-  font-weight: bold;
-  border: none;
+
+.cart-content-top td p {
+    margin: 0;
+    text-align: center;
 }
+
+/* Điều chỉnh input số lượng */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    display: block; /* Để hình ảnh trở thành một khối độc lập */
+    margin: 0 auto;
+}
+
+/* Điều chỉnh nút Xóa */
+.cart-content-top td span {
+    cursor: pointer;
+    color: #f00;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Để căn giữa theo chiều ngang */
+    align-items: center;    /* Để căn giữa theo chiều dọc */
+}
+
+/* Điều chỉnh phần tạm tính và tổng tiền */
+.cart-content-bottom table {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.cart-content-bottom td {
+    text-align: right;
+}
+
+.gia{
+    display: flex;
+    justify-content: center; /* Để căn giữa theo chiều ngang */
+    align-items: center;
+}
+
+.tong{
+    color: #ff9f43;
+    display: flex;
+    justify-content: center; /* Để căn giữa theo chiều ngang */
+    align-items: center;
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite;
+    -o-animation: my 700ms infinite;
+    animation: my 700ms infinite;
+}
+
+/* Điều chỉnh nút TIẾP TỤC MUA HÀNG và THANH TOÁN */
+.cart-content-right-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Điều chỉnh phần button */
+#tt, #pay {
+    background-color: #8395a7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 10px;
+}
+
+/* Hiệu ứng hover */
+#tt:hover {
+    background-color: #555;
+    transform: scale(2.05);
+}
+
 #pay:hover{
-  background-color: #ff4757;
-  color: white;
-  cursor: pointer;
+    background-color: #ff6b6b;
+    transform: scale(2.05);
 }
-#tt:hover{
-  background-color: #95a5a6;
-  color: white;
-  cursor: pointer;  
+
+.cart-content-top td span:hover {
+    color: #ff0000;
 }
+
+input[type="number"]:focus {
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.5);
+    outline: none;
+}
+.cart-content-top tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+h1:hover {
+    color: #555;
+    transition: color 0.3s;
+}
+
+/* Điều chỉnh phần bảng giá */
+.bang-gia {
+    margin-top: 20px;
+    margin-left: 800px;
+    text-align: right;
+    width: 30%;
+}
+
+.bang-gia table {
+
+    border-collapse: collapse;
+    margin-top: 20px;
+
+
+}
+
+.bang-gia td {
+    text-align: right;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    color: #333;
+}
+
+b{
+    font-weight: bold;
+}
+
+.bang-gia .tong {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff9f43;
+    transition: color 0.3s;
+}
+
+.bang-gia sub {
+    font-size: 16px;
+    vertical-align: super;
+}
+
+/* Hiệu ứng hover cho hàng trong bảng */
+.bang-gia tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hiệu ứng hover cho giá và tổng tiền */
+.bang-gia .gia:hover, .bang-gia .tong:hover {
+    color: #c0392b; /* Đổi màu sắc khi hover */
+}
+
+/* Tạo hiệu ứng hover mượt mà cho hàng trong bảng */
+.bang-gia tr {
+    transition: background-color 0.3s;
+}
+
+/* Hiệu ứng hover cho toàn bảng */
+.bang-gia:hover {
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.3);
+}
+
