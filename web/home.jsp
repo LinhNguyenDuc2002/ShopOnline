@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/home.css">
 </head>
-         <%@ include file="Header.jsp" %>
+         
 <body>
+    <%@ include file="header.jsp" %>
    
     <div style="display: flex">
         <div class="all-category" style="width: 15%; background-color: whitesmoke;">
@@ -481,7 +482,7 @@
     </div>
   
     </div>
- <%@ include file="Footer.jsp" %>
+ <%@ include file="footer.jsp" %>
 
 </body>
 

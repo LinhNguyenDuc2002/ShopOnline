@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <%@ include file="Header.jsp" %>
+    <%@ include file="header.jsp" %>
 
         <div class="edit-user">
             <div class="edit-title">
@@ -116,7 +116,7 @@
             </div>
         </div>
 
-        <%@ include file="Footer.jsp" %>
+        <%@ include file="footer.jsp" %>
 
         <script src="./script/edit_user.js"></script>
 </body>
