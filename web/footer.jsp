@@ -39,11 +39,32 @@
             <div class="footer-contact">
                 <div class="footer-title">CONTACT US</div>
                 <div class="footer-content">
-                    <p><i class="fa-solid fa-location-dot"></i>Store I: 159 - Nguyễn Trãi - Hà Nội</p>
-                    <p><i class="fa-solid fa-location-dot"></i>Store II: 150 - Thị trấn Đông Anh - Hà Nội</p>
-                    <p><i class="fa-solid fa-location-dot"></i>Store III: 463 Quang Trung, P.10, Q.Gò Vấp, TP.HCM</p>
-                    <p><i class="fa-solid fa-location-dot"></i>Store IV: G-Town 1, 350 Điện Biên Phủ, P.17, Q.Bình Thạnh, TP.HCM</p>
-                    <p><i class="fa-solid fa-phone"></i>1900.1001</p>
+                    <table>
+                        <tr>
+                            <td><i class="fa-solid fa-location-dot"></i></td>
+                            <td>Store I: 159 - Nguyễn Trãi - Hà Nội</td>
+                        </tr>
+
+                        <tr>
+                            <td><i class="fa-solid fa-location-dot"></i></td>
+                            <td>Store III: 463 Quang Trung, P.10, Q.Gò Vấp, TP.HCM</td>
+                        </tr>
+
+                        <tr>
+                            <td><i class="fa-solid fa-location-dot"></i></td>
+                            <td>Store III: 463 Quang Trung, P.10, Q.Gò Vấp, TP.HCM</td>
+                        </tr>
+
+                        <tr>
+                            <td><i class="fa-solid fa-location-dot"></i></td>
+                            <td>Store IV: G-Town 1, 350 Điện Biên Phủ, P.17, Q.Bình Thạnh, TP.HCM</td>
+                        </tr>
+
+                        <tr>
+                            <td><i class="fa-solid fa-phone"></i></td>
+                            <td>1900.1001</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
             <link rel="stylesheet" href="./style/login.css">
             
         </head>
-        <%@ include file="header.jsp" %>
+        <%@ include file="Header.jsp" %>
 
             <body>
 
@@ -20,28 +20,35 @@
                     <div class="content-title">
                         <p id="content-title">Login</p>
                     </div>
-                    <form>
+                    
+                    <form method="POST" action="/shop/users">
+                        <input type="hidden" name="action" value="login">
+                        
                         <label for="name">
                             <span class="login-label">Username:</span>
                             <span class="obligatory">*</span>
                         </label><br>
-                        <input id="name" type="text" placeholder="Username"><br>
+                        <input class="input" name="username" type="text" placeholder="Username"><br>
+                        
                         <label for="password">
                             <span class="login-label">Password:</span>
                             <span class="obligatory">*</span>
                         </label><br>
-                        <input id="password" type="text" placeholder="Password">
+                        <input class="input" name="password" type="text" placeholder="Password">
+                        
+                        <p class="error">${requestScope.error}</p>
+                        
                         <div class="login-button">
-                            <button>Sign in</button>
+                            <input type="submit" value="Sign in">
                             <a href="">Quên mật khẩu ?</a>
                         </div>
-                        <p>Don't have acount yet? Please sign up
-                            <a style="color: #1191e1;" href="http://localhost:9999/shop/signup">here</a>
+                        <p id="signup">Don't have acount yet? Please sign up
+                            <a style="color: #1191e1;" href="http://localhost:9999/shop/users?action=signup">here</a>
                         </p>
                     </form>
                 </div>
                 <script src="./script/login.js"></script>
             </body>
-            <%@ include file="footer.jsp" %>
+            <%@ include file="Footer.jsp" %>
 
         </html>

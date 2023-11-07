@@ -45,9 +45,9 @@
 
         <div class="content-body">
             <div class="left-content">
-                <button id="home">HOME</button>
-                <button id="category">CATEGORY</button>
-                <button id="contact-button">CONTACT</button>
+                <a href="/shop/home">HOME</a>
+                <a href="#">CATEGORY</a>
+                <a href="#">CONTACT</a>
             </div>
 
             <div class="right-content">
@@ -60,33 +60,39 @@
         </div>
 
         <div class="selection-table">
-            <div class="profile">
+            <a href="/shop/users" class="profile">
                 <p>See all profile</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="/shop/home">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="#">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p>Cart</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="#">
                 <i class="fa-solid fa-truck"></i>
                 <p>Purchased orders</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="#">
                 <i class="fa-solid fa-gear"></i>
                 <p>Setting & privacy</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="#">
                 <i class="fa-solid fa-question"></i>
                 <p>Help & support</p>
-            </div>
-            <div class="selection">
+            </a>
+
+            <a class="selection" href="/shop/users?action=logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <p>Log out</p>
-            </div>
+            </a>
         </div>
     </div>
 

@@ -44,6 +44,11 @@ body {
     margin-right: 40px;
     cursor: pointer;
 }
-.footer-contact i {
-    margin-right: 20px;
+.footer-follow i:hover {
+    color: blue;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
 }

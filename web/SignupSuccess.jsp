@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./style/signup.css">
 </head>
 <body>
-    <%@ include file="header.jsp" %>
+    <%@ include file="Header.jsp" %>
 
     <div class="content">
         <div class="content-title">
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <%@ include file="footer.jsp" %>
+    <%@ include file="Footer.jsp" %>
 
     <script src="./script/signup_success.js"></script>
 </body>

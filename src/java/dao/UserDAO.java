@@ -25,20 +25,19 @@ public class UserDAO {
         this.connection = DBConnection.getConnection();
     }
     
-    public boolean addUser(String fullname, String username, String password,
-            Date birthday, String email, String phone, Date now) {
+    public boolean addUser(User user) {
         String sql = "INSERT INTO user (fullname, username, password, birthday, email, phone, join_date, role, status) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, fullname);
-            preparedStatement.setString(2, username);
-            preparedStatement.setString(3, password);
-            preparedStatement.setDate(4, birthday);
-            preparedStatement.setString(5, email);
-            preparedStatement.setString(6, phone);
-            preparedStatement.setDate(7, now);
+            preparedStatement.setString(1, user.getFullname());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setDate(4, (Date) user.getBirthday());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.setDate(7, (Date) user.getJoin_date());
             preparedStatement.setString(8, "USER");
             preparedStatement.setBoolean(9, true);
 
@@ -91,6 +90,118 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean checkExistUserByEmail(String email) {
+        String sql = "SELECT * FROM User WHERE email = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateUser(User user) {
+        String sql = "UPDATE user SET " +
+                "    username = ?, " +
+                "    password = ?, " +
+                "    fullname = ?, " +
+                "    birthday = ?, " +
+                "    sex = ?, " +
+//                "    avatar = ?, " +
+                "    phone = ?, " +
+                "    email = ?, " +
+                "    detail_address = ?, " +
+                "    city = ?, " +
+                "    country = ?, " +
+                "    note = ? " +
+                "    WHERE id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFullname());
+            preparedStatement.setDate(4, (Date) user.getBirthday());
+            preparedStatement.setBoolean(5, user.getSex());
+//            preparedStatement.setString(6, user.getAvatar());
+            preparedStatement.setString(6, user.getPhone());
+            preparedStatement.setString(7, user.getEmail());
+            preparedStatement.setString(8, user.getDetail_address());
+            preparedStatement.setString(9, user.getCity());
+            preparedStatement.setString(10, user.getCountry());
+            preparedStatement.setString(11, user.getNote());
+            preparedStatement.setLong(12, user.getId());
+
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public User getCurrentUser(String username) {
+        String sql = "SELECT * FROM User WHERE username = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            User user = new User();
+            if(resultSet.next()) {
+                user.setId(resultSet.getLong("id"));
+                user.setFullname(resultSet.getString("fullname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setBirthday(resultSet.getDate("birthday"));
+                user.setCity(resultSet.getString("city"));
+                user.setCountry(resultSet.getString("country"));
+                user.setDetail_address(resultSet.getString("detail_address"));
+                user.setRole(resultSet.getString("role"));
+                user.setNote(resultSet.getString("note"));
+                user.setJoin_date(resultSet.getDate("join_date"));
+                user.setStatus(resultSet.getBoolean("status"));
+                user.setSex(resultSet.getBoolean("sex"));
+                
+                return user;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public boolean authenticate(String username, String password) {
+        String sql = "SELECT * FROM user WHERE username = ? and password = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {

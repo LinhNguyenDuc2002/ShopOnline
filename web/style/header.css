@@ -28,17 +28,17 @@ body {
 }
 p#contact {
     width: fit-content;
-    height: 50px;
+    height: 100%;
     color: white;
     font-family: sans-serif;
-    margin: 0px 150px;
+    margin: 0px 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
 }
 .avatar1 {
-    margin: 0px 150px;
+    margin: 0px 100px;
     height: 100%;
     width: fit-content;
     display: flex;
@@ -91,7 +91,7 @@ p#contact {
     align-items: center;
     justify-content: center;
 }
-.left-content button {
+.left-content a {
     width: 120px;
     height: 100%;
     background-color: white;
@@ -104,8 +104,10 @@ p#contact {
     font-weight: bold;
     cursor: pointer;
     font-family: sans-serif;
+    text-decoration: none;
+    color: black;
 }
-.left-content button:hover {
+.left-content a:hover {
     color: blue;
 }
 .right-content {
@@ -202,6 +204,11 @@ input#search-text {
     align-items: center;
     border-bottom: 1px solid blue;
     cursor: pointer;
+    text-decoration: none;
+}
+a.selection {
+    text-decoration: none;
+    color: black;
 }
 .selection {
     margin-top: 10px;
