@@ -9,7 +9,7 @@ body {
 .order {
     display: flex;
     justify-content: center;
-    margin: 20px auto;
+    margin: 30px 150px;
     max-width: 1200px;
     background-color: #fff;
     padding: 20px;
@@ -120,7 +120,7 @@ body {
 
 .previous-link {
     text-decoration: none;
-    color: #54a0ff;
+    color: #555;
     font-weight: bold;
     margin-right: 10px;
 }
@@ -131,9 +131,9 @@ body {
 
 .dat-hang-button {
     padding: 15px 30px;
-    background-color: #ff6b6b;
+    background-color: #ed1c24;
     color: #fff;
-    border: none;
+    border: 1px solid #ed1c24;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -141,7 +141,9 @@ body {
 
 /* Định dạng đẹp hơn cho nút, input, textarea và các yếu tố khác có thể được thêm vào */
 .dat-hang-button:hover {
-    background-color: #ee5253;
+    background-color: white;
+    color: blue;
+    border: 1px solid #ed1c24;
     transform: scale(1.1);
     transition: background-color 0.3s, transform 0.3s;
 }
@@ -163,7 +165,7 @@ body {
     opacity: 1;
 }
 .previous-link:hover {
-    color: #555;
+    color: blue;
     transition: color 0.3s;
 }
 .ap-dung:hover {
