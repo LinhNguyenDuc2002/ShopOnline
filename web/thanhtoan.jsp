@@ -35,9 +35,9 @@
         <%@ include file="Header.jsp" %>
 
         <article>
-            <h1>
-                Giỏ hàng của bạn
-            </h1>
+            <div class="content-title">
+                <p id="content-title">Cart</p>
+            </div>
 
             <div class="container">
                 <div class="cart-content">
