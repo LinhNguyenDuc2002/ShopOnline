@@ -1,122 +1,180 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 19, 2023, 9:52:40 PM
-    Author     : thanh
-*/
+/* Thiết lập font và màu chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
 
-body{
-  margin:0;
-}
-.logo {
-  width: 100px;
-  margin: 50px 0 50px 0;
-}
+/* Cài đặt độ rộng và căn giữa nội dung */
 .order {
-  display: flex;
-}
-.order-left {
-  width:60%;
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-  border-right: 1px #7f8c8d solid;
-  height:595px;
-}
-.main-order-left{
-  margin-top: 70px;
-}
-.nhap{
-  margin-top: 30px;
-}
-.nhap input{
-  margin-bottom: 10px;
-  width: 300px;
-  height: 30px;
-}
-.nhap textarea{
-  width: 300px;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
+/* Định dạng header */
+.logo-header {
+    margin-right: 20px;
+}
+.logo-header a img {
+    max-width: 150px;
+}
+
+/* Thiết lập thông tin nhận hàng */
+.order-left {
+    flex: 1;
+    padding: 10px;
+}
+
+.main-order-left h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.nhap input, .nhap textarea {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.nhap textarea{
+  resize: none;
+}
+
+/* Định dạng đơn hàng */
 .order-right {
-  width:40%;
-  background-color: #f1f2f6;
+    flex: 1;
+    padding: 10px;
 }
-.order-right h2{
-  border-bottom: 1px #ced6e0 solid;
-  padding: 0 0 10px 20px;
-  font-size: 20px;
+
+.order-right h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
-.order-right table{
-  margin-left: 20px;
-  width: 300px;
-  text-align: center;
-  font-size: 12px;
+
+.san-pham {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
 }
-.ma-giam-gia{
-  margin-left: 20px;
-  border-bottom: 1px #ced6e0 solid;
-  width: 300px;
-  padding: 20px 0;
+
+.san-pham td {
+    position: relative;
+    padding: 10px;
+    
 }
-.anh-sp{
-  border: 1px #ced6e0 solid;
-  border-radius: 8px;
-  position: relative;
+
+.anh-sp {
+    max-width: 80px;
 }
-.so-san-pham{
-  position: absolute;
-  top: 65px;
-  right: 380px;
-  border: 1px #ced6e0 solid;
-  border-radius: 50%;
-  background-color: #25CCF7;
-  height: 1.5em;
-  width: 1.5em;
-  color: #ffffff;
+
+.so-san-pham {
+    position: absolute;
+    background-color: #00d2d3;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity:0.5;
 }
-.ma-giam-gia input{
-  width: 200px;
-  height: 30px;
+
+.ma-giam-gia input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-.ap-dung{
-  height: 40px;
-  border: none;
-  border-radius: 5px;
-  background-color: #7bed9f;
-  color: white;
-  cursor: pointer;
-  opacity: 0.5;
+
+.ap-dung {
+    padding: 10px 20px;
+    background-color: #0abde3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
-.san-pham{
-  border-bottom: 1px #ced6e0 solid;
+
+.tam-tinh td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
-.tam-tinh{
-  border-bottom: 1px #ced6e0 solid;
-  padding-bottom: 10px;
+
+.tong {
+    font-size: 24px;
+    color: #ff9f43;
 }
-.previous-link{
-  text-decoration: none;
-  color: #70a1ff;
+
+.previous-link {
+    text-decoration: none;
+    color: #54a0ff;
+    font-weight: bold;
+    margin-right: 10px;
 }
-.dat-hang-button{
-  width: 70px;
-  height: 40px;
-  border: none;
-  border-radius: 5px;
-  background-color: #7bed9f;
-  color: white;
-  cursor: pointer;
+
+.previous-link__arrow {
+    margin-right: 5px;
 }
-.tong{
-  color:#1e90ff;
-  font-size: 20px;
+
+.dat-hang-button {
+    padding: 15px 30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
-button:hover{
-  background-color: #2ed573;
+
+/* Định dạng đẹp hơn cho nút, input, textarea và các yếu tố khác có thể được thêm vào */
+.dat-hang-button:hover {
+    background-color: #ee5253;
+    transform: scale(1.1);
+    transition: background-color 0.3s, transform 0.3s;
 }
-a:hover{
-  color: #3742fa;
+.ma-giam-gia input:hover {
+    background-color: #eee;
+    transition: background-color 0.3s;
+}
+.san-pham td:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+    transition: background-color 0.3s, transform 0.3s;
+}
+.anh-sp {
+    opacity: 0.1;
+    transition: opacity 0.5s;
+}
+
+.san-pham td:hover .anh-sp {
+    opacity: 1;
+}
+.previous-link:hover {
+    color: #555;
+    transition: color 0.3s;
+}
+.ap-dung:hover {
+    background-color: #2e86de;
+    transition: background-color 0.3s;
+}
+input[type="text"]:hover {
+    border-color: #555555;
+}
+input[type="text"]:focus {
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.5);
+    outline: none;
 }
