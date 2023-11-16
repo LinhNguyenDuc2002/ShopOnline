@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page import = "model.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,26 +17,37 @@
     <link rel="stylesheet" href="./css/all.min.css">
 </head>
 <body>
-    <div class="header1">
-        <p id="contact">Hotline: 1900.1001</p>
-        
-        <div class="avatar1">
-            <button class="signup">Sign up</button>
-            <button class="login">Log in</button>
-            <button class="contact">Contact</button>
-        </div>
-    </div>
 
-    <div class="header2">
-        <p id="contact">Hotline: 1900.1001</p>
-        
-        <div class="avatar2">
-            <p class="user">Hello, ${requestScope.user.getFullname()}</p>
-            <div class="avt">
-                <i class="fa-solid fa-user fa-xl"></i>
+    <% 
+        User user = (User) request.getAttribute("user");
+        if(user == null) { 
+    %>
+            <div class="header1">
+                <p id="contact">Hotline: 1900.1001</p>
+                
+                <div class="avatar1">
+                    <a class="signup" href="/shop/users?action=signup">Sign up</a>
+                    <a class="login" href="/shop/users?action=login">Log in</a>
+                    <a class="contact">Contact</a>
+                </div>
             </div>
-        </div>
-    </div>
+    <%      
+        }
+        else {
+    %>
+            <div class="header2">
+                <p id="contact">Hotline: 1900.1001</p>
+                
+                <div class="avatar2">
+                    <p class="user">Hello, ${requestScope.user.getFullname()}</p>
+                    <div class="avt">
+                        <i class="fa-solid fa-user fa-xl"></i>
+                    </div>
+                </div>
+            </div>
+    <% 
+        }
+    %>
 
     <div class="body">
         <div class="header-body">

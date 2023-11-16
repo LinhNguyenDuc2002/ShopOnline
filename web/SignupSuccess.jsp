@@ -32,7 +32,5 @@
     </div>
 
     <%@ include file="footer.jsp" %>
-
-    <script src="./script/signup_success.js"></script>
 </body>
 </html>

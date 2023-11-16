@@ -118,6 +118,5 @@
         </div>
         
         <%@ include file="footer.jsp" %>
-        <script src="./script/dat_hang.js"></script>
     </body>
 </html>
