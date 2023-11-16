@@ -33,6 +33,7 @@ import service.UserService;
 @WebServlet(name="UserController", urlPatterns={"/users"})
 public class UserController extends HttpServlet {
     private UserService userService;
+    
     @Override
     public void init() throws ServletException {
          super.init();
@@ -74,27 +75,34 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
         
+        request.setAttribute("user", user);
         if(action == null) {
-            User user = userService.getCurrentUser(request);
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
-        }
-        else if(action.equals("login")) {
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
-        else if(action.equals("signup")) {
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
-        }
-        else if(action.equals("logout")) {
-            try {
-                logout(request, response);
-            } catch (ParseException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            if(user != null) {
+                request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            else {
+                request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
+            }
+        }
+        else {
+            if(action.equals("login")) {
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+            else if(action.equals("signup")) {
+                request.getRequestDispatcher("Signup.jsp").forward(request, response);
+            }
+            else if(action.equals("logout") && user != null) {
+                try {
+                    logout(request, response);
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("/shop/users?action=login");
+            }
         }
     } 
 
@@ -158,6 +166,9 @@ public class UserController extends HttpServlet {
         if(errorEmail != null) {
             errors.add(errorEmail);
         }
+        if(request.getParameter("birthday") == null) {
+            errors.add("Birthday field is not null");
+        }
         
         Map<String, String> input = new HashMap<>();
         input.put("fullname", request.getParameter("fullname"));
@@ -206,11 +217,13 @@ public class UserController extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
             session.setMaxInactiveInterval(3600);
-            response.sendRedirect("/shop/users");
+            
+            response.sendRedirect("/shop/home");
         }
-        
-        request.setAttribute("error", "Username or password is incorrect! Please re-enter");
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        else {
+            request.setAttribute("error", "Username or password is incorrect! Please re-enter");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
     }
     
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {

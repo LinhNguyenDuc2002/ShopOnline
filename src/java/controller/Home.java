@@ -12,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
+import service.ProductService;
+import service.UserService;
 
 /**
  *
@@ -19,7 +22,16 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="Home", urlPatterns={"/home"})
 public class Home extends HttpServlet {
-   
+    private ProductService productService;
+    
+    private UserService userService;
+    
+    @Override
+    public void init() throws ServletException {
+         super.init();
+         productService = new ProductService();
+         userService = new UserService();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -55,6 +67,9 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        User user = userService.getCurrentUser(request);
+        request.setAttribute("user", user);
+        
         request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 

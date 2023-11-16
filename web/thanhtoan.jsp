@@ -87,6 +87,5 @@
         </article>
 
         <%@ include file="footer.jsp" %>
-        <script src="./script/signup.js"></script>
     </body>
 </html>

@@ -117,8 +117,6 @@
         </div>
 
         <%@ include file="footer.jsp" %>
-
-        <script src="./script/edit_user.js"></script>
 </body>
 
 </html>
