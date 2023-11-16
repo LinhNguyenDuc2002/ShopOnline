@@ -51,7 +51,6 @@
           </div>
         </div>
       </div>
-    <script src="./script/profile.js"></script>
     <%@ include file="footer.jsp" %>
 </body>
 </html>
