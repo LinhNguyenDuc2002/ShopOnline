@@ -157,7 +157,8 @@ public class ProductController extends HttpServlet {
             inputStream = filePart.getInputStream();
         }
         
-//        productService.addProduct(input, filePart);
+        productService.addProduct(input, inputStream);
+        response.sendRedirect("/shop/home");
     }
 
 }
