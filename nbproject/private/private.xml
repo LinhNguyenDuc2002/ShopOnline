@@ -9,12 +9,12 @@
             <file>file:/D:/ShopOnline/src/java/controller/NotFound.java</file>
             <file>file:/D:/ShopOnline/web/header.jsp</file>
             <file>file:/D:/ShopOnline/src/java/dao/CategoryDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/model/Category.java</file>
             <file>file:/D:/ShopOnline/src/java/dao/UserDAO.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/Home.java</file>
             <file>file:/D:/ShopOnline/src/java/service/CategoryService.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/UserController.java</file>
             <file>file:/D:/ShopOnline/web/addsp.jsp</file>
+            <file>file:/D:/ShopOnline/src/java/model/User.java</file>
             <file>file:/D:/ShopOnline/web/UserInfo.jsp</file>
         </group>
     </open-files>
