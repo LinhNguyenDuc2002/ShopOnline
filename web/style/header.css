@@ -28,6 +28,9 @@ body {
     display: flex;
     justify-content: space-between;
 }
+img {
+    height: 100%;
+}
 p#contact {
     width: fit-content;
     height: 100%;
