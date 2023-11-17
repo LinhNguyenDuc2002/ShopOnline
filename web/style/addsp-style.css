@@ -1,32 +1,31 @@
-.tong{
-    display: flex;
-    margin: 20px 90px;
-    padding: 20px 20px;
-    /* border: 1px solid rgba(0, 0, 0, 0.5); */
-    font-size: 18px;
+.tong {
+  display: flex;
+  font-size: 18px;
 }
-.tieu-de{
-  font-size:25px;
+.tieu-de {
+  font-size: 20px;
   border-bottom: 3px solid red;
-  padding: 50px 0 10px 30px;
-  font-weight:1000;
-  margin: auto 100px;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-weight: bold;
 }
 .left-input{
     margin: 50px 0;
 }
-.left-input label,.right-input label{
-    display: inline-block;
-    min-width: 150px;
-    font-weight: 700;
+.left-input label, .right-input label {
+  display: inline-block;
+  min-width: 100px;
+  font-size: 16px;
+  padding: 10px 0px;
 }
 .left-input select{
     width: 70%;
     height: 30px;
 }
-.left-input input{
-    height: 30px;
-    width: 70%;
+.left-input input {
+  height: 30px;
+  width: 70%;
+  text-indent: 5px;
 }
 .left{
     width: 50%;
@@ -105,21 +104,44 @@
    
 }
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: red;
-    display: inline-block;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border: 1px solid red;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100px;
+  height: 40px;
 }
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: blue;
+   color: blue;
+   background-color: white;
 }
-.button1{
-  margin-left: 0;
+.button1 {
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border: 1px solid red;
+  display: inline-block;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
 }
+.button1:hover{
+  color: blue;
+   background-color: white;
+}
+
 .nut{
   display: flex;
   justify-content: space-between
+}
+
+.content {
+  margin: 0px 150px;
+  font-family: sans-serif;
 }
