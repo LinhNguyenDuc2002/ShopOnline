@@ -12,7 +12,7 @@
          
 <body>
     <%@ include file="header.jsp" %>
-   
+
     <div style="display: flex">
         <div class="all-category" style="width: 15%; background-color: whitesmoke;">
             <p style="margin-bottom: 10%;font-size: 20px;font-weight: 600;margin-top: 10%">PRODUCT CATEGORY</p>

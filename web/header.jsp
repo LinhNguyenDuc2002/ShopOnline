@@ -51,7 +51,7 @@
 
     <div class="body">
         <div class="header-body">
-            <img src="" alt="Shop logo">
+            <img src="./image/logo-vpp-021.png" alt="Shop logo">
         </div>
 
         <div class="content-body">

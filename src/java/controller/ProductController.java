@@ -8,16 +8,22 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Category;
+import model.Product;
 import model.User;
 import service.CategoryService;
 import service.ProductService;
@@ -28,6 +34,7 @@ import service.UserService;
  * @author LinhNguyenDuc
  */
 @WebServlet(name="ProductController", urlPatterns={"/products"})
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 public class ProductController extends HttpServlet {
     private ProductService productService;
     
@@ -104,7 +111,17 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
         
+        request.setAttribute("user", user);
+        
+        if(user != null) {
+            if(action.equals("add")) {
+                postToAddProduct(request, response);
+            }
+            
+        }
     }
 
     /** 
@@ -121,6 +138,26 @@ public class ProductController extends HttpServlet {
         request.setAttribute("categories", categories);
         
         request.getRequestDispatcher("addsp.jsp").forward(request, response);
+    }
+    
+    private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Map<String, String> input = new HashMap<>();
+        
+        input.put("productName",request.getParameter("productName"));
+        input.put("price",request.getParameter("price"));
+        input.put("category",request.getParameter("category"));
+        input.put("available", request.getParameter("available"));
+        input.put("description", request.getParameter("description"));
+        
+        InputStream inputStream = null;
+        Part filePart = request.getPart("image");
+
+        if (filePart != null) {
+            // Đọc dữ liệu từ file ảnh upload
+            inputStream = filePart.getInputStream();
+        }
+        
+//        productService.addProduct(input, filePart);
     }
 
 }
