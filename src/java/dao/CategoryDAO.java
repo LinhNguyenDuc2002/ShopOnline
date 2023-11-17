@@ -43,4 +43,23 @@ public class CategoryDAO {
         }
         return null;
     }
+    
+    public Category getCategory(String name) {
+        String sql = "SELECT * FROM Category WHERE name = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                Category category = new Category(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3));
+                return category;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
