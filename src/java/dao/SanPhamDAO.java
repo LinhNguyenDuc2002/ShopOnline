@@ -4,7 +4,7 @@
  */
 package dao;
 
-import com.mysql.cj.jdbc.Blob;
+//import com.mysql.cj.jdbc.Blob;
 import config.DBConnection;
 import java.util.List;
 import model.Product;
@@ -31,9 +31,9 @@ public class SanPhamDAO extends DBConnection {
             ResultSet rs = ps.executeQuery();
             List<Product> list = new ArrayList<>();
             while(rs.next()){
-                Blob blob= (Blob) rs.getBlob(9);
+//                Blob blob= (Blob) rs.getBlob(9);
                 Product a = new Product(rs.getLong(1),rs.getString(2),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
-                        rs.getLong(7),rs.getLong(8),blob.getBytes(1, (int) blob.length()),rs.getDate(10),rs.getString(11));
+                        rs.getLong(7),rs.getLong(8),rs.getBytes(9),rs.getDate(10),rs.getString(11));
                 list.add(a);
             }
             return list;
@@ -50,11 +50,11 @@ public class SanPhamDAO extends DBConnection {
             Product a = null;
             while (rs.next()){
                 Category b = TimLoai(rs.getLong(3));
-                Blob blob= (Blob) rs.getBlob(9);
+//                Blob blob= (Blob) rs.getBlob(9);
                 
                 a = new Product(rs.getLong(1),rs.getString(2),rs.getString(4)
                         ,rs.getDouble(5),rs.getDouble(6),rs.getLong(7),rs.getLong(8)
-                        ,blob.getBytes(1, (int) blob.length()),rs.getDate(10),rs.getString(11));
+                        ,rs.getBytes(9),rs.getDate(10),rs.getString(11));
                 a.setCategory(b);
             }
             return a;

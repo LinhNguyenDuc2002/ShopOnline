@@ -16,36 +16,7 @@
         Product a = (Product)request.getAttribute("sanphamchitiet"); 
     %>
     <body>
-        <div class="header">
-            <p id="contact">Hotline: 1900.1001</p>
-            <div class="direct-button">
-                <button class="signup">Sign up</button>
-                <button class="login">Log in</button>
-                <button class="contact">Contact</button>
-            </div>
-        </div>
-
-        <div class="body">
-            <div class="header-body">
-                <img src="" alt="Shop logo">
-            </div>
-
-            <div class="content-body">
-                <div class="left-content">
-                    <button id="home">HOME</button>
-                    <button id="category">CATEGORY</button>
-                    <button id="contact-button">CONTACT</button>
-                </div>
-
-                <div class="right-content">
-                    <div class="search">
-                        <input type="text" name="" id="search-text">
-                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-                    </div>
-                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                </div>
-            </div>
-        </div>
+        <%@ include file="header.jsp" %>
         <section class="san-pham">
             <div class="product-content">
                 <div class="product-left">

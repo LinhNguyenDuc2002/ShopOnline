@@ -5,36 +5,51 @@
 
 package controller;
 
-import dao.SanPhamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Category;
 import model.Product;
+import model.User;
+import service.CategoryService;
 import service.ProductService;
 import service.UserService;
 
-
 /**
  *
- * @author Hue
+ * @author LinhNguyenDuc
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name="ProductController", urlPatterns={"/products"})
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
+public class ProductController extends HttpServlet {
     private ProductService productService;
     
     private UserService userService;
+    
+    private CategoryService categoryservice;
     
     @Override
     public void init() throws ServletException {
          super.init();
          productService = new ProductService();
          userService = new UserService();
+         categoryservice = new CategoryService();
     }
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -50,10 +65,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet ProductController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProductController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,15 +85,20 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SanPhamDAO sp = new SanPhamDAO();
-        List<Product> list = sp.getAllSP();
-        request.setAttribute("sanpham", list);
-        System.out.print(list.size());
-        request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
-//        User user = userService.getCurrentUser(request);
-//        request.setAttribute("user", user);
-//        request.getRequestDispatcher("home.jsp").forward(request, response);
-
+        String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
+        
+        request.setAttribute("user", user);
+        
+        if(action == null) {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
+        else if(action.equals("add") && user != null) {
+            getToAddProduct(request, response);
+        }
+        else {
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -91,7 +111,17 @@ public class Home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
+        
+        request.setAttribute("user", user);
+        
+        if(user != null) {
+            if(action.equals("add")) {
+                postToAddProduct(request, response);
+            }
+            
+        }
     }
 
     /** 
@@ -102,5 +132,33 @@ public class Home extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void getToAddProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryservice.getAllCategory();
+        request.setAttribute("categories", categories);
+        
+        request.getRequestDispatcher("addsp.jsp").forward(request, response);
+    }
+    
+    private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Map<String, String> input = new HashMap<>();
+        
+        input.put("productName",request.getParameter("productName"));
+        input.put("price",request.getParameter("price"));
+        input.put("category",request.getParameter("category"));
+        input.put("available", request.getParameter("available"));
+        input.put("description", request.getParameter("description"));
+        
+        InputStream inputStream = null;
+        Part filePart = request.getPart("image");
+
+        if (filePart != null) {
+            // Đọc dữ liệu từ file ảnh upload
+            inputStream = filePart.getInputStream();
+        }
+        
+        productService.addProduct(input, inputStream);
+        response.sendRedirect("/shop/home");
+    }
 
 }

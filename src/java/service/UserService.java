@@ -39,8 +39,12 @@ public class UserService {
     
     public User getCurrentUser(HttpServletRequest request) {
         HttpSession session = getSession(request);
+        if(session == null || session.getAttribute("username") == null) {
+            return null;
+        }
+        
         String username = session.getAttribute("username").toString();
-        System.out.println("session: "+username);
+        
         return userDAO.getCurrentUser(username);
     }
     

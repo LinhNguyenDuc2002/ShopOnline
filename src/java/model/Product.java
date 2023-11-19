@@ -4,7 +4,7 @@
  */
 package model;
 
-import com.mysql.cj.jdbc.Blob;
+
 import java.sql.SQLException;
 import java.util.Date;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -40,10 +40,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Blob image) throws SQLException {
-        
 
-    }
 
     public Product(long id, String productName, Category category, String unit, double price, double discount, long available, long sold, byte[] image, Date updateDay, String description) {
         this.id = id;

@@ -35,9 +35,9 @@
         <%@ include file="header.jsp" %>
 
         <article>
-            <h1>
-                Giỏ hàng của bạn
-            </h1>
+            <div class="content-title">
+                <p id="content-title">Cart</p>
+            </div>
 
             <div class="container">
                 <div class="cart-content">
@@ -87,6 +87,5 @@
         </article>
 
         <%@ include file="footer.jsp" %>
-        <script src="./script/signup.js"></script>
     </body>
 </html>

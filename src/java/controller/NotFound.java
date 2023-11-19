@@ -5,7 +5,6 @@
 
 package controller;
 
-import dao.SanPhamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,28 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Product;
-import service.ProductService;
-import service.UserService;
-
 
 /**
  *
- * @author Hue
+ * @author LinhNguyenDuc
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
-    private ProductService productService;
-    
-    private UserService userService;
-    
-    @Override
-    public void init() throws ServletException {
-         super.init();
-         productService = new ProductService();
-         userService = new UserService();
-    }
+@WebServlet(name="NotFound", urlPatterns={"/404"})
+public class NotFound extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -50,10 +35,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet NotFound</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet NotFound at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,15 +55,7 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SanPhamDAO sp = new SanPhamDAO();
-        List<Product> list = sp.getAllSP();
-        request.setAttribute("sanpham", list);
-        System.out.print(list.size());
-        request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
-//        User user = userService.getCurrentUser(request);
-//        request.setAttribute("user", user);
-//        request.getRequestDispatcher("home.jsp").forward(request, response);
-
+        request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
     } 
 
     /** 

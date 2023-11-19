@@ -4,7 +4,7 @@
  */
 package controller;
 
-import com.mysql.cj.jdbc.Blob;
+
 import dao.SanPhamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
