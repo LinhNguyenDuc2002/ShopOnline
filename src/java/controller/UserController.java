@@ -88,10 +88,10 @@ public class UserController extends HttpServlet {
         }
         else {
             if(action.equals("login")) {
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
             else if(action.equals("signup")) {
-                request.getRequestDispatcher("Signup.jsp").forward(request, response);
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
             else if(action.equals("logout") && user != null) {
                 try {

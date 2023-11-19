@@ -62,4 +62,20 @@ public class CategoryDAO {
         }
         return null;
     }
+    
+    public Category getCategoryById(Long id) {
+        try {
+            String query = "select * from category where id= ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            Category a = null;
+            while(rs.next()){
+                a = new Category(rs.getLong(1), rs.getString(2), rs.getString(3));
+            }
+            return a;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 }
