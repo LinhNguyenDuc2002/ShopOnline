@@ -46,6 +46,34 @@ public class ProductService {
         productDAO.addProduct(product);
     }
     
+    public Product getProduct(Long id) {
+        return productDAO.getProduct(id);
+    }
+    
+    public void deleteProduct(Long id) {
+        productDAO.deleteProduct(id);
+    }
+    
+    public List<Product> getAllProduct() {
+        return productDAO.getAllProduct();
+    }
+    
+    public void editProduct(Map<String, String> input, InputStream inputStream) throws IOException {
+        Category a = categoryDAO.getCategoryById(Long.parseLong(input.get("category")));
+        
+        Product old = new Product();
+
+        old.setId(Long.valueOf(input.get("id")));
+        old.setProductName(input.get("productName"));
+        old.setDescription(input.get("description"));
+        old.setAvailable(Long.parseLong(input.get("available")));
+        old.setPrice(Double.parseDouble(input.get("price")));
+        old.setCategory(a);
+        old.setImage(handleImage(inputStream));
+        
+        productDAO.editProduct(old);
+    }
+    
     private byte[] handleImage(InputStream inputStream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         int nRead;

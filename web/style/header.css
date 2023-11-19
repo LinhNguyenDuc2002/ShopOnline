@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
-img {
+.header-body img {
     height: 100%;
 }
 p#contact {

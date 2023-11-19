@@ -50,7 +50,28 @@ public class Product {
         this.description = description;
     }
 
-    
+    public Product(long id, String productName, String unit, double price, double discount, long available, long sold,  byte[] image, Date updateDay, String description) {
+        this.id = id;
+        this.productName = productName;
+        this.unit = unit;
+        this.price = price;
+        this.discount = discount;
+        this.available = available;
+        this.sold = sold;
+        this.image = image;
+        this.updateDay = updateDay;
+        this.description = description;
+    }
+
+    public Product( String productName, Category category, double price, double discount, long available,  byte[] image, String description) {
+        this.productName = productName;
+        this.category = category;
+        this.price = price;
+        this.discount = discount;
+        this.available = available;
+        this.image = image;
+        this.description = description;
+    }
 
     public long getId() {
         return id;

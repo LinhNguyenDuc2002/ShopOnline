@@ -93,8 +93,17 @@ public class ProductController extends HttpServlet {
         if(action == null) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
-        else if(action.equals("add") && user != null) {
+        else if(action.equals("add")) {
             getToAddProduct(request, response);
+        }
+        else if(action.equals("delete")) {
+            deleteProduct(request, response);
+        }
+        else if(action.equals("edit")) {
+            getToEditProduct(request, response);
+        }
+        else if(action.equals("show")) {
+            getToShowProduct(request, response);
         }
         else {
             request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
@@ -116,9 +125,12 @@ public class ProductController extends HttpServlet {
         
         request.setAttribute("user", user);
         
-        if(user != null) {
+        if(user == null) {
             if(action.equals("add")) {
                 postToAddProduct(request, response);
+            }
+            else if(action.equals("edit")) {
+                postToEditProduct(request, response);
             }
             
         }
@@ -159,6 +171,56 @@ public class ProductController extends HttpServlet {
         
         productService.addProduct(input, inputStream);
         response.sendRedirect("/shop/home");
+    }
+    
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        productService.deleteProduct(Long.valueOf(request.getParameter("id")));
+        response.sendRedirect("/shop/home");
+    }
+    
+    private void getToEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
+        
+        List<Category> arr = categoryservice.getAllCategory();
+        request.setAttribute("sanphamchitiet", a);
+        request.setAttribute("list", arr);
+        
+        request.getRequestDispatcher("fixsp.jsp").forward(request, response);
+    }
+    
+    private void getToShowProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
+
+        request.setAttribute("sanphamchitiet", a);
+        request.getRequestDispatcher("product.jsp").forward(request, response);
+    }
+    
+    private void postToEditProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String id = request.getParameter("id");
+        String product_name = request.getParameter("ten-san-pham");
+        String price = request.getParameter("gia");
+        String available = request.getParameter("so-luong");
+        String category = request.getParameter("category");
+        String description = request.getParameter("mo-ta");
+        
+        Map<String, String> input = new HashMap<>();
+        input.put("id", id);
+        input.put("productName", product_name);
+        input.put("price", price);
+        input.put("available", available);
+        input.put("category", category);
+        input.put("description", description);
+        
+        InputStream inputStream = null;
+        Part filePart = request.getPart("file");
+
+        if (filePart != null) {
+            // Đọc dữ liệu từ file ảnh upload
+            inputStream = filePart.getInputStream();
+        }
+        productService.editProduct(input, inputStream);
+        
+        response.sendRedirect("/shop/products?action=edit&id="+id.toString());
     }
 
 }

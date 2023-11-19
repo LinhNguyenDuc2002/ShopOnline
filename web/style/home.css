@@ -1,26 +1,13 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Nov 5, 2023, 10:44:02 PM
-    Author     : Hue
-*/
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Nov 5, 2023, 10:42:17 PM
-    Author     : Hue
-*/
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Quicksand&family=Rubik&display=swap');
 
 img {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
 }
-
+#wrapper {
+    margin: 20px 100px;
+}
 * {
     margin: 0;
     padding: 0;
@@ -31,22 +18,14 @@ body {
     font-size: 14px;
     line-height: 1.15;
     font-family: 'Quicksand', sans-serif;
+   
 }
-.all-category{
-    margin-top: 20px;
-    /*text-align: center;*/ 
-}
-.category{
-    font-weight: 500;
-    font-size: 20px;
-    cursor:pointer;  
-   margin-left: 10px
-}
+
 ul.products {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
 }
 
 ul.products li {
@@ -69,7 +48,9 @@ ul.products li .product-top {
 }
 
 ul.products li .product-top .hien-thi {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ul.products li .product-top .hien-thi img {
@@ -102,7 +83,7 @@ ul.products li:hover a.buy-now {
 }
 
 ul.products li .product-info {
-    padding: 15px 0px;
+    padding-top: 15px;
 }
 
 ul.products li .product-info a {
@@ -111,31 +92,43 @@ ul.products li .product-info a {
 
 ul.products li .product-info a.product-name {
     color: black;
-    padding: 3px 0px;
+    display: flex;
+    padding: 5px 0px;
     font-size: 20px;
     font-weight: 600;
 }
 
 ul.products li .product-info .product-price {
-    padding: 2px 0px;
+    padding: 5px 0px;
     font-size: 20px;
 }
 
 .button1 {
     background-color: red;
     color: white;
-    /* border: 2px solid red; */
-    margin-left: 45%;
-    border: 2px solid red;
+    border: 1px solid red;
     padding: 10px 32px;
     font-size: 15px;
+    cursor: pointer;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button1:hover {
-    background-color: blue;
-    border: 2px solid blue;
-    color: white;
+    background-color: white;
+    border: 1px solid red;
+    color: blue;
 }
+
+.products-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
 footer {
     margin-top: 50px;
     width: 100%;
@@ -162,3 +155,12 @@ footer h3 {
     font-size: 14px;
 }
 
+.product-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-price .status {
+    font-size: 16px;
+}

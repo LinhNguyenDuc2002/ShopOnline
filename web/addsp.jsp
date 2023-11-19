@@ -57,14 +57,18 @@
             </div>
             
             <div class="right">
-                <div class="right-input">
+                <div class="desc-input">
                     <label for="">Description</label>
                     <textarea name="mo-ta" id="mo-ta" cols="60" rows="10" name="description"></textarea>
                 </div>
 
-                <div class="right-input">
-                    <input type="file" name="image" id="file" class="inputfile" required>
-                    <label class="label" for="file">Upload</label>
+                <div class="file-input">
+                    <div>
+                        <input type="file" name="image" id="file" class="inputfile" onchange="displayFileName()" required>
+                        <label class="label" for="file">Upload</label>
+                    </div>
+                    
+                    <p id="fileNameDisplay">Choose a image file</p>
                 </div>
 
                 <input type="submit" class="button1" value="Add">
@@ -73,6 +77,8 @@
     </div>
 
     <%@ include file="footer.jsp" %>
+
+    <script src="./script/addsp.js"></script>
 </body>
 
 </html>
