@@ -13,15 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 import model.Product;
 
 /**
  *
  * @author Hue
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name="DeleteProduct", urlPatterns={"/DeleteProduct"})
+public class DeleteProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet DeleteProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,10 +59,10 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         SanPhamDAO sp = new SanPhamDAO();
-        List<Product> list = sp.getAllSP();
-        request.setAttribute("sanpham", list);
-        System.out.print(list.size());
-        request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Product a = (Product) session.getAttribute("spct");
+        sp.Delete(a.getId());
+        response.sendRedirect("home");
     } 
 
     /** 

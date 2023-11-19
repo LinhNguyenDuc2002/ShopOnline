@@ -13,15 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 import model.Product;
 
 /**
  *
  * @author Hue
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name="ProductDetailController", urlPatterns={"/ProductDetailController"})
+public class ProductDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet ProductController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProductController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +58,16 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SanPhamDAO sp = new SanPhamDAO();
-        List<Product> list = sp.getAllSP();
-        request.setAttribute("sanpham", list);
-        System.out.print(list.size());
-        request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+       String idstring = request.getParameter("id");
+       Long id = Long.parseLong(idstring);
+        System.out.println(idstring);
+       SanPhamDAO sp = new SanPhamDAO();
+       Product a = sp.TimSP(id);
+        System.out.println(a);
+       request.setAttribute("sanphamchitiet", a);
+       
+        
+       request.getRequestDispatcher("product.jsp").forward(request, response);
     } 
 
     /** 

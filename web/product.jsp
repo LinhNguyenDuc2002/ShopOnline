@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+        import="java.io.*, model.* ,DAO.*, java.sql.Date"%>
 <html lang="en">
 
     <head>
@@ -11,7 +12,9 @@
         <link rel="stylesheet" href="./style/home.css">
         <link rel="stylesheet" href="./style/product-style.css">
     </head>
-
+    <% 
+        Product a = (Product)request.getAttribute("sanphamchitiet"); 
+    %>
     <body>
         <div class="header">
             <p id="contact">Hotline: 1900.1001</p>
@@ -46,65 +49,40 @@
         <section class="san-pham">
             <div class="product-content">
                 <div class="product-left">
-                    <div><img class="anh1" src="./image/mt-2.webp" alt=""></div>
-                    <div class="chi-tiet">
-                        <div>
-                            <img src="./image/mt-2.webp" alt="">
-                        </div>
-                        <div>
-                            <img src="./image/mt-2.webp" alt="">
-                        </div>
-                        <div>
-                            <img src="./image/mt-2.webp" alt="">
-                        </div>
-                        <div>
-                            <img src="./image/mt-2.webp" alt="">
-                        </div>
-                    </div>
+                    <div><img class="anh1" src="data:image/jpg;base64,${requestScope.sanphamchitiet.getImage()}"alt=""></div>
+                   
 
                 </div>
                 <div class="product-right">
-                    <h1>Product name</h1>
-                    <p class="text">Brand name: <span>WISDOM</span> | Status: <span>available</span></p>
-                    <p class="price text">100.000</p>
-                    <!--                <p>Size</p>
-                                    <div id="radio">
-                                        <label for="S">
-                    
-                                            <input type="radio" name="size" id="S">
-                                            <span class="size">S</span>
-                                        </label>
-                                        <label for="M">
-                                            <input type="radio" name="size" id="M">
-                                            <span class="size">M</span>
-                                        </label>
-                                        <label for="L">
-                                            <input type="radio" name="size" id="L">
-                                            <span class="size">L</span>
-                                        </label>
-                                        <label for="XL">
-                                            <input type="radio" name="size" id="XL">
-                                            <span class="size">XL</span>
-                                        </label>
-                                    </div>-->
-                    
+                    <h1>${requestScope.sanphamchitiet.getProductName()}</h1>
+                    <p class="text">Category: <span>${requestScope.sanphamchitiet.getCategory().getName()}</span> | Status: 
+                        <% if (a.getAvailable() > 0 ){ %>
+                        <span>available</span>
+                        <% } else { %>
+                        <span>Sold out</span>
+                        <% } %>
+                    </p>
+                    <p class="price text">${requestScope.sanphamchitiet.getPrice()}</p>                    
                         <p>Quantity</p>
                         <div style="position: relative;">
-                            <input type="number" value="0" min="0" max="100" />
+                            <input type="number" value="1" min="1" max="100" />
                             <div id="inc-button" class="spinner-button">+</div>
                             <div id="dec-button" class="spinner-button">-</div>
                         </div>
-                        
                         <button class="button1" style="margin-top: 100px; margin-left: 0">ADD TO CART</button>
-                    
                 </div>
             </div>
             <!-- MÔ TẢ -->
-            <div></div>
+            <div class="mo-ta">
+                     <h2 >MÔ TẢ</h2>
+                     <div class="khung-mo-ta">
+                         <p>${requestScope.sanphamchitiet.getDescription()}<p>
+                     </div>
+            </div>
             <!-- MÔ TẢ-->
             <div>
                 <h2>Products of the same type</h2>
-                <div id="wrapper">
+                <div class="wrapper">
                     <ul class="products">
                         <li>
                             <div class="product-item">
@@ -162,12 +140,10 @@
                                 </div>
                             </div>
                         </li>
+                    </ul>
                 </div>
             </div>
         </section>
         <%@ include file="footer.jsp" %>
     </body>
-
-
-
 </html>

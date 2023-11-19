@@ -31,14 +31,13 @@ public class DBConnection {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        final String dbURL = properties.getProperty("DB_URL");
-        final String username = properties.getProperty("USERNAME");
-        final String password = properties.getProperty("PASSWORD");
+        final String dbURL = "jdbc:mysql://localhost:3306/shop_online";
+        final String username = "root";
+        final String password = "hue2002";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(dbURL, username, password);
-            System.out.println("connect successfully!");
             return connection;
         } catch (Exception e) {
             System.out.println("connect failure!");

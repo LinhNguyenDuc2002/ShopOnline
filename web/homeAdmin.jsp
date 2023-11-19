@@ -25,7 +25,7 @@
                                 <a href="" class="hien-thi">
                                     <img src="data:image/jpg;base64,${i.getImage()}" alt="${i.getImage()}">
                                 </a>
-                                <a href="ProductDetailController?id=${i.getId()}" class="buy-now">Buy now</a>
+                                <a href="EditProductController?id=${i.getId()}" class="buy-now">Edit</a>
                             </div>
                             <div class="product-info">
                                 <a href="" class="product-name">${i.getProductName()}</a>
