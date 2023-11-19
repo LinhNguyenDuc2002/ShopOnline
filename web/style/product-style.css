@@ -5,14 +5,17 @@
     display: flex;
     grid: 1fr 1fr;
 }
-.product-right{
+.product-right {
     padding: 0 40px;
+    display: block;
 }
 .product-right h1, .price{
     font-size: 30px;
 }
-.product-right h1, .text, #radio{
-    margin-bottom: 20px;
+.product-right h1, .text, #radio {
+    margin-bottom: 30px;
+    height: fit-content;
+    width: 100%;
 }
 .anh1{
     width: 470px;
@@ -95,4 +98,26 @@ input[type="number"]{
     margin-top: 30px;
     width: 270px;
     height: 270px;
+}
+.mo-ta h2{
+    color: white;
+    background-color: red; 
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    padding: 15px 40px
+}
+
+.wrapper {
+    margin-top: 20px;
+}
+
+.mo-ta {
+    margin: 40px 0px;
+}
+
+.mo-ta .khung-mo-ta{
+    width: 100%;  
+    border: 2px solid #EEEEEE;
+    margin-bottom: 30px
 }
