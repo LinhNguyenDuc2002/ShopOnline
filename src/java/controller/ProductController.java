@@ -106,7 +106,7 @@ public class ProductController extends HttpServlet {
             getToShowProduct(request, response);
         }
         else {
-            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
+            response.sendRedirect("/shop/404");
         }
     } 
 
@@ -161,15 +161,9 @@ public class ProductController extends HttpServlet {
         input.put("available", request.getParameter("available"));
         input.put("description", request.getParameter("description"));
         
-        InputStream inputStream = null;
         Part filePart = request.getPart("image");
-
-        if (filePart != null) {
-            // Đọc dữ liệu từ file ảnh upload
-            inputStream = filePart.getInputStream();
-        }
         
-        productService.addProduct(input, inputStream);
+        productService.addProduct(input, filePart);
         response.sendRedirect("/shop/home");
     }
     
@@ -181,11 +175,16 @@ public class ProductController extends HttpServlet {
     private void getToEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
         
-        List<Category> arr = categoryservice.getAllCategory();
-        request.setAttribute("sanphamchitiet", a);
-        request.setAttribute("list", arr);
-        
-        request.getRequestDispatcher("fixsp.jsp").forward(request, response);
+        if(a == null) {
+            response.sendRedirect("/shop/404");
+        }
+        else {
+            List<Category> arr = categoryservice.getAllCategory();
+            request.setAttribute("sanphamchitiet", a);
+            request.setAttribute("list", arr);
+
+            request.getRequestDispatcher("fixsp.jsp").forward(request, response);
+        }
     }
     
     private void getToShowProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -210,15 +209,10 @@ public class ProductController extends HttpServlet {
         input.put("available", available);
         input.put("category", category);
         input.put("description", description);
-        
-        InputStream inputStream = null;
+       
         Part filePart = request.getPart("file");
 
-        if (filePart != null) {
-            // Đọc dữ liệu từ file ảnh upload
-            inputStream = filePart.getInputStream();
-        }
-        productService.editProduct(input, inputStream);
+        productService.editProduct(input, filePart);
         
         response.sendRedirect("/shop/products?action=edit&id="+id.toString());
     }

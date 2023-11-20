@@ -121,4 +121,25 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
+    
+    public List<Product> getAllProductsByCategory(Long id) {
+        try {
+            String query = "select * from product where category_id = ?";
+            
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while(rs.next()){
+                Product a = new Product(rs.getLong(1),rs.getString(2),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
+                        rs.getLong(7),rs.getLong(8),rs.getBytes(9),rs.getDate(10),rs.getString(11));
+                
+                list.add(a);
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 }
