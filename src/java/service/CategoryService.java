@@ -5,8 +5,10 @@
 package service;
 
 import dao.CategoryDAO;
+import dao.ProductDAO;
 import java.util.List;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -14,12 +16,19 @@ import model.Category;
  */
 public class CategoryService {
     private CategoryDAO categoryDAO;
+    
+    private ProductDAO productDAO;
 
     public CategoryService() {
         this.categoryDAO = new CategoryDAO();
+        this.productDAO = new ProductDAO();
     }
     
     public List<Category> getAllCategory() {
         return categoryDAO.getAllCategory();
+    }
+    
+    public List<Product> getAllProductsByCategory(Long id) {
+        return productDAO.getAllProductsByCategory(id);
     }
 }

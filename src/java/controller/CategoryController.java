@@ -12,25 +12,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
+import java.util.List;
+import model.Category;
+import model.Product;
+import service.CategoryService;
 import service.ProductService;
 import service.UserService;
 
 /**
  *
- * @author Hue
+ * @author LinhNguyenDuc
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name="CategoryController", urlPatterns={"/categories"})
+public class CategoryController extends HttpServlet {
     private ProductService productService;
     
     private UserService userService;
+    
+    private CategoryService categoryservice;
     
     @Override
     public void init() throws ServletException {
          super.init();
          productService = new ProductService();
          userService = new UserService();
+         categoryservice = new CategoryService();
     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +53,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet CategoryController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CategoryController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,19 +73,19 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String role = request.getParameter("role");
+        String id = request.getParameter("id");
         
-        User user = userService.getCurrentUser(request);
-        request.setAttribute("user", user);
-        
-        request.setAttribute("sanpham", productService.getAllProduct());
-        
-        if(role != null && role.equals("ADMIN")) {
-            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        if(id == null) {
+            id = "1";
         }
-        else {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
+        
+        List<Category> categories = categoryservice.getAllCategory();
+        List<Product> products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
+        
+        request.setAttribute("categories", categories);
+        request.setAttribute("products", products);
+        
+        request.getRequestDispatcher("category.jsp").forward(request, response);
     } 
 
     /** 
