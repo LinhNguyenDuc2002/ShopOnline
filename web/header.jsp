@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "model.User" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +18,8 @@
 </head>
 <body>
 
-    <% 
-        User user = (User) request.getAttribute("user");
-        if(user == null) { 
-    %>
+    <c:choose>
+        <c:when test="${empty requestScope.user}">
             <div class="header1">
                 <p id="contact">Hotline: 1900.1001</p>
                 
@@ -31,10 +29,9 @@
                     <a class="contact">Contact</a>
                 </div>
             </div>
-    <%      
-        }
-        else {
-    %>
+        </c:when>
+
+        <c:otherwise>
             <div class="header2">
                 <p id="contact">Hotline: 1900.1001</p>
                 
@@ -45,9 +42,8 @@
                     </div>
                 </div>
             </div>
-    <% 
-        }
-    %>
+        </c:otherwise>
+    </c:choose>
 
     <div class="body">
         <div class="header-body">
@@ -56,7 +52,14 @@
 
         <div class="content-body">
             <div class="left-content">
-                <a href="/shop/home">HOME</a>
+                <c:choose>
+                    <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
+                        <a href="/shop/home?role=admin">HOME</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/shop/home">HOME</a>
+                    </c:otherwise>
+                </c:choose>
                 <a href="#">CATEGORY</a>
                 <a href="#">CONTACT</a>
             </div>
