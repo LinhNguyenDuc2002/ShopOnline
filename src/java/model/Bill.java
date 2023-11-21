@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -18,16 +19,17 @@ public class Bill {
     private Date orderDate;
     
     private String deliveryAddress;
+    
+    private List<DetailOrder> detailOrders;
 
-    public Bill(long id, User user, Date orderDate, String deliveryAddress) {
+    public Bill(long id, User user, Date orderDate, String deliveryAddress, List<DetailOrder> detailOrders) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
         this.deliveryAddress = deliveryAddress;
+        this.detailOrders = detailOrders;
     }
-
-    public Bill() {
-    }
+    
 
     public long getId() {
         return id;
@@ -60,6 +62,15 @@ public class Bill {
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
+
+    public List<DetailOrder> getDetailOrders() {
+        return detailOrders;
+    }
+
+    public void setDetailOrders(List<DetailOrder> detailOrders) {
+        this.detailOrders = detailOrders;
+    }
     
     
+
 }

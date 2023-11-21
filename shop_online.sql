@@ -67,5 +67,5 @@ CREATE TABLE comment(
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
-INSERT INTO user(id, username, password, fullname, birthday, phone, email, detail_address, city, country, role, status) 
-			values(1, "linhnguyenduc", "123", "Nguyễn Đức Linh", "16/04/2002", "0395084430", "abc@gmail.com", "Đông Anh", "Hà Nội", "Việt Nam", "ADMIN", true);
+-- INSERT INTO user(id, username, password, fullname, birthday, phone, email, detail_address, city, country, role, status) 
+-- 			values(1, "linhnguyenduc", "123", "Nguyễn Đức Linh", "16/04/2002", "0395084430", "abc@gmail.com", "Đông Anh", "Hà Nội", "Việt Nam", "ADMIN", true);

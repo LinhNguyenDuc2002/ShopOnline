@@ -11,15 +11,13 @@ package model;
 public class DetailOrder {
     private long id;
     
-    private Bill bill;
-    
     private Product product;
     
     private long quantity;
 
-    public DetailOrder(long id, Bill bill, Product product, long quantity) {
+    public DetailOrder(long id, Product product, long quantity) {
         this.id = id;
-        this.bill = bill;
+       
         this.product = product;
         this.quantity = quantity;
     }
@@ -35,13 +33,7 @@ public class DetailOrder {
         this.id = id;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
+    
 
     public Product getProduct() {
         return product;

@@ -15,7 +15,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="https://glitch.com/favicon.ico" />
+
 
         <!--
           This is the page head - it contains info the browser uses
@@ -35,14 +35,26 @@
         <%@ include file="header.jsp" %>
 
         <article>
-            <div class="content-title">
-                <p id="content-title">Cart</p>
-            </div>
+            <h1>
+                Giỏ hàng của bạn
+            </h1>
 
             <div class="container">
                 <div class="cart-content">
                     <div class="cart-content-top">
                         <table>
+
+                            <c:if test="${error!=null }">
+                                <div class="alert alert-danger" role="alert">
+                                    ${error}
+                                </div>
+                            </c:if>
+                            <c:if test="${mess!=null }">
+                                <div class="alert alert-success" role="alert">
+                                    ${mess}
+                                </div>
+                            </c:if>
+
                             <tr>
                                 <th>Ảnh sản phẩm</th>
                                 <th>Tên sản phẩm</th>
@@ -52,14 +64,23 @@
                                 <th>Xóa</th>
                             </tr>
 
-                            <tr>
-                                <td><img src="https://bizweb.dktcdn.net/thumb/compact/100/318/614/products/mt-4-compressed.jpg" alt=""></td>
-                                <td><p>ANGEL TEE - BLACK <br/> S </p></td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
-                                <td><input type="number" value="1" min="1"></td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
-                                <td><span>X</span></td>
-                            </tr>
+                            <c:forEach items="${listCart}" var="o">
+                                <c:forEach items="${listProduct}" var="p">
+                                    <c:if test="${o.productID == p.id}">
+
+                                        <tr>
+                                            <td><img src="${p.image}" alt=""></td>
+                                            <td><p class="name">${p.name} </p></td>
+                                            <td><p style="font-weight: bold;">${p.price}<sub>đ</sub></p></td>
+                                            <td><input type="number" value="1" min="1" class="form-control">${o.amount}</td>
+                                            <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
+                                            <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                        </tr>
+
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                                            
                         </table>
                     </div>
 
@@ -67,17 +88,17 @@
                         <table>
                             <tr>
                                 <td>Tạm tính</td>
-                                <td><p>395.000<sub>đ</sub></p></td>
+                                <td><p class="gia">395.000<sub>đ</sub></p></td>
                             </tr>
 
                             <tr>
-                                <td>Tổng tiền thanh toán</td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
+                                <td><b>Tổng tiền thanh toán</b></td>
+                                <td><p class="tong" style="font-weight: bold;">395.000<sub>đ</sub></p></td>
                             </tr>
                         </table>
 
                         <div class="cart-content-right-button">
-                            <button id="tt">TIẾP TỤC MUA HÀNG</button>
+                            <button id="tt">< TIẾP TỤC MUA HÀNG</button>
                             <button id="pay">THANH TOÁN</button>
                         </div>
                     </div>
@@ -87,5 +108,6 @@
         </article>
 
         <%@ include file="footer.jsp" %>
+        <script src="./script/signup.js"></script>
     </body>
 </html>
