@@ -13,24 +13,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import service.CategoryService;
 import service.ProductService;
 import service.UserService;
 
 /**
  *
- * @author Hue
+ * @author LinhNguyenDuc
  */
-@WebServlet(name="Home", urlPatterns={"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name="CartController", urlPatterns={"/carts"})
+public class CartController extends HttpServlet {
     private ProductService productService;
     
     private UserService userService;
+    
+    private CategoryService categoryservice;
     
     @Override
     public void init() throws ServletException {
          super.init();
          productService = new ProductService();
          userService = new UserService();
+         categoryservice = new CategoryService();
     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +51,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
+            out.println("<title>Servlet CartController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CartController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,17 +71,25 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String action = request.getParameter("action");
         User user = userService.getCurrentUser(request);
-        request.setAttribute("user", user);
         
-        request.setAttribute("sanpham", productService.getAllProduct());
-        
-        if(user != null && user.getRole().equals("ADMIN")) {
-            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        if(user != null && user.getRole().equals("USER") && action != null) {
+            request.setAttribute("user", user);
+            
+            switch (action) {
+                case "show":
+                    showCart(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            
         }
         else {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            response.sendRedirect("/shop/404");
         }
+        
     } 
 
     /** 
@@ -101,5 +113,9 @@ public class Home extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
+    }
 
 }

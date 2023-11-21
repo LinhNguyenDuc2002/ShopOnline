@@ -1,0 +1,109 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+p {
+    padding: 0px;
+    margin: 0px 0px;
+}
+div, table {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    margin: 0px;
+    width: 100%;
+}
+
+.content {
+    margin: 20px 150px;
+    font-family: sans-serif;
+}
+
+.content table {
+    margin: 10px 0px;
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+}
+
+/* Định dạng cho các dòng chan */
+.product-list:nth-child(even) {
+    background-color: lightgray;
+}
+/* Định dạng cho các dòng lẻ */
+.product-list:nth-child(odd) {
+    background-color: lightblue;
+}
+
+.product-list a {
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-list a:hover {
+    color: blue;
+}
+
+.content .title {
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}
+
+.content form {
+    margin-bottom: 20px; 
+}
+
+.add-product-btn {
+    height: 35px;
+    background-color: red;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid red;
+}
+
+.add-product-btn:hover {
+    color: blue;
+    background-color: white;
+}
+
+.add-product-btn i {
+    margin-right: 10px;
+}
+
+.content .field {
+    font-size: 16px;
+    font-weight: bold;
+    height: 35px;
+    color: darkred;
+    background-color: burlywood;
+}
+
+.content td {
+    padding: 0px 5px;
+    text-align: center;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

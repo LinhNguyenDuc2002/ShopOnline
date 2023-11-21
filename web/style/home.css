@@ -43,6 +43,7 @@ ul.products li img {
 }
 
 ul.products li .product-top {
+    height: 75%;
     position: relative;
     overflow: hidden;
 }
@@ -51,10 +52,14 @@ ul.products li .product-top .hien-thi {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 ul.products li .product-top .hien-thi img {
     display: block;
+    height: 100%;
+    width: auto;
 }
 
 ul.products li:hover .product-top .hien-thi img {
@@ -103,6 +108,10 @@ ul.products li .product-info .product-price {
     font-size: 20px;
 }
 
+.product-item {
+    height: 350px;
+}
+
 .button1 {
     background-color: red;
     color: white;
@@ -114,6 +123,7 @@ ul.products li .product-info .product-price {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .button1:hover {

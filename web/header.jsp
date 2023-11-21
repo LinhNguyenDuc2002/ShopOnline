@@ -60,7 +60,7 @@
                         <a href="/shop/home">HOME</a>
                     </c:otherwise>
                 </c:choose>
-                <a href="#">CATEGORY</a>
+                <a href="/shop/categories">CATEGORY</a>
                 <a href="#">CONTACT</a>
             </div>
 
@@ -69,7 +69,8 @@
                     <input type="text" name="" id="search-text">
                     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                 </div>
-                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+
+                <a href="/shop/carts?action=show"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
             </div>
         </div>
 
@@ -83,15 +84,34 @@
                 <p>Home</p>
             </a>
 
-            <a class="selection" href="#">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart</p>
-            </a>
+            <c:choose>
+                <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
+                    <a class="selection" href="/shop/manage?action=products">
+                        <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                        <p>Manage products</p>
+                    </a>
 
-            <a class="selection" href="#">
-                <i class="fa-solid fa-truck"></i>
-                <p>Purchased orders</p>
-            </a>
+                    <a class="selection" href="/shop/manage?action=users">
+                        <i class="fa-solid fa-people-roof"></i>
+                        <p>Manage users</p>
+                    </a>
+                </c:when>
+            </c:choose>
+
+            <c:choose>
+                <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
+                    <a class="selection" href="#">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Invoice list</p>
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a class="selection" href="#">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Purchase history</p>
+                    </a>
+                </c:otherwise>
+            </c:choose>
 
             <a class="selection" href="#">
                 <i class="fa-solid fa-gear"></i>

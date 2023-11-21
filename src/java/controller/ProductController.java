@@ -93,13 +93,13 @@ public class ProductController extends HttpServlet {
         if(action == null) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
-        else if(action.equals("add")) {
+        else if(action.equals("add") && user.getRole().equals("ADMIN")) {
             getToAddProduct(request, response);
         }
-        else if(action.equals("delete")) {
+        else if(action.equals("delete") && user.getRole().equals("ADMIN")) {
             deleteProduct(request, response);
         }
-        else if(action.equals("edit")) {
+        else if(action.equals("edit") && user.getRole().equals("ADMIN")) {
             getToEditProduct(request, response);
         }
         else if(action.equals("show")) {
@@ -125,14 +125,16 @@ public class ProductController extends HttpServlet {
         
         request.setAttribute("user", user);
         
-        if(user == null) {
+        if(user != null && user.getRole().equals("ADMIN")) {
             if(action.equals("add")) {
                 postToAddProduct(request, response);
             }
             else if(action.equals("edit")) {
                 postToEditProduct(request, response);
             }
-            
+        }
+        else {
+            response.sendRedirect("/shop/404");
         }
     }
 
@@ -162,7 +164,7 @@ public class ProductController extends HttpServlet {
         input.put("description", request.getParameter("description"));
         
         Part filePart = request.getPart("image");
-        
+
         productService.addProduct(input, filePart);
         response.sendRedirect("/shop/home");
     }
