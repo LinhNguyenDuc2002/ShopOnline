@@ -114,6 +114,7 @@ ul.products li .product-info .product-price {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .button1:hover {

@@ -26,7 +26,6 @@ ul.products {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
-    margin-left: 25%;
 }
 
 ul.products li {
@@ -164,4 +163,64 @@ footer h3 {
 
 .product-price .status {
     font-size: 16px;
+}
+
+.category-menu {
+    width: 280px;
+    height: fit-content;
+    padding: 10px;
+    border: 1px solid whitesmoke;
+}
+
+.category-product {
+    display: flex;
+}
+
+.category-header p {
+    font-size: 18px;
+}
+
+.category-header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 10px;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.category-items {
+    font-size: 16px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: black;
+    padding: 0px 10px;
+    text-decoration: none;
+}
+
+.category-items:hover {
+    background-color: whitesmoke;
+}
+
+.category-wrapper {
+    margin-left: 30px;
+    height: 100%;
+    width: 100%;
+}
+
+.category-wrapper-header {
+    height: 80px;
+    padding: 20px;
+    border-bottom: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-header i {
+    cursor: pointer;
 }

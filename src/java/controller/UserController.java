@@ -87,7 +87,7 @@ public class UserController extends HttpServlet {
             }
         }
         else {
-            if(action.equals("login")) {
+            if(action.equals("login") && user == null) {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
             else if(action.equals("signup")) {
@@ -102,6 +102,9 @@ public class UserController extends HttpServlet {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 response.sendRedirect("/shop/users?action=login");
+            }
+            else {
+                request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
             }
         }
     } 
@@ -213,6 +216,8 @@ public class UserController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
+        
+        
         if(userService.authenticate(username, password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
@@ -222,7 +227,7 @@ public class UserController extends HttpServlet {
         }
         else {
             request.setAttribute("error", "Username or password is incorrect! Please re-enter");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
     

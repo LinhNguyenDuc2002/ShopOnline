@@ -83,6 +83,20 @@
                 <p>Home</p>
             </a>
 
+            <c:choose>
+                <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
+                    <a class="selection" href="/shop/manage-products">
+                        <i class="fa-solid fa-house"></i>
+                        <p>Manage products</p>
+                    </a>
+
+                    <a class="selection" href="/shop/manage-products">
+                        <i class="fa-solid fa-house"></i>
+                        <p>Manage users</p>
+                    </a>
+                </c:when>
+            </c:choose>
+
             <a class="selection" href="#">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p>Cart</p>

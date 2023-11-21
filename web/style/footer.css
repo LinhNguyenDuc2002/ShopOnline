@@ -48,7 +48,7 @@ body {
     color: blue;
 }
 
-table {
+.footer-content table {
     border-collapse: separate;
     border-spacing: 10px;
 }

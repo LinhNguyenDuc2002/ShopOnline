@@ -75,12 +75,14 @@ public class CategoryController extends HttpServlet {
     throws ServletException, IOException {
         String id = request.getParameter("id");
         
-        if(id == null) {
-            id = "1";
-        }
-        
         List<Category> categories = categoryservice.getAllCategory();
-        List<Product> products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
+        List<Product> products;
+        if(id == null) {
+            products = productService.getAllProduct();
+        }
+        else {
+            products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
+        }
         
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
