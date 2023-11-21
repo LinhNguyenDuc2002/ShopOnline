@@ -5,6 +5,8 @@
         <group>
             <file>file:/D:/ShopOnline/src/java/service/UserService.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/ProductController.java</file>
+            <file>file:/D:/ShopOnline/web/WEB-INF/classes/app-config.properties</file>
+            <file>file:/D:/ShopOnline/web/META-INF/context.xml</file>
         </group>
     </open-files>
 </project-private>

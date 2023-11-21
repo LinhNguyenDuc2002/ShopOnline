@@ -17,7 +17,7 @@
         </div>
         <div class="profile-form">
           <div class="profile-title">
-            <img src="../web/image/profile.webp" alt="linh ăn cứt">
+            <img src="../web/image/profile.webp" alt="ảnh đại diện">
             <div class="profile-title-name">Nguyen Trung Anh
               <div class="profile-title-ID">ID: B20DCAT009</div>
             </div>
