@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Category;
 import model.Product;
+import model.User;
 import service.CategoryService;
 import service.ProductService;
 import service.UserService;
@@ -73,6 +74,7 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        User user = userService.getCurrentUser(request);
         String id = request.getParameter("id");
         
         List<Category> categories = categoryservice.getAllCategory();
@@ -84,6 +86,7 @@ public class CategoryController extends HttpServlet {
             products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
         }
         
+        request.setAttribute("user", user);
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
         

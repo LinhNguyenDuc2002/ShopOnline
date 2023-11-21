@@ -93,7 +93,7 @@ public class UserController extends HttpServlet {
             else if(action.equals("signup")) {
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
-            else if(action.equals("logout") && user != null) {
+            else if(action.equals("logout")) {
                 try {
                     logout(request, response);
                 } catch (ParseException ex) {

@@ -152,6 +152,10 @@ input#search-text {
     color: blue;
 }
 
+.right-content a{
+    color: black;
+}
+
 .avatar1 {
     margin: 0px 150px;
     height: 100%;

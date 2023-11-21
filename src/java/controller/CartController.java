@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package model;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import model.User;
 import service.CategoryService;
 import service.ProductService;
 import service.UserService;
@@ -21,8 +21,8 @@ import service.UserService;
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="TKProduct", urlPatterns={"/manage-products"})
-public class TKProduct extends HttpServlet {
+@WebServlet(name="CartController", urlPatterns={"/carts"})
+public class CartController extends HttpServlet {
     private ProductService productService;
     
     private UserService userService;
@@ -51,10 +51,10 @@ public class TKProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TKProduct</title>");  
+            out.println("<title>Servlet CartController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TKProduct at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CartController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,17 +71,25 @@ public class TKProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String action = request.getParameter("action");
         User user = userService.getCurrentUser(request);
         
-        if(user != null && user.getRole().equals("ADMIN")){
-            List<Product> products = productService.getAllProduct();
+        if(user != null && user.getRole().equals("USER") && action != null) {
+            request.setAttribute("user", user);
             
-            request.setAttribute("sanpham", products);
-            request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
+            switch (action) {
+                case "show":
+                    showCart(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            
         }
         else {
             response.sendRedirect("/shop/404");
         }
+        
     } 
 
     /** 
@@ -105,5 +113,9 @@ public class TKProduct extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
+    }
 
 }

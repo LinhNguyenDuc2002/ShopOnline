@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 import util.DateUtil;
 
@@ -78,6 +80,43 @@ public class UserDAO {
                 
                 return user;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<User> getAllUser() {
+        String sql = "SELECT * FROM User";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getLong("id"));
+                user.setFullname(resultSet.getString("fullname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setBirthday(resultSet.getDate("birthday"));
+                user.setCity(resultSet.getString("city"));
+                user.setCountry(resultSet.getString("country"));
+                user.setDetail_address(resultSet.getString("detail_address"));
+                user.setRole(resultSet.getString("role"));
+                user.setNote(resultSet.getString("note"));
+                user.setJoin_date(resultSet.getDate("join_date"));
+                user.setStatus(resultSet.getBoolean("status"));
+                user.setSex(resultSet.getBoolean("sex"));
+                
+                users.add(user);
+            }
+            
+            return users;
         } catch (SQLException e) {
             e.printStackTrace();
         }

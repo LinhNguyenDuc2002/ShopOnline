@@ -12,14 +12,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Product;
+import model.User;
+import service.CategoryService;
+import service.ProductService;
+import service.UserService;
 
 /**
  *
- * @author thanh
+ * @author LinhNguyenDuc
  */
-@WebServlet(name="test", urlPatterns={"/test"})
-public class test extends HttpServlet {
-   
+@WebServlet(name="ManageController", urlPatterns={"/manage"})
+public class ManageController extends HttpServlet {
+    private ProductService productService;
+    
+    private UserService userService;
+    
+    private CategoryService categoryservice;
+    
+    @Override
+    public void init() throws ServletException {
+         super.init();
+         productService = new ProductService();
+         userService = new UserService();
+         categoryservice = new CategoryService();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,10 +53,10 @@ public class test extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet test</title>");  
+            out.println("<title>Servlet TKProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet test at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet TKProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +73,26 @@ public class test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
+        User user = userService.getCurrentUser(request);
+        String action = request.getParameter("action");
+        
+        if(user != null && user.getRole().equals("ADMIN") && action != null){
+            request.setAttribute("user", user);
+            
+            switch (action) {
+                case "products":
+                    TKProduct(request, response);
+                    break;
+                case "users":
+                    TKUsers(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        }
+        else {
+            response.sendRedirect("/shop/404");
+        }
     } 
 
     /** 
@@ -79,5 +116,19 @@ public class test extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void TKProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> products = productService.getAllProduct();
+            
+        request.setAttribute("sanpham", products);
+        request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
+    }
+    
+    private void TKUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> users = userService.getAllUser();
+            
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("manageUser.jsp").forward(request, response);
+    }
 
 }

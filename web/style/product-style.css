@@ -119,5 +119,6 @@ input[type="number"]{
 .mo-ta .khung-mo-ta{
     width: 100%;  
     border: 2px solid #EEEEEE;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    white-space: pre-wrap;
 }
