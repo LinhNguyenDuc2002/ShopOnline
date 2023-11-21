@@ -48,7 +48,7 @@
         </ul>
 
         <div class="products-button">
-            <button class="button1">All product</button>
+            <a href="/shop/categories" class="button1">All product</a>
         </div>
     </div>
     <%@ include file="footer.jsp" %>

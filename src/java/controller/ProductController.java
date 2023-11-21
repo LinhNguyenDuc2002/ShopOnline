@@ -93,13 +93,13 @@ public class ProductController extends HttpServlet {
         if(action == null) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
-        else if(action.equals("add")) {
+        else if(action.equals("add") && user.getRole().equals("ADMIN")) {
             getToAddProduct(request, response);
         }
-        else if(action.equals("delete")) {
+        else if(action.equals("delete") && user.getRole().equals("ADMIN")) {
             deleteProduct(request, response);
         }
-        else if(action.equals("edit")) {
+        else if(action.equals("edit") && user.getRole().equals("ADMIN")) {
             getToEditProduct(request, response);
         }
         else if(action.equals("show")) {
