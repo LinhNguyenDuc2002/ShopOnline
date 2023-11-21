@@ -18,6 +18,7 @@ body {
 
 .content {
     margin: 20px 150px;
+    font-family: sans-serif;
 }
 
 .content table {
@@ -28,41 +29,31 @@ body {
 }
 
 /* Định dạng cho các dòng chan */
-.content tr:nth-child(even) {
+.product-list:nth-child(even) {
     background-color: lightgray;
 }
 /* Định dạng cho các dòng lẻ */
-.content tr:nth-child(odd) {
+.product-list:nth-child(odd) {
     background-color: lightblue;
 }
 
 .product-list a {
-    text-decoration: none;
-    color: black;
-    margin: 3px;
-    width: 60px;
-    height: 30px;
+    color: white;
+    padding: 5px 20px;
     cursor: pointer;
-    background-color: royalblue;
-    border: 0px;
-    font-weight: bold;
-    border-radius: 5px;
-    font-family: sans-serif;
-    font-size: 14px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .product-list a:hover {
-    border: solid 2px blue;
-    background-color: white;
+    color: blue;
 }
 
-.title {
+.content .title {
     display: flex;
     font-size: 18px;
     font-weight: bold;
-    font-family: sans-serif;
     align-items: center;
     justify-content: center;
 }
@@ -71,16 +62,48 @@ body {
     margin-bottom: 20px; 
 }
 
-.add-product {
-    height: 30px;
+.add-product-btn {
+    height: 35px;
     background-color: red;
     width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
     font-size: 16px;
     color: white;
     cursor: pointer;
     text-decoration: none;
+    border: 1px solid red;
+}
+
+.add-product-btn:hover {
+    color: blue;
+    background-color: white;
+}
+
+.add-product-btn i {
+    margin-right: 10px;
+}
+
+.content .field {
+    font-size: 16px;
+    font-weight: bold;
+    height: 35px;
+    color: darkred;
+    background-color: burlywood;
+}
+
+.content td {
+    padding: 0px 5px;
+    text-align: center;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

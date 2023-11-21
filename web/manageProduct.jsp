@@ -17,9 +17,9 @@
     
     <div class="content">
         <div class="title">PRODUCT LIST</div>
-        <a href="/shop/products?action=add" class="add-product">Add a product</a>
+        <a href="/shop/products?action=add" class="add-product-btn"><i class="fa-solid fa-plus"></i>Add a product</a>
         <table>
-            <tr>
+            <tr class="field"> 
                 <td>ID</td>
                 <td>Product name</td>
                 <td>Category</td>
@@ -39,9 +39,9 @@
                     <td>${i.price}</td>
                     <td>${i.sold}</td>
                     <td>${i.description}</td>
-                    <td>
-                        <a href="/shop/products?action=edit&id=${i.id}">Update</a>
-                        <a href="/shop/products?action=delete&id=${i.id}">Delete</a>
+                    <td class="actions">
+                        <a href="/shop/products?action=edit&id=${i.id}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             </c:forEach>

@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 import model.User;
 import util.DateUtil;
@@ -56,6 +57,10 @@ public class UserService {
                             birthdayToDate, map.get("phone"), map.get("email"), now);
         
         return userDAO.addUser(user);
+    }
+    
+    public List<User> getAllUser() {
+        return userDAO.getAllUser();
     }
     
     public boolean updateUser(Map<String, String> map, long id) throws ParseException {

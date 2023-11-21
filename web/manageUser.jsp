@@ -19,7 +19,7 @@
         <div class="title">USER LIST</div>
         <!-- <a href="/shop/products?action=add" class="add-product">Add a product</a> -->
         <table>
-            <tr>
+            <tr class="field">
                 <td>ID</td>
                 <td>Full name</td>
                 <td>Username</td>
@@ -30,18 +30,26 @@
                 <td>Actions</td>
             </tr>
 
-            <c:forEach items="${requestScope.sanpham}" var="i">
+            <c:forEach items="${requestScope.users}" var="i">
                 <tr class="product-list">
                     <td>${i.id}</td>
                     <td>${i.fullname}</td>
                     <td>${i.username}</td>
                     <td>${i.birthday}</td>
-                    <td>${i.sex}</td>
+                    <c:choose>
+                        <c:when test="${i.sex == true}">
+                            <td>female</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>male</td>
+                        </c:otherwise>
+                    </c:choose>
+                    
                     <td>${i.phone}</td>
                     <td>${i.email}</td>
-                    <td>
-                        <a href="/shop/products?action=edit&id=${i.id}">Update</a>
-                        <a href="/shop/products?action=delete&id=${i.id}">Delete</a>
+                    <td class="actions">
+                        <!-- <a href="/shop/products?action=edit&id=${i.id}">Update</a> -->
+                        <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             </c:forEach>
