@@ -181,7 +181,7 @@ public class UserController extends HttpServlet {
         if(!errors.isEmpty()) {
             request.setAttribute("input", input);
             request.setAttribute("error", errors);
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         
         userService.addUser(input);
@@ -222,7 +222,7 @@ public class UserController extends HttpServlet {
         }
         else {
             request.setAttribute("error", "Username or password is incorrect! Please re-enter");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
     
