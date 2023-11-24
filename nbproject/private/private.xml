@@ -5,12 +5,18 @@
         <group>
             <file>file:/D:/ShopOnline/src/java/service/UserService.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/ProductController.java</file>
-            <file>file:/D:/ShopOnline/src/java/service/CategoryService.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/UserController.java</file>
-            <file>file:/D:/ShopOnline/src/java/dao/ProductDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/NotFound.java</file>
+            <file>file:/D:/ShopOnline/src/java/service/CommentService.java</file>
+            <file>file:/D:/ShopOnline/src/java/service/CartService.java</file>
+            <file>file:/D:/ShopOnline/src/java/dao/CartDAO.java</file>
             <file>file:/D:/ShopOnline/src/java/dao/CategoryDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/model/Category.java</file>
+            <file>file:/D:/ShopOnline/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/ShopOnline/src/java/service/ProductService.java</file>
+            <file>file:/D:/ShopOnline/src/java/service/CategoryService.java</file>
+            <file>file:/D:/ShopOnline/src/java/controller/CartController.java</file>
+            <file>file:/D:/ShopOnline/src/java/dao/ProductDAO.java</file>
+            <file>file:/D:/ShopOnline/src/java/model/DetailOrder.java</file>
+            <file>file:/D:/ShopOnline/src/java/service/BillService.java</file>
+            <file>file:/D:/ShopOnline/src/java/model/User.java</file>
         </group>
     </open-files>
 </project-private>

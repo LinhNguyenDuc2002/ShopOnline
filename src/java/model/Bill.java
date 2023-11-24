@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -18,6 +19,8 @@ public class Bill {
     private Date orderDate;
     
     private String deliveryAddress;
+    
+    private List<DetailOrder> detailOrders;
 
     public Bill(long id, User user, Date orderDate, String deliveryAddress) {
         this.id = id;

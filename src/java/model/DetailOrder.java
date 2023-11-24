@@ -11,20 +11,20 @@ package model;
 public class DetailOrder {
     private long id;
     
-    private Bill bill;
+    private User user;
     
     private Product product;
     
     private long quantity;
+    
+    private boolean status;
 
-    public DetailOrder(long id, Bill bill, Product product, long quantity) {
+    public DetailOrder(long id, User user, Product product, long quantity, boolean status) {
         this.id = id;
-        this.bill = bill;
+        this.user = user;
         this.product = product;
         this.quantity = quantity;
-    }
-
-    public DetailOrder() {
+        this.status = status;
     }
 
     public long getId() {
@@ -35,12 +35,12 @@ public class DetailOrder {
         this.id = id;
     }
 
-    public Bill getBill() {
-        return bill;
+    public User getUser() {
+        return user;
     }
 
-    public void setBill(Bill bill) {
-        this.bill = bill;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {
@@ -58,6 +58,15 @@ public class DetailOrder {
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     
     
 }
