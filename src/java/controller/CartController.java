@@ -12,7 +12,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.DetailOrder;
 import model.User;
+import service.CartService;
 import service.CategoryService;
 import service.ProductService;
 import service.UserService;
@@ -27,14 +30,14 @@ public class CartController extends HttpServlet {
     
     private UserService userService;
     
-    private CategoryService categoryservice;
+    private CartService cartService;
     
     @Override
     public void init() throws ServletException {
          super.init();
          productService = new ProductService();
          userService = new UserService();
-         categoryservice = new CategoryService();
+         this.cartService = new CartService();
     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -79,7 +82,7 @@ public class CartController extends HttpServlet {
             
             switch (action) {
                 case "show":
-                    showCart(request, response);
+                    showCart(request, response, user);
                     break;
                 default:
                     throw new AssertionError();
@@ -87,7 +90,7 @@ public class CartController extends HttpServlet {
             
         }
         else {
-            response.sendRedirect("/shop/404");
+            response.sendRedirect("/shop/users?action=login");
         }
         
     } 
@@ -102,7 +105,24 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
+        
+        if(user != null && user.getRole().equals("USER") && action != null) {
+            request.setAttribute("user", user);
+            
+            switch (action) {
+                case "add":
+                    addCart(request, response, user);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            
+        }
+        else {
+            response.sendRedirect("/shop/users?action=login");
+        }
     }
 
     /** 
@@ -114,8 +134,18 @@ public class CartController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showCart(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
+        List<DetailOrder> cart = cartService.getCart(user);
+        request.setAttribute("cart", cart);
+        
         request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
+    }
+    
+    private void addCart(HttpServletRequest request, HttpServletResponse response, User user) {
+        String productId = request.getParameter("id");
+        String quantity = request.getParameter("quantity");
+        
+        cartService.addCart(user, Long.valueOf(productId), Long.valueOf(quantity));
     }
 
 }

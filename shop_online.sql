@@ -45,15 +45,26 @@ CREATE TABLE bill(
     user_id BIGINT NOT NULL,
     order_date DATE NOT NULL,
     delivery_address VARCHAR(255) NOT NULL,
+    status BOOLEAN,
     FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE cart(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id),
 );
 
 CREATE TABLE detail_order(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    bill_id BIGINT NOT NULL,
+    bill_id BIGINT,
     product_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     quantity BIGINT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES product(id)
+    status BOOLEAN NOT NULL,
+    FOREIGN KEY (bill_id) REFERENCES bill(id),
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 CREATE TABLE comment(
