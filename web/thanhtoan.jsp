@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.apache.tomcat.util.codec.binary.Base64" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,14 +54,17 @@
                                 <th>Xóa</th>
                             </tr>
 
-                            <tr>
-                                <td><img src="https://bizweb.dktcdn.net/thumb/compact/100/318/614/products/mt-4-compressed.jpg" alt=""></td>
-                                <td><p>ANGEL TEE - BLACK <br/> S </p></td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
-                                <td><input type="number" value="1" min="1"></td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
-                                <td><span>X</span></td>
-                            </tr>
+                            <c:forEach items="${requestScope.cart}" var="i">
+                                <tr>
+                                    <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
+                                    <td><p>${i.product.productName}</p></td>
+                                    <td><p style="font-weight: bold;">${i.product.productName}</p></td>
+                                    <td><input type="number" value="${i.quantity}" min="1" max="${i.product.available}" required></td>
+                                    <td><p style="font-weight: bold;" class="price">${i.product.price * i.quantity}</p></td>
+                                    <td><a href="/shop/carts?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a></td>
+                                </tr>
+                            </c:forEach>
+                            
                         </table>
                     </div>
 
@@ -77,8 +82,8 @@
                         </table>
 
                         <div class="cart-content-right-button">
-                            <button id="tt">TIẾP TỤC MUA HÀNG</button>
-                            <button id="pay">THANH TOÁN</button>
+                            <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a>
+                            <a id="pay">THANH TOÁN</a>
                         </div>
                     </div>
                 </div>
@@ -87,5 +92,6 @@
         </article>
 
         <%@ include file="footer.jsp" %>
+        <script src="./script/formatVND.js"></script>
     </body>
 </html>

@@ -72,4 +72,15 @@ public class CartDAO {
         }
         return null;
     }
+    
+    public void deleteCart(Long id) {
+        try {
+            String query ="DELETE FROM detail_order WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 }

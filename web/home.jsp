@@ -53,7 +53,7 @@
     </div>
     <%@ include file="footer.jsp" %>
 
-    <script src="./script/home.js"></script>
+    <script src="./script/formatVND.js"></script>
 
 </body>
 
