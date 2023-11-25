@@ -56,9 +56,8 @@ input[type="radio"]:checked + span{
     background-color: red;
     color: white;
 }
-input[type="number"]{
-    position: absolute;
-    top: 10px;
+input[type="number"] {
+    position: relative;
     width: 100px;
     height: 40px;
     padding: 0px;
@@ -66,12 +65,11 @@ input[type="number"]{
     border: solid 1px rgba(0, 0, 0, 0.1);
     z-index: 1;
     text-align: center;
-  }
-  .spinner-button {
+}
+.spinner-button {
     position: absolute;
     cursor: default;
     z-index: 2;
-    background-color: #ccc;
     width: 14.5px;
     margin: 0px;
     pointer-events: none;
@@ -80,15 +78,16 @@ input[type="number"]{
     line-height: 10px;
     background-color: white;
     border: solid 1px rgba(0, 0, 0, 0.1);
-  }
+    cursor: pointer;
+}
   #inc-button {
-    left: 85px;
-    top: 10.5px;
-  }
+    right: 0px;
+    top: 0px;
+}
   
   #dec-button {
-    left: 85px;
-    top: 30.5px;
+    right: 0px;
+    bottom: 0px;
 }
 .san-pham-cung-loai{
     display: flex;
@@ -121,4 +120,18 @@ input[type="number"]{
     border: 2px solid #EEEEEE;
     margin-bottom: 30px;
     white-space: pre-wrap;
+}
+
+.product-quantity {
+    display: grid;
+}
+
+.quantity {
+    display: grid;
+}
+
+p.error-quantity {
+    margin-top: 20px;
+    color: red;
+    display: none;
 }
