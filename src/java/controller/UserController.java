@@ -184,7 +184,7 @@ public class UserController extends HttpServlet {
         if(!errors.isEmpty()) {
             request.setAttribute("input", input);
             request.setAttribute("error", errors);
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         
         userService.addUser(input);
