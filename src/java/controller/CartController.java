@@ -150,7 +150,7 @@ public class CartController extends HttpServlet {
         
         cartService.addCart(user, Long.valueOf(productId), Long.valueOf(quantity));
         
-        response.sendRedirect(request.getRequestURI());
+        response.sendRedirect("/shop/carts?action=show");
     }
     
     private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
