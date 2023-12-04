@@ -28,10 +28,9 @@ body {
     align-items: center;
     flex-direction: column;
 }
-.gallery-display-area{
+.gallery-display-area {
     overflow: hidden;
-    height: 490px;
-    width: 1257px;
+    height: 80%;
     margin: 0 auto;
 }
 .gallery-wrap{
