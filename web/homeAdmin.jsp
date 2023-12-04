@@ -4,42 +4,78 @@
 <%@ page import="org.apache.tomcat.util.codec.binary.Base64" %>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Header</title>
-        
-    </head>
-    <%@ include file="header.jsp" %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/home.css">
+</head>
 
-    <body >
-        
-        <div id="wrapper">
-            <ul style= " "class="products">   
-                <c:forEach var="i" items="${requestScope.sanpham}">
-                    <li>
-                        
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
-                                </a>
-                                <a href="/shop/products?action=edit&id=${i.getId()}" class="buy-now">Edit</a>
-                            </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">${i.getProductName()}</a>
-                                <div class="product-price">${i.getPrice()}</div>
+<body>
+    <%@ include file="header.jsp" %>
+    
+    <div class="container">
+        <div class="gallery-display-area">
+            <div class="gallery-wrap">
+                <div >
+                    <img class="image" src="./image/anh3.png" alt="">
+                </div>
+                <div >
+                    <img class="image" src="./image/anh1.png" alt="">
+                </div>
+                <div >
+                    <img class="image" src="./image/anh4.png" alt="">
+                </div>
+                <div >
+                    <img class="image" src="./image/anh2.png" alt="">
+                </div>
+                <div >
+                    <img class="image" src="./image/6.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <ul class="products">   
+            <c:forEach var="i" items="${requestScope.sanpham}">
+                <li>
+                    <div class="product-item">
+                        <div class="product-top">
+                            <a href="" class="hien-thi">
+                                <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
+                            </a>
+                            <a href="/shop/products?action=edit&id=${i.getId()}" class="buy-now">Edit</a>
+                        </div>
+                        <div class="product-info">
+                            <a href="" class="product-name">${i.getProductName()}</a>
+                            <div class="product-price">
+                                <p class="price">${i.getPrice()}</p>
+                                <p class="status">
+                                    <c:choose>
+                                        <c:when test="${i.available > 0}">
+                                            <span>Available: ${i.available}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span style="color: red;">Sold out</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
                             </div>
                         </div>
-                    </li>
-                </c:forEach>
-            </ul>
-            <button class="button1">All product</button>
-        </div>
-        <%@ include file="footer.jsp" %>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
 
-    </body>
+        <div class="products-button">
+            <a href="/shop/categories" class="button1">All product</a>
+        </div>
+    </div>
+    <%@ include file="footer.jsp" %>
+
+    <script src="./script/formatVND.js"></script>
+</body>
 
 </html>

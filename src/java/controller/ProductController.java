@@ -157,8 +157,6 @@ public class ProductController extends HttpServlet {
     private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> input = new HashMap<>();
         
-        System.out.println(request.getParameter("category"));
-        
         input.put("productName",request.getParameter("productName"));
         input.put("price",request.getParameter("price"));
         input.put("category",request.getParameter("category"));
@@ -173,7 +171,7 @@ public class ProductController extends HttpServlet {
     
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         productService.deleteProduct(Long.valueOf(request.getParameter("id")));
-        response.sendRedirect("/shop/home");
+        response.sendRedirect("/shop/manage?action=products");
     }
     
     private void getToEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
