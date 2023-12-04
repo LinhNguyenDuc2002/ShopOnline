@@ -157,6 +157,8 @@ public class ProductController extends HttpServlet {
     private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> input = new HashMap<>();
         
+        System.out.println(request.getParameter("category"));
+        
         input.put("productName",request.getParameter("productName"));
         input.put("price",request.getParameter("price"));
         input.put("category",request.getParameter("category"));
@@ -191,7 +193,8 @@ public class ProductController extends HttpServlet {
     
     private void getToShowProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
-
+        List<Product> list = productService.getAllProductsByCategory(a.getCategory().getId());
+        request.setAttribute("list_category", list);
         request.setAttribute("sanphamchitiet", a);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }

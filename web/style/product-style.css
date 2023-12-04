@@ -80,12 +80,12 @@ input[type="number"] {
     border: solid 1px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
-  #inc-button {
+#inc-button {
     right: 0px;
     top: 0px;
 }
-  
-  #dec-button {
+
+#dec-button {
     right: 0px;
     bottom: 0px;
 }
@@ -98,9 +98,40 @@ input[type="number"] {
     width: 270px;
     height: 270px;
 }
+/*slide*/
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 760px) {
+    .swiper-button-next {
+        right: 20px;
+        transform: rotate(90deg);
+    }
+
+    .swiper-button-prev {
+        left: 20px;
+        transform: rotate(90deg);
+    }
+}
+ul.products {
+    display: flex;
+    gap: 0;
+}
+/*slide*/
 .mo-ta h2{
     color: white;
-    background-color: red; 
+    background-color: red;
     width: 150px;
     height: 50px;
     font-size: 20px;
@@ -116,7 +147,7 @@ input[type="number"] {
 }
 
 .mo-ta .khung-mo-ta{
-    width: 100%;  
+    width: 100%;
     border: 2px solid #EEEEEE;
     margin-bottom: 30px;
     white-space: pre-wrap;

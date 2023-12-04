@@ -58,7 +58,9 @@ public class ProductService {
     public List<Product> getAllProduct() {
         return productDAO.getAllProduct();
     }
-    
+    public List<Product> getAllProductsByCategory(Long id){
+        return productDAO.getAllProductsByCategory(id);
+    }
     public void editProduct(Map<String, String> input, Part filePart) throws IOException {
         Category a = categoryDAO.getCategoryById(Long.parseLong(input.get("category")));
         
