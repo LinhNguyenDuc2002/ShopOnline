@@ -52,4 +52,12 @@ public class CartService {
     public void deleteCart(Long id) {
         cartDAO.deleteCart(id);
     }
+    
+    public boolean saveToCart(User user) {
+        return cartDAO.addToCart(user.getId());
+    }
+    
+    public void deleteCartAll(long userId) {
+        cartDAO.deleteCart(userId); // Gọi phương thức từ CartDAO để xóa giỏ hàng của người dùng
+    }
 }

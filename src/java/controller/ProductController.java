@@ -157,6 +157,8 @@ public class ProductController extends HttpServlet {
     private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> input = new HashMap<>();
         
+        System.out.println(request.getParameter("category"));
+        
         input.put("productName",request.getParameter("productName"));
         input.put("price",request.getParameter("price"));
         input.put("category",request.getParameter("category"));
