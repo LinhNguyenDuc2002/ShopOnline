@@ -14,7 +14,7 @@
 
 <body >
     <%@ include file="header.jsp" %> 
-        <div class="container">
+    <div class="container">
         <div class="gallery-display-area">
             <div class="gallery-wrap">
                 <div >

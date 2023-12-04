@@ -39,7 +39,7 @@
                     <label for="">Category</label>
                     <select id="cars" name="category" required>
                         <c:forEach items="${requestScope.categories}" var="i">
-                            <option value=${i.name}>${i.name}</option>
+                            <option value="${i.name}">${i.name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -48,7 +48,7 @@
             <div class="right">
                 <div class="desc-input">
                     <label for="">Description</label>
-                    <textarea name="mo-ta" id="mo-ta" cols="60" rows="10" name="description"></textarea>
+                    <textarea id="mo-ta" cols="60" rows="10" name="description"></textarea>
                 </div>
 
                 <div class="file-input">

@@ -34,7 +34,7 @@ public class ProductDAO {
         String sql = "INSERT INTO `shop_online`.`product`\n"
                 + "(`product_name`, `category_id`, `price`, `available`, `sold`, `image`, `update_day`, `description`)\n"
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
-
+      
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, product.getProductName());
