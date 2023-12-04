@@ -20,16 +20,19 @@ public class Bill {
     
     private String deliveryAddress;
     
+    private boolean status;
+    
     private List<DetailOrder> detailOrders;
 
-    public Bill(long id, User user, Date orderDate, String deliveryAddress) {
+    public Bill() {
+    }
+
+    public Bill(long id, User user, Date orderDate, String deliveryAddress, boolean status) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
         this.deliveryAddress = deliveryAddress;
-    }
-
-    public Bill() {
+        this.status = status;
     }
 
     public long getId() {
@@ -63,6 +66,24 @@ public class Bill {
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public List<DetailOrder> getDetailOrders() {
+        return detailOrders;
+    }
+
+    public void setDetailOrders(List<DetailOrder> detailOrders) {
+        this.detailOrders = detailOrders;
+    }
+
     
+
     
 }

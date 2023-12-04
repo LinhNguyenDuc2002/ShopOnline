@@ -40,6 +40,13 @@
             <div class="content-title">
                 <p id="content-title">Cart</p>
             </div>
+            <%-- Kiểm tra nếu giỏ hàng không có sản phẩm thì không chuyển tới trang dathang.jsp --%>
+            <c:if test="${empty requestScope.cart}">
+                <p>Giỏ hàng của bạn đang trống. Không thể thanh toán.</p></br>
+                <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a></br>
+            </c:if>
+            
+            <c:if test="${not empty requestScope.cart}">
 
             <div class="container">
                 <div class="cart-content">
@@ -53,7 +60,9 @@
                                 <th>Thành tiền</th>
                                 <th>Xóa</th>
                             </tr>
-
+                            
+                            
+                                
                             <c:forEach items="${requestScope.cart}" var="i">
                                 <tr>
                                     <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
@@ -83,12 +92,13 @@
 
                         <div class="cart-content-right-button">
                             <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a>
-                            <a id="pay">THANH TOÁN</a>
+                            <a id="pay" href="/shop/order">THANH TOÁN</a>
                         </div>
                     </div>
                 </div>
 
             </div>
+            </c:if>
         </article>
 
         <%@ include file="footer.jsp" %>
