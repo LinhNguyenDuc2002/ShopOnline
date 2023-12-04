@@ -30,7 +30,7 @@
 
             <div class="product-content">
                 <div class="product-left">
-                    <div><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(requestScope.sanphamchitiet.image)}"alt=""></div>
+                    <div><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(requestScope.sanphamchitiet.image)}" alt="picture"></div>
     
     
                 </div>
@@ -55,7 +55,7 @@
                         <div class="quantity">
                             <p>Quantity</p>
                             <div style="position: relative; display: flex; width: fit-content; margin-top: 10px;">
-                                <input type="number" value="1" min="1" max="${requestScope.sanphamchitiet.available}" name="quantity" >
+                                <input type="number" value="1" min="1" max="${requestScope.sanphamchitiet.available}" name="quantity" required>
                             </div>
                         </div>  
 
@@ -159,10 +159,14 @@
     </section>
     <%@ include file="footer.jsp" %>
 
+
     <script src="./script/product.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!-- Initialize Swiper -->
   <script src="./script/product-detail.js"></script>
+
+    <script src="./script/formatVND.js"></script>
+
 </body>
 </html>

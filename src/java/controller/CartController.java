@@ -84,6 +84,9 @@ public class CartController extends HttpServlet {
                 case "show":
                     showCart(request, response, user);
                     break;
+                case "delete":
+                    deleteCart(request, response);
+                    break;
                 default:
                     throw new AssertionError();
             }
@@ -141,11 +144,20 @@ public class CartController extends HttpServlet {
         request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
     }
     
-    private void addCart(HttpServletRequest request, HttpServletResponse response, User user) {
+    private void addCart(HttpServletRequest request, HttpServletResponse response, User user) throws IOException {
         String productId = request.getParameter("id");
         String quantity = request.getParameter("quantity");
         
         cartService.addCart(user, Long.valueOf(productId), Long.valueOf(quantity));
+        
+        response.sendRedirect("/shop/carts?action=show");
+    }
+    
+    private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        
+        cartService.deleteCart(Long.valueOf(id));
+        response.sendRedirect("/shop/carts?action=show");
     }
 
 }

@@ -19,6 +19,9 @@ public class DetailOrder {
     
     private boolean status;
 
+    public DetailOrder() {
+    }
+
     public DetailOrder(long id, User user, Product product, long quantity, boolean status) {
         this.id = id;
         this.user = user;

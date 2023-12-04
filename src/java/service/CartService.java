@@ -7,6 +7,7 @@ package service;
 import dao.CartDAO;
 import dao.CategoryDAO;
 import dao.ProductDAO;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import model.DetailOrder;
@@ -31,9 +32,24 @@ public class CartService {
     }
     
     public List<DetailOrder> getCart(User user) {
-        Map<Integer, List<String>> detailOrder = cartDAO.getCart(user.getId());
+        Map<Integer, List<String>> result = cartDAO.getCart(user.getId());
         
-        System.out.println(detailOrder.toString());
-        return List.of();
+        List<DetailOrder> detailOrders = new ArrayList<>();
+        for(List<String> detail : result.values()) {
+            DetailOrder detailOrder = new DetailOrder();
+            detailOrder.setId(Long.valueOf(detail.get(0)));
+            detailOrder.setProduct(productDAO.getProduct(Long.valueOf(detail.get(1))));
+            detailOrder.setUser(user);
+            detailOrder.setQuantity(Long.valueOf(detail.get(3)));
+            detailOrder.setStatus(Boolean.valueOf(detail.get(4)));
+            
+            detailOrders.add(detailOrder);
+        }
+        
+        return detailOrders;
+    }
+    
+    public void deleteCart(Long id) {
+        cartDAO.deleteCart(id);
     }
 }
