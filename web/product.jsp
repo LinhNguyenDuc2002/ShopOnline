@@ -11,7 +11,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/home.css">
-    <link rel="stylesheet" href="./style/product-style.css">
+        <link rel="stylesheet" href="./style/product-style.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+  
+    </style>
+
 </head>
 
 <body>
@@ -71,9 +77,25 @@
         <!-- MÔ TẢ-->
         <div>
             <h2>Products of the same type</h2>
-            <div class="wrapper">
-                <ul class="products">
-                    <li>
+            <div class="swiper">
+                <ul class="swiper-wrapper products ">
+                    <c:forEach var="i" items="${requestScope.list_category}">
+                    <li class="swiper-slide">
+                        <div class="product-item">
+                            <div class="product-top">
+                                <a href="" class="hien-thi">
+                                    <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
+                                </a>
+                                <a href="/shop/products?action=show&id=${i.getId()}" class="buy-now">BUY NOW</a>
+                            </div>
+                            <div class="product-info">
+                                <a href="" class="product-name">${i.getProductName()}</a>
+                                <div class="product-price">${i.getPrice()}</div>
+                            </div>
+                        </div>
+                    </li>
+                    </c:forEach>
+<!--                    <li class="swiper-slide">
                         <div class="product-item">
                             <div class="product-top">
                                 <a href="" class="hien-thi">
@@ -87,7 +109,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="swiper-slide">
                         <div class="product-item">
                             <div class="product-top">
                                 <a href="" class="hien-thi">
@@ -101,7 +123,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="swiper-slide">
                         <div class="product-item">
                             <div class="product-top">
                                 <a href="" class="hien-thi">
@@ -115,7 +137,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                     <li class="swiper-slide">
                         <div class="product-item">
                             <div class="product-top">
                                 <a href="" class="hien-thi">
@@ -128,13 +150,19 @@
                                 <div class="product-price">100.000</div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                 </ul>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
     <%@ include file="footer.jsp" %>
 
     <script src="./script/product.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script src="./script/product-detail.js"></script>
 </body>
 </html>
