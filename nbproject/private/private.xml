@@ -3,12 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/src/java/model/Product.java</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/src/java/controller/OrderServlet.java</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/web/dathang.jsp</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/web/thanhtoan.jsp</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/src/java/service/ProductService.java</file>
+            <file>file:/C:/Users/thanh/OneDrive%20-%20ptit.edu.vn/Desktop/ShopOnline/src/java/dao/ProductDAO.java</file>
             <file>file:/D:/ShopOnline/src/java/service/ProductService.java</file>
+            <file>file:/D:/ShopOnline/src/java/controller/ProductController.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/UserController.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/CartController.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/BillController.java</file>
+            <file>file:/D:/ShopOnline/web/addsp.jsp</file>
+            <file>file:/D:/ShopOnline/src/java/controller/test.java</file>
             <file>file:/D:/ShopOnline/src/java/controller/ManageController.java</file>
-            <file>file:/D:/ShopOnline/web/style/home.css</file>
+            <file>file:/D:/ShopOnline/src/java/invalid/InvalidUser.java</file>
+            <file>file:/D:/ShopOnline/src/java/dao/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>
