@@ -27,7 +27,7 @@
                 <p><i class="fa-regular fa-circle-check"></i>Account created successfully!</p>
                 <p>Login to start shopping</p>
             </div>
-            <button class="login-account">Log in</button>
+            <a href="/shop/users?action=login" class="login-account">Log in</button>
         </div>
     </div>
 

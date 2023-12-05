@@ -54,24 +54,27 @@
                 </div>
                         
                 <div class="right">
-                    <div class="right-input">
+                    <div class="desc-input">
                         <label for="">Description</label>
                         <textarea name="mo-ta" id="mo-ta" cols="60" rows="10" style="resize:none" >${requestScope.sanphamchitiet.description}</textarea>
                     </div>
                     
-                    <div class="right-input">
-                        <input type="file" name="file" id="file" value="12" class="inputfile" onchange="displayFileName()"/>
-                        <label class="label" for="file" style="font-size: 20px;">Upload</label>
+                    <div class="file-input">
+                        <div>
+                            <input type="file" name="image" id="file" class="inputfile" onchange="displayFileName()" required>
+                            <label class="label" for="file">Upload</label>
+                        </div>
 
+                        <p id="fileNameDisplay">Choose a image file</p>
                     </div>
                     
-                    <div class="nut">
-                        <button class="button1" >Submit</button>
+                    <div class="right-button">
+                        <input type="submit" class="button1" value="Submit">
+                        <a href="/shop/products?action=delete&id=${requestScope.sanphamchitiet.id}" class="delete button1">Delete</a>      
                     </div>
+                    
                 </div>
             </form>
-                    
-            <a href="/shop/products?action=delete&id=${requestScope.sanphamchitiet.id}" style="position: absolute;bottom: 35px;right: 179px"><button class="button1 delete">Delete</button></a>      
         </div>
     </div>
 

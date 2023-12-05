@@ -162,7 +162,7 @@ p#content-title {
     font-weight: bold;
     font-size: 15px;
 }
-button.login-account {
+a.login-account {
     width: 120px;
     height: 40px;
     background-color: red;
@@ -176,8 +176,10 @@ button.login-account {
     font-family: sans-serif;
     cursor: pointer;
     margin: 30px 0px;
+    text-decoration: none;
 }
-button.login-account:hover {
+
+a.login-account:hover {
     background-color: white;
     color: blue;
     border: 1px solid red;
