@@ -40,64 +40,68 @@
             <div class="content-title">
                 <p id="content-title">Cart</p>
             </div>
+
             <%-- Kiểm tra nếu giỏ hàng không có sản phẩm thì không chuyển tới trang dathang.jsp --%>
             <c:if test="${empty requestScope.cart}">
-                <p>Giỏ hàng của bạn đang trống. Không thể thanh toán.</p></br>
-                <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a></br>
+                <div class="container empty-cart">
+                    <p style="color: red;">Your shopping cart is empty!</p></br>
+                    <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a></br>
+                </div>
             </c:if>
             
             <c:if test="${not empty requestScope.cart}">
 
-            <div class="container">
-                <div class="cart-content">
-                    <div class="cart-content-top">
-                        <table>
-                            <tr>
-                                <th>Ảnh sản phẩm</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Đơn giá</th>
-                                <th>Số lượng</th>
-                                <th>Thành tiền</th>
-                                <th>Xóa</th>
-                            </tr>
-                            
-                            
-                                
-                            <c:forEach items="${requestScope.cart}" var="i">
+                <div class="container">
+                    <div class="cart-content">
+                        <div class="cart-content-top">
+                            <table>
                                 <tr>
-                                    <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
-                                    <td><p>${i.product.productName}</p></td>
-                                    <td><p style="font-weight: bold;">${i.product.productName}</p></td>
-                                    <td><input type="number" value="${i.quantity}" min="1" max="${i.product.available}" required></td>
-                                    <td><p style="font-weight: bold;" class="price">${i.product.price * i.quantity}</p></td>
-                                    <td><a href="/shop/carts?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a></td>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th>Xóa</th>
                                 </tr>
-                            </c:forEach>
-                            
-                        </table>
-                    </div>
+                                    
+                                <c:set var="totalPrice" value="0" />
+                                <c:forEach items="${requestScope.cart}" var="i">
+                                    <tr>
+                                        <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
+                                        <td><p>${i.product.productName}</p></td>
+                                        <td><p style="font-weight: bold;">${i.product.productName}</p></td>
+                                        <td><input type="number" value="${i.quantity}" min="1" max="${i.product.available}" required></td>
+                                        <td><p style="font-weight: bold;" class="price">${i.product.price * i.quantity}</p></td>
+                                        <td><a href="/shop/carts?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
 
-                    <div class="cart-content-bottom">
-                        <table>
-                            <tr>
-                                <td>Tạm tính</td>
-                                <td><p>395.000<sub>đ</sub></p></td>
-                            </tr>
+                                    <c:set var="totalPrice" value="${totalPrice + i.product.price * i.quantity}" />
+                                </c:forEach>
+                                
+                            </table>
+                        </div>
 
-                            <tr>
-                                <td>Tổng tiền thanh toán</td>
-                                <td><p style="font-weight: bold;">395.000<sub>đ</sub></p></td>
-                            </tr>
-                        </table>
+                        <div class="cart-content-bottom">
+                            <table>
+                                <tr>
+                                    <td>Tạm tính</td>
+                                    <td><p class="price">${totalPrice}</p></td>
+                                </tr>
 
-                        <div class="cart-content-right-button">
-                            <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a>
-                            <a id="pay" href="/shop/order">THANH TOÁN</a>
+                                <tr>
+                                    <td>Tổng tiền thanh toán</td>
+                                    <td><p style="font-weight: bold;" class="price">${totalPrice}</p></td>
+                                </tr>
+                            </table>
+
+                            <div class="cart-content-right-button">
+                                <a id="tt" href="/shop/home">TIẾP TỤC MUA HÀNG</a>
+                                <a id="pay" href="/shop/order">ĐẶT HÀNG</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </c:if>
         </article>
 

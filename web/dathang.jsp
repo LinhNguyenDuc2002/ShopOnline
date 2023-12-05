@@ -37,8 +37,6 @@
                             Thông tin nhận hàng
                         </h2>
                         <div class="nhap">
-                            
-                            
                             <input type="text" placeholder="Email" value="${requestScope.user.getEmail()}"><br/>
                             <input type="text" placeholder="Họ và tên" value="${requestScope.user.getFullname()}"><br/>
                             <input type="text" placeholder="Số điện thoại" value="${requestScope.user.getPhone()}"><br/>
@@ -47,7 +45,6 @@
                             <input type="text" placeholder="Quận huyện"><br/>
                             <input type="text" placeholder="Phường xã"><br/>
                             <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Ghi chú (tùy chọn)"></textarea><br/>
-                            
                         </div>
                     </div>
 
@@ -102,7 +99,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" class="previous-link">
+                                <a href="/shop/carts?action=show" class="previous-link">
                                     <i class="previous-link__arrow">❮</i>
                                     <span class="previous-link__content">Quay về giỏ hàng</span>
                                 </a>

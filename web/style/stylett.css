@@ -262,3 +262,9 @@ article {
     margin: 40px 0px;
     font-family: sans-serif;
 }
+
+.empty-cart {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}

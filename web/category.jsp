@@ -43,13 +43,13 @@
                         <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="hien-thi">
+                                    <a href="/shop/products?action=show&id=${i.getId()}" class="hien-thi">
                                         <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
                                     </a>
                                     <a href="/shop/products?action=show&id=${i.getId()}" class="buy-now">Buy now</a>
                                 </div>
                                 <div class="product-info">
-                                    <a href="" class="product-name">${i.getProductName()}</a>
+                                    <a href="/shop/products?action=show&id=${i.getId()}" class="product-name">${i.getProductName()}</a>
                                     <div class="product-price">
                                         <p class="price">${i.getPrice()}</p>
                                         <p class="status">
@@ -70,15 +70,12 @@
                 </ul>
             </div>
         </div>
-
-        <div class="products-button">
-            <button class="button1">All product</button>
-        </div>
     </div>
     <%@ include file="footer.jsp" %>
 
     <script src="./script/home.js"></script>
     <script src="./script/category.js"></script>
+    <script src="./script/formatVND.js"></script>
 
 </body>
 

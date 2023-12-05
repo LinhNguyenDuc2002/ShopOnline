@@ -11,8 +11,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/home.css">
-        <link rel="stylesheet" href="./style/product-style.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./style/product-style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
   
@@ -49,7 +49,7 @@
                         </c:choose>
                     </p>
     
-                    <p class="price text">${requestScope.sanphamchitiet.getPrice()}</p>    
+                    <p class="price text main">${requestScope.sanphamchitiet.getPrice()}</p>    
                     
                     <div class="product-quantity">
                         <div class="quantity">
@@ -80,77 +80,34 @@
             <div class="swiper">
                 <ul class="swiper-wrapper products ">
                     <c:forEach var="i" items="${requestScope.list_category}">
-                    <li class="swiper-slide">
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
-                                </a>
-                                <a href="/shop/products?action=show&id=${i.getId()}" class="buy-now">BUY NOW</a>
+                        <li class="swiper-slide">
+                            <div class="product-item">
+                                <div class="product-top">
+                                    <a href="/shop/products?action=show&id=${i.getId()}" class="hien-thi">
+                                        <img src="data:image/png;base64, ${Base64.encodeBase64String(i.image)}" alt="Picture" />
+                                    </a>
+                                    <a href="/shop/products?action=show&id=${i.getId()}" class="buy-now">BUY NOW</a>
+                                </div>
+
+                                <div class="product-info">
+                                    <a href="/shop/products?action=show&id=${i.getId()}" class="product-name">${i.getProductName()}</a>
+                                    <div class="product-price">
+                                        <p class="price">${i.getPrice()}</p>
+                                        <p class="status">
+                                            <c:choose>
+                                                <c:when test="${i.available > 0}">
+                                                    <span>Available: ${i.available}</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span style="color: red;">Sold out</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">${i.getProductName()}</a>
-                                <div class="product-price">${i.getPrice()}</div>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
                     </c:forEach>
-<!--                    <li class="swiper-slide">
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="./image/mt-2.webp" alt="">
-                                </a>
-                                <a href="" class="buy-now">BUY NOW</a>
-                            </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">Product name</a>
-                                <div class="product-price">100.000</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="swiper-slide">
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="./image/mt-2.webp" alt="">
-                                </a>
-                                <a href="" class="buy-now">BUY NOW</a>
-                            </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">Product name</a>
-                                <div class="product-price">100.000</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="swiper-slide">
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="./image/mt-2.webp" alt="">
-                                </a>
-                                <a href="" class="buy-now">BUY NOW</a>
-                            </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">Product name</a>
-                                <div class="product-price">100.000</div>
-                            </div>
-                        </div>
-                    </li>
-                     <li class="swiper-slide">
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="" class="hien-thi">
-                                    <img src="./image/mt-2.webp" alt="">
-                                </a>
-                                <a href="" class="buy-now">BUY NOW</a>
-                            </div>
-                            <div class="product-info">
-                                <a href="" class="product-name">Product name</a>
-                                <div class="product-price">100.000</div>
-                            </div>
-                        </div>
-                    </li>-->
                 </ul>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -163,8 +120,8 @@
     <script src="./script/product.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <!-- Initialize Swiper -->
-  <script src="./script/product-detail.js"></script>
+    <!-- Initialize Swiper -->
+    <script src="./script/product-detail.js"></script>
 
     <script src="./script/formatVND.js"></script>
 
