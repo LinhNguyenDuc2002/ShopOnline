@@ -24,8 +24,6 @@ body {
 .content table {
     margin: 10px 0px;
     width: 100%;
-    border-collapse: collapse;
-    position: relative;
 }
 
 /* Định dạng cho các dòng chan */
@@ -83,6 +81,11 @@ body {
 
 .add-product-btn i {
     margin-right: 10px;
+}
+
+.container {
+    height: 400px;
+    overflow-y: auto;
 }
 
 .content .field {

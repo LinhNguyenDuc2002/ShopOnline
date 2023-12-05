@@ -47,7 +47,7 @@
 
     <div class="body">
         <div class="header-body">
-            <img src="./image/logo-vpp-021.png" alt="Shop logo">
+            <a href="/shop/home"><img src="./image/logo-vpp-021.png" alt="Shop logo"></a>
         </div>
 
         <div class="content-body">

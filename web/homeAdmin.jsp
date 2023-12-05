@@ -15,28 +15,6 @@
 <body>
     <%@ include file="header.jsp" %>
     
-    <div class="container">
-        <div class="gallery-display-area">
-            <div class="gallery-wrap">
-                <div >
-                    <img class="image" src="./image/anh3.png" alt="">
-                </div>
-                <div >
-                    <img class="image" src="./image/anh1.png" alt="">
-                </div>
-                <div >
-                    <img class="image" src="./image/anh4.png" alt="">
-                </div>
-                <div >
-                    <img class="image" src="./image/anh2.png" alt="">
-                </div>
-                <div >
-                    <img class="image" src="./image/6.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <div id="wrapper">
         <ul class="products">   
             <c:forEach var="i" items="${requestScope.sanpham}">

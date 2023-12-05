@@ -82,6 +82,9 @@ p#contact {
     align-items: center;
     justify-content: center;
 }
+.header-body a {
+    height: 100%;
+}
 .content-body {
     height: 25%;
     display: flex;
