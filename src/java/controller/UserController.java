@@ -192,24 +192,51 @@ public class UserController extends HttpServlet {
     }
     
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
-        List<String> errors = new ArrayList<>();
+        User user = userService.getCurrentUser(request);
         
-        Map<String, String> input = new HashMap<>();
-        input.put("fullname", request.getParameter("fullname"));
-        input.put("username", request.getParameter("username"));
-        input.put("password", request.getParameter("password"));
-        input.put("birthday", request.getParameter("birthday"));
-        input.put("email", request.getParameter("email"));
-        input.put("phone", request.getParameter("phone"));
+        List<String> errors = new ArrayList<>();
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        
+        if(!user.getUsername().equals(username)) {
+            String errorUsername = InvalidUser.checkUsername(username);
+            if(errorUsername != null) {
+                errors.add(errorUsername);
+            }
+        }
+        
+        if(!user.getEmail().equals(email)) {
+            String errorEmail = InvalidUser.checkEmail(email);
+            if(errorEmail != null) {
+                errors.add(errorEmail);
+            }
+        }
+        
+        if(request.getParameter("birthday") == null) {
+            errors.add("Birthday field is not null");
+        }
         
         if(!errors.isEmpty()) {
-            request.setAttribute("user", userService.getCurrentUser(request));
+            request.setAttribute("user", user);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
         }
-        System.out.println(input);
-        userService.updateUser(input, 1);
-        response.sendRedirect("/shop/users");
+        else {
+            Map<String, String> input = new HashMap<>();
+            input.put("fullname", request.getParameter("fullname"));
+            input.put("username", request.getParameter("username"));
+            input.put("birthday", request.getParameter("birthday"));
+            input.put("email", request.getParameter("email"));
+            input.put("phone", request.getParameter("phone"));
+            input.put("sex", request.getParameter("gender"));
+            input.put("detail_address", request.getParameter("detail_address"));
+            input.put("city", request.getParameter("city"));
+            input.put("country", request.getParameter("country"));
+            input.put("note", request.getParameter("note"));
+
+            userService.updateUser(input, user.getId());
+            response.sendRedirect("/shop/users");
+        }
     }
     
     private void login(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {

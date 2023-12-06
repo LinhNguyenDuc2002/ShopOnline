@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.apache.tomcat.util.codec.binary.Base64" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,10 +42,10 @@
                             <input type="text" placeholder="Email" value="${requestScope.user.email}"><br/>
                             <input type="text" placeholder="Fullname" value="${requestScope.user.fullname}"><br/>
                             <input type="text" placeholder="Phone number" value="${requestScope.user.phone}"><br/>
-                            <input type="text" placeholder="Country" value="${requestScope.user.country}"><br/>
-                            <input type="text" placeholder="City" value="${requestScope.user.city}"><br/>
-                            <input type="text" name="deliveryAddress" placeholder="Detail Address" value="${requestScope.user.detail_address}" required><br/>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Note"></textarea><br/>
+                            <input type="text" name="country" placeholder="Country" value="${requestScope.user.country}"><br/>
+                            <input type="text" name="city" placeholder="City" value="${requestScope.user.city}"><br/>
+                            <input type="text" name="detailAddress" placeholder="Detail Address" value="${requestScope.user.detail_address}" required><br/>
+                            <textarea id="w3review" name="note" rows="4" cols="50" placeholder="Note"></textarea><br/>
                         </div>
                     </div>
 

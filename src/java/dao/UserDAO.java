@@ -162,7 +162,6 @@ public class UserDAO {
     public boolean updateUser(User user) {
         String sql = "UPDATE user SET " +
                 "    username = ?, " +
-                "    password = ?, " +
                 "    fullname = ?, " +
                 "    birthday = ?, " +
                 "    sex = ?, " +
@@ -178,18 +177,17 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getFullname());
-            preparedStatement.setDate(4, (Date) user.getBirthday());
-            preparedStatement.setBoolean(5, user.getSex());
+            preparedStatement.setString(2, user.getFullname());
+            preparedStatement.setDate(3, (Date) user.getBirthday());
+            preparedStatement.setBoolean(4, user.getSex());
 //            preparedStatement.setString(6, user.getAvatar());
-            preparedStatement.setString(6, user.getPhone());
-            preparedStatement.setString(7, user.getEmail());
-            preparedStatement.setString(8, user.getDetail_address());
-            preparedStatement.setString(9, user.getCity());
-            preparedStatement.setString(10, user.getCountry());
-            preparedStatement.setString(11, user.getNote());
-            preparedStatement.setLong(12, user.getId());
+            preparedStatement.setString(5, user.getPhone());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getDetail_address());
+            preparedStatement.setString(8, user.getCity());
+            preparedStatement.setString(9, user.getCountry());
+            preparedStatement.setString(10, user.getNote());
+            preparedStatement.setLong(11, user.getId());
 
             preparedStatement.executeUpdate();
             return true;
