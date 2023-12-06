@@ -5,8 +5,13 @@
 package service;
 
 import dao.BillDAO;
+import dao.CartDAO;
+import dao.ProductDAO;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import model.Bill;
+import model.DetailOrder;
 import model.User;
 import util.DateUtil;
 
@@ -17,22 +22,35 @@ import util.DateUtil;
 public class BillService {
     
     private BillDAO billDAO;
+    
+    private CartDAO cartDAO;
+    
+    private ProductDAO productDAO;
 
     public BillService() {
         this.billDAO = new BillDAO();
+        this.cartDAO = new CartDAO();
+        this.productDAO = new ProductDAO();
     }
 
-    public void addBill(User user, String deliveryAddress) {
+    public void addBill(User user, Map<String, String> input) {
         Bill newBill = new Bill();
         newBill.setUser(user);
-        newBill.setOrderDate(new Date(System.currentTimeMillis()));
-        newBill.setDeliveryAddress(deliveryAddress);
+        newBill.setOrderDate(DateUtil.getDateNow());
+        newBill.setDeliveryAddress(formatAddress(input));
         newBill.setStatus(false);
         
-        billDAO.addBill(newBill);
+        Long billId = billDAO.addBill(newBill); 
+        
+        List<Long> detailOrderId = cartDAO.getDetailOrder(user.getId());
+        for(Long it : detailOrderId) {
+            cartDAO.updateDetailOrder(it, billId);
+            productDAO.updateProductAvailability(it);
+        }
     }
-
     
-
+    private String formatAddress(Map<String, String> input) {
+        return input.get("detail") + " - " + input.get("city") + " - " + input.get("country");
+    }
     
 }

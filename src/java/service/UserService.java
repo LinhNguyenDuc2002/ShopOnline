@@ -64,15 +64,12 @@ public class UserService {
     }
     
     public boolean updateUser(Map<String, String> map, long id) throws ParseException {
-        Date birthdayToDate = DateUtil.convertStringToDate(map.get("birthday"));
-        
         User user = new User();
         user.setId(id);
         user.setFullname(map.get("fullname"));
-//        user.setUsername(map.get("username"));
+        user.setUsername(map.get("username"));
         user.setPhone(map.get("phone"));
         user.setEmail(map.get("email"));
-        user.setPassword(map.get("password"));
         user.setBirthday(DateUtil.convertStringToDate(map.get("birthday")));
         user.setCity(map.get("city"));
         user.setCountry(map.get("country"));

@@ -144,13 +144,15 @@ public class ProductDAO {
         return null;
     }
 
-    public void updateProductAvailability(Product product) {
+    public void updateProductAvailability(Long id) {
         try {
-            String query = "UPDATE product SET available = ? WHERE id = ?";
+            String query = "UPDATE product p " +
+                    "INNER JOIN detail_order d ON p.id = d.product_id " +
+                    "SET p.available = p.available - d.quantity " +
+                    "WHERE d.id = ?";
             PreparedStatement ps = connection.prepareStatement(query);
 
-            ps.setLong(1, product.getAvailable());
-            ps.setLong(2, product.getId());
+            ps.setLong(1, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {
