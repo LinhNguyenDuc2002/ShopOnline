@@ -122,6 +122,25 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
+    
+    public void editProductWithoutImage(Product a) {
+        try {
+            String query = "UPDATE product SET product_name = ?,category_id = ?,"
+                    + "price = ?, available = ?, description= ? WHERE (id= ?)";
+
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setString(1, a.getProductName());
+            ps.setLong(2, a.getCategory().getId());
+            ps.setDouble(3, a.getPrice());
+            ps.setLong(4, a.getAvailable());
+            ps.setString(5, a.getDescription());
+            ps.setLong(6, a.getId());
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public List<Product> getAllProductsByCategory(Long id) {
         try {
