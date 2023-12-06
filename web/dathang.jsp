@@ -24,7 +24,7 @@
     <body>
         <%@ include file="header.jsp" %>
 
-        <<form action="order" method="post">
+        <form action="/shop/order" method="POST">
             <div class="order">
 
                 <div class="logo-header">
@@ -37,14 +37,13 @@
                             Thông tin nhận hàng
                         </h2>
                         <div class="nhap">
-                            <input type="text" placeholder="Email" value="${requestScope.user.getEmail()}"><br/>
-                            <input type="text" placeholder="Họ và tên" value="${requestScope.user.getFullname()}"><br/>
-                            <input type="text" placeholder="Số điện thoại" value="${requestScope.user.getPhone()}"><br/>
-                            <input type="text" name="deliveryAddress" placeholder="Địa chỉ" value="${requestScope.user.getDetail_address()}" required><br/>
-                            <input type="text" placeholder="Tỉnh thành" value="${requestScope.user.getCity()}"><br/>
-                            <input type="text" placeholder="Quận huyện"><br/>
-                            <input type="text" placeholder="Phường xã"><br/>
-                            <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Ghi chú (tùy chọn)"></textarea><br/>
+                            <input type="text" placeholder="Email" value="${requestScope.user.email}"><br/>
+                            <input type="text" placeholder="Fullname" value="${requestScope.user.fullname}"><br/>
+                            <input type="text" placeholder="Phone number" value="${requestScope.user.phone}"><br/>
+                            <input type="text" placeholder="Country" value="${requestScope.user.country}"><br/>
+                            <input type="text" placeholder="City" value="${requestScope.user.city}"><br/>
+                            <input type="text" name="deliveryAddress" placeholder="Detail Address" value="${requestScope.user.detail_address}" required><br/>
+                            <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Note"></textarea><br/>
                         </div>
                     </div>
 
@@ -52,7 +51,7 @@
 
                 <div class="order-right">
                     <h2>
-                        Đơn hàng (2 sản phẩm)
+                        The order has ${requestScope.cart.size()} products
                     </h2>
 
                     <table class="san-pham">

@@ -46,6 +46,7 @@ CREATE TABLE bill(
     order_date DATE NOT NULL,
     delivery_address VARCHAR(255) NOT NULL,
     status BOOLEAN,
+    note TEXT,
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
