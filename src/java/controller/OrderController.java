@@ -20,13 +20,14 @@ import model.User;
 import service.BillService;
 import service.CartService;
 import service.UserService;
+import util.DateUtil;
 
 /**
  *
  * @author thanh
  */
 @WebServlet(name = "OrderServlet", urlPatterns = {"/order"})
-public class OrderServlet extends HttpServlet {
+public class OrderController extends HttpServlet {
 
     private UserService userService;
 
@@ -35,7 +36,7 @@ public class OrderServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        userService = new UserService();
+        this.userService = new UserService();
         this.cartService = new CartService();
     }
 
@@ -80,16 +81,13 @@ public class OrderServlet extends HttpServlet {
         User user = userService.getCurrentUser(request);
 
         if (user != null && user.getRole().equals("USER")) {
-            request.setAttribute("user", user);
-
             // Hiển thị thông tin người dùng trên trang dathang.jsp
             request.setAttribute("user", user);
-
-            CartService cartService = new CartService();
 
             // Lấy danh sách sản phẩm trong giỏ hàng của người dùng
             List<DetailOrder> cart = cartService.getCart(user);
             request.setAttribute("cart", cart);
+            
             request.getRequestDispatcher("dathang.jsp").forward(request, response);
         } else {
             response.sendRedirect("/shop/users?action=login");
@@ -112,9 +110,7 @@ public class OrderServlet extends HttpServlet {
 
         if (user != null && user.getRole().equals("USER")) {
             request.setAttribute("user", user);
-
-            CartService cartService = new CartService();
-
+            
             //1. Tạo bill: Lấy thông tin đơn hàng từ request
             String deliveryAddress = request.getParameter("deliveryAddress");
 
@@ -123,7 +119,7 @@ public class OrderServlet extends HttpServlet {
             newBill.setUser(user);
 
             newBill.setDeliveryAddress(deliveryAddress);
-            newBill.setOrderDate(new java.util.Date()); // Lấy thời gian hiện tại
+            newBill.setOrderDate(DateUtil.getDateNow()); // Lấy thời gian hiện tại
 
             // Gọi phương thức addBill từ BillService để lưu thông tin đơn hàng vào cơ sở dữ liệu
             BillService billService = new BillService();

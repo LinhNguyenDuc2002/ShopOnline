@@ -22,6 +22,8 @@ public class Bill {
     
     private boolean status;
     
+    private String note;
+    
     private List<DetailOrder> detailOrders;
 
     public Bill() {
