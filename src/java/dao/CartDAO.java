@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class CartDAO {
     }
 
     public boolean addCart(Long userId, Long productId, Long quantity) {
-        String checkExistQuery = "SELECT id, quantity FROM detail_order WHERE product_id = ? AND user_id = ?";
+        String checkExistQuery = "SELECT id, quantity FROM detail_order WHERE product_id = ? AND user_id = ? AND status = false";
         String updateQuery = "UPDATE detail_order SET quantity = ? WHERE id = ?";
         String insertQuery = "INSERT INTO detail_order (product_id, user_id, quantity, status) VALUES (?, ?, ?, ?)";
 
@@ -95,10 +96,44 @@ public class CartDAO {
         }
         return null;
     }
+    
+    public List<Long> getDetailOrder(Long id) {
+        try {
+            String query = "select * from detail_order where user_id = ? AND status = false";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            List<Long> value = new ArrayList<>();
+            while (rs.next()) {
+                value.add(rs.getLong(1));
+            }
+            return value;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public void updateDetailOrder(Long id, Long billId) {
+        String sql = "UPDATE detail_order SET " +
+                "    bill_id = ?, " +
+                "    status = true " +
+                "    WHERE id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, billId);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void deleteCart(Long id) {
         try {
-            String query = "DELETE FROM detail_order WHERE id = ?";
+            String query = "DELETE FROM detail_order WHERE id = ? AND status = false";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setLong(1, id);
 
@@ -123,7 +158,7 @@ public class CartDAO {
     }
 
     public void deleteCart(long userId) {
-        String sql = "DELETE FROM detail_order WHERE user_id = ?";
+        String sql = "DELETE FROM detail_order WHERE user_id = ? AND status = false";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

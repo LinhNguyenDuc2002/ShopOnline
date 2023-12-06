@@ -46,16 +46,13 @@
 
                     <div class="edit">
                         <div class="edit-left">
-                            <p>Name</p>
+                            <p>Fullname</p>
                             <input type="text" pattern="^[A-Za-z0-9 ]+$" name="fullname"
                                 value="${requestScope.user.getFullname()}"
                                 title="Please enter a username without special characters" required>
 
                             <p>Username</p>
                             <input type="text" name="username" value="${requestScope.user.getUsername()}" required>
-
-                            <p>Password</p>
-                            <input type="text" minlength="6" name="password" value="${requestScope.user.getPassword()}" required>
 
                             <p>Birthday</p>
                             <input type="date" name="birthday" value="${requestScope.user.getBirthday()}">
@@ -109,8 +106,8 @@
                     </div>
 
                     <div class="edit-button">
-                        <button class="save" type="submit">Save</button>
-                        <button class="back" onclick="goBack()"><i class="fa-solid fa-reply"></i>Back</button>
+                        <input class="save" type="submit" value="Save"></input>
+                        <input class="back" type="button" onclick="goBack()" value="Back"></input>
                     </div>
                 </form>
             </div>

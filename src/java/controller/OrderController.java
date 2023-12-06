@@ -12,7 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Bill;
 import model.DetailOrder;
 import model.Product;
@@ -32,12 +34,15 @@ public class OrderController extends HttpServlet {
     private UserService userService;
 
     private CartService cartService;
+    
+    private BillService billService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = new UserService();
         this.cartService = new CartService();
+        this.billService = new BillService();
     }
 
     /**
@@ -111,45 +116,12 @@ public class OrderController extends HttpServlet {
         if (user != null && user.getRole().equals("USER")) {
             request.setAttribute("user", user);
             
-            //1. Tạo bill: Lấy thông tin đơn hàng từ request
-            String deliveryAddress = request.getParameter("deliveryAddress");
+            Map<String, String> input = new HashMap<>();
+            input.put("country", request.getParameter("country"));
+            input.put("city", request.getParameter("city"));
+            input.put("detail", request.getParameter("detailAddress"));
 
-            // Tạo đối tượng Bill từ thông tin thu thập được từ request
-            Bill newBill = new Bill();
-            newBill.setUser(user);
-
-            newBill.setDeliveryAddress(deliveryAddress);
-            newBill.setOrderDate(DateUtil.getDateNow()); // Lấy thời gian hiện tại
-
-            // Gọi phương thức addBill từ BillService để lưu thông tin đơn hàng vào cơ sở dữ liệu
-            BillService billService = new BillService();
-            billService.addBill(user, deliveryAddress);
-
-            //2. Cập nhật sl kho: Lấy thông tin chi tiết đơn hàng từ giỏ hàng của người dùng
-            List<DetailOrder> cart = cartService.getCart(user);
-            
-            // Tạo một đối tượng ProductDAO
-            ProductDAO productDAO = new ProductDAO();
-
-            // Lặp qua từng sản phẩm trong giỏ hàng để cập nhật số lượng trong cơ sở dữ liệu
-            for (DetailOrder item : cart) {
-                Long productId = item.getProduct().getId(); // Lấy ID của sản phẩm
-                Long quantityOrdered = item.getQuantity(); // Lấy số lượng sản phẩm đã đặt
-
-                // Lấy thông tin sản phẩm từ cơ sở dữ liệu dựa trên ID
-                Product product = productDAO.getProduct(productId);
-
-                if (product != null) {
-                    Long currentAvailable = product.getAvailable(); // Lấy số lượng hiện có
-
-                    // Tính toán số lượng mới sau khi đặt hàng
-                    Long newAvailable = currentAvailable - quantityOrdered;
-
-                    // Cập nhật số lượng mới vào cơ sở dữ liệu
-                    product.setAvailable(newAvailable);
-                    productDAO.updateProductAvailability(product); // Phương thức updateProductAvailability cần được thêm vào ProductDAO
-                }
-            }
+            billService.addBill(user, input);
 
             //3. Xác nhận đặt hàng thành công            
             cartService.deleteCartAll(user.getId()); // Xóa toàn bộ sản phẩm trong giỏ hàng của người dùng
@@ -159,7 +131,6 @@ public class OrderController extends HttpServlet {
         } else {
             response.sendRedirect("/shop/users?action=login");
         }
-
     }
 
     /**
