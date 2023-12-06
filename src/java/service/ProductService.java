@@ -72,9 +72,14 @@ public class ProductService {
         old.setAvailable(Long.parseLong(input.get("available")));
         old.setPrice(Double.parseDouble(input.get("price")));
         old.setCategory(a);
-        old.setImage(handleImage(filePart));
-        
-        productDAO.editProduct(old);
+        if (filePart != null && filePart.getSize() > 0) {
+            old.setImage(handleImage(filePart));
+            productDAO.editProduct(old);
+        }
+        else {
+            old.setImage(null);
+            productDAO.editProductWithoutImage(old);
+        }
     }
     
     private byte[] handleImage(Part filePart) throws IOException {
