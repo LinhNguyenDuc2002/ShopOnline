@@ -61,7 +61,7 @@
                     
                     <div class="file-input">
                         <div>
-                            <input type="file" name="image" id="file" class="inputfile" onchange="displayFileName()" value="${requestScope.sanphamchitiet.image}">
+                            <input type="file" name="image" id="file" class="inputfile" onchange="displayFileName()" >
                             <label class="label" for="file">Upload</label>
                         </div>
 
