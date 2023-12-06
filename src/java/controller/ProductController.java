@@ -213,7 +213,7 @@ public class ProductController extends HttpServlet {
         input.put("category", category);
         input.put("description", description);
        
-        Part filePart = request.getPart("file");
+        Part filePart = request.getPart("image");
 
         productService.editProduct(input, filePart);
         
