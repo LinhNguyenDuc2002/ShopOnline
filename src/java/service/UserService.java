@@ -80,6 +80,24 @@ public class UserService {
         return userDAO.updateUser(user);
     }
     
+    public String changePassword(Map<String, String> input, User user) throws NoSuchAlgorithmException {
+        if(!input.get("new").equals(input.get("again"))) {
+            return "Password is incorrect!";
+        }
+        
+        String oldPwd = hashPassWord(input.get("old"));
+        if(!oldPwd.equals(user.getPassword())) {
+            return "Old password is incorrect!";
+        }
+        
+        if(input.get("new").equals(input.get("old"))) {
+            return "The new password must be different from the old password!";
+        }
+        
+        userDAO.changePassword(hashPassWord(input.get("new")), user.getId());
+        return null;
+    }
+    
     private String hashPassWord(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
             

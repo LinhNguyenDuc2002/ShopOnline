@@ -1,3 +1,20 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+p {
+    padding: 0px;
+    margin: 0px 0px;
+}
+div {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    width: 100%;
+}
+
 .content {
     margin: 0px 150px;
 }
@@ -18,14 +35,13 @@ p#content-title {
 
 .content form {
     margin-top: 50px;
+}
+form.change {
     display: grid;
     align-items: center;
     justify-content: center;
 }
-.login-label{
-    margin-left:30px ;
-    margin-top: 20px;
-    margin-bottom: 5px;
+.login-label {
     font-weight: bold;
     font-family: sans-serif;
     font-size: 15px;
@@ -34,34 +50,14 @@ p#content-title {
     color: red;
 }   
 
-#signup {
-    margin-left:30px ;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: 15px;
-}   
 .login-button {
+    margin: 10px 0px;
+    width: 100%;
     align-items: center;
-    justify-content: space-between;
-    width: fit-content;
+    justify-content: center;
     display: flex;
 }
-.login-button a {
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: 15px;
-    color: black;
-    margin-left: 30px;
-    height: 35px;
-}
-.login-button a:hover{
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: 15px;
-    color: #1191e1;
-}
+
 .login-button input {
     color: white;
     font-size: 15px;
@@ -76,15 +72,10 @@ p#content-title {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(237, 28, 36);
-    border-image-source: initial;
-    border-image-slice: initial;
-    border-image-width: initial;
-    border-image-outset: initial;
-    border-image-repeat: initial;
     width: 150px;
     height: 35px;
     text-indent: 5px;
-    margin: 10px 0px 30px 30px;
+    margin: 10px 30px;
 }
 .login-button input:hover {
     background-color: white;
@@ -96,9 +87,9 @@ p#content-title {
     width: 500px;
     height: 35px;
     text-indent: 5px;
-    margin: 10px 0px 30px 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 .error {
     color: red;
-    margin-left: 30px;
 }

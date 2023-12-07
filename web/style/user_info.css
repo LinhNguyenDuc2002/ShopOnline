@@ -47,18 +47,27 @@ div#general-info {
     align-items: center;
     justify-content: center;
 }
-.button-edit button {
+.button-edit a {
     margin: 20px 0px;
     height: 30px;
-    width: 100px;
+    width: 130px;
     cursor: pointer;
-    border: 0px;
     font-weight: bold;
+    font-family: sans-serif;
     border-radius: 5px;
+    background-color: whitesmoke;
+    border: 1px solid whitesmoke;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
 }
-.button-edit button:hover {
+.button-edit a:hover {
     color: blue;
     background-color: white;
+    border: 1px solid red;
 }
 .nickname {
     display: flex;

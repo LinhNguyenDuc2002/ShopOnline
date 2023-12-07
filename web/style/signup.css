@@ -41,15 +41,9 @@ p#content-title {
     align-items: center;
     justify-content: space-between;
 }
-/* .form input {
-    width: 500px;
-    height: 30px;
-    text-indent: 5px;
-} */
-
 .form input {
     position: relative;
-    width: 500px;
+    width: 400px;
     background: white;
     outline: none;
     padding: 25px 10px 7.5px;
