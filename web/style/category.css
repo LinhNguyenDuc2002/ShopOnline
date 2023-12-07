@@ -233,3 +233,7 @@ footer h3 {
 .category-header i {
     cursor: pointer;
 }
+
+.active {
+    background-color: whitesmoke;
+}

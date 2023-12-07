@@ -90,10 +90,13 @@ public class UserController extends HttpServlet {
             if(action.equals("login") && user == null) {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-            else if(action.equals("signup")) {
+            else if(action.equals("signup") && user == null) {
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
-            else if(action.equals("logout")) {
+            else if(action.equals("change-pwd") && user != null) {
+                getToChangePwd(request, response);
+            }
+            else if(action.equals("logout") && user != null) {
                 try {
                     logout(request, response);
                 } catch (ParseException ex) {
@@ -120,31 +123,49 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request);
         
-        if(action.equals("login")) {
-            try {
-                login(request, response);
-            } catch (ParseException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if(action.equals("signup")) {
-            try {
-                signup(request, response);
-            } catch (ParseException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if(action.equals("update")) {
-            try {
-                update(request, response);
-            } catch (ParseException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        request.setAttribute("user", user);
+        
+        switch (action) {
+            case "login":
+                try {
+                    login(request, response);
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case "signup":
+                try {
+                    signup(request, response);
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case "update":
+                if(user!=null) {
+                    try {
+                        update(request, response);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+            case "change-pwd":
+                if(user!=null) {
+                    try {
+                        postToChangePwd(request, response);
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+            default:
+                throw new AssertionError();
         }
     }
 
@@ -261,5 +282,25 @@ public class UserController extends HttpServlet {
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
         HttpSession session = request.getSession(false);
         session.invalidate();
+    }
+    
+    private void getToChangePwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("changePwd.jsp").forward(request, response);
+    }
+    
+    private void postToChangePwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
+        Map<String, String> input = new HashMap<>();
+        input.put("old", request.getParameter("old"));
+        input.put("new", request.getParameter("new"));
+        input.put("again", request.getParameter("again"));
+        
+        String error = userService.changePassword(input, userService.getCurrentUser(request));
+        if(error == null) {
+            error = "success";
+        }
+        
+        request.setAttribute("message", error);
+        
+        request.getRequestDispatcher("changePwd.jsp").forward(request, response);
     }
 }

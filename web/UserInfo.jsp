@@ -26,8 +26,9 @@
                     <div class="image"><i class="fa-solid fa-user fa-xl"></i></div>
 
                     <div class="button-edit">
-                        <button>Change avatar</button>
-                        <button>Delete account</button>
+                        <a>Change avatar</a>
+                        <a href="/shop/users?action=change-pwd">Change password</a>
+                        <a>Delete account</a>
                     </div>
 
                     <div id="general-info">
