@@ -250,4 +250,20 @@ public class UserDAO {
             return false;
         }
     }
+    
+    public void changePassword(String password, Long id) {
+        String sql = "UPDATE user SET " +
+                "    password = ? " +
+                "    WHERE id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

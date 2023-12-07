@@ -27,14 +27,14 @@
                 <label for="name">
                     <span class="login-label">Username:</span>
                     <span class="obligatory">*</span>
-                </label><br>
-                <input class="input" name="username" type="text" placeholder="Username"><br>
+                </label>
+                <input class="input" name="username" type="text" placeholder="Username">
                 
                 <label for="password">
                     <span class="login-label">Password:</span>
                     <span class="obligatory">*</span>
-                </label><br>
-                <input class="input" name="password" type="text" placeholder="Password">
+                </label>
+                <input class="input" name="password" type="password" placeholder="Password">
                 
                 <p class="error">${requestScope.error}</p>
                 

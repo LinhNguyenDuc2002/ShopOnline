@@ -33,7 +33,7 @@
 
             <div class="category-wrapper">
                 <div class="category-wrapper-header">
-                    <p>All item</p>
+                    <p class="category-title">All item</p>
                     <div class="sort">
 
                     </div>
