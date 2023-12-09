@@ -49,8 +49,8 @@ public class CartService {
         return detailOrders;
     }
     
-    public void deleteCart(Long id) {
-        cartDAO.deleteCart(id);
+    public void deleteDetailOrder(Long id) {
+        cartDAO.deleteDetailOrder(id);
     }
     
     public boolean saveToCart(User user) {
