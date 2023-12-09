@@ -131,7 +131,7 @@ public class CartDAO {
         }
     }
 
-    public void deleteCart(Long id) {
+    public void deleteDetailOrder(Long id) {
         try {
             String query = "DELETE FROM detail_order WHERE id = ? AND status = false";
             PreparedStatement ps = connection.prepareStatement(query);
