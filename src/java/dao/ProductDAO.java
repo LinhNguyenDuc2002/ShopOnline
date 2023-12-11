@@ -166,8 +166,9 @@ public class ProductDAO {
     public void updateProductAvailability(Long id) {
         try {
             String query = "UPDATE product p " +
-                    "INNER JOIN detail_order d ON p.id = d.product_id " +
-                    "SET p.available = p.available - d.quantity " +
+                    "INNER JOIN detail_order d ON p.id = d.product_id SET " +
+                    "p.available = p.available - d.quantity, " +
+                    "p.sold = p.sold + d.quantity " +
                     "WHERE d.id = ?";
             PreparedStatement ps = connection.prepareStatement(query);
 

@@ -89,6 +89,7 @@ public class CategoryController extends HttpServlet {
         request.setAttribute("user", user);
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
+        request.setAttribute("id", id);
         
         request.getRequestDispatcher("category.jsp").forward(request, response);
     } 

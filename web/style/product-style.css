@@ -14,7 +14,7 @@
 }
 .product-right h1, .text, #radio {
     margin-bottom: 30px;
-    height: fit-content;
+    max-height: 70px;
     width: 100%;
 }
 .anh1{
@@ -124,10 +124,10 @@ input[type="number"] {
         transform: rotate(90deg);
     }
 }
-ul.products {
+/* ul.products {
     display: flex;
     gap: 0;
-}
+} */
 /*slide*/
 .mo-ta h2{
     color: white;

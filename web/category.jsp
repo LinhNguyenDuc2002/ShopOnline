@@ -26,14 +26,22 @@
                 <div class="category-content">
                     <a href="/shop/categories" class="category-items">All items</a>
                     <c:forEach var="i" items="${requestScope.categories}">
-                        <a href="/shop/categories?id=${i.id}" class="category-items">${i.name}</a>
+                        <a href="/shop/categories?id=${i.id}" onclick="displayCategoryName(event, '${i.name}')" class="category-items">${i.name}</a>
                     </c:forEach>
                 </div>
             </div>
 
             <div class="category-wrapper">
                 <div class="category-wrapper-header">
-                    <p class="category-title">All item</p>
+                    <c:set var="category" value="All items"/>
+                    <c:forEach var="i" items="${requestScope.categories}" varStatus="loop">
+                        <c:if test="${i.id eq requestScope.id}">
+                            <c:set var="category" value="${i.name}"/>
+                        </c:if>
+                    </c:forEach>
+
+                    <p class="category-title">${category}</p>
+
                     <div class="sort">
 
                     </div>
