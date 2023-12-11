@@ -35,6 +35,11 @@
             </div>
         </div>
     </div>
+    <c:choose>
+        <c:when test="${!empty requestScope.key}">
+            <span class="alert-search">Results for '${requestScope.key}'</span>
+        </c:when>
+    </c:choose>
     <div id="wrapper">
         <ul class="products">   
             <c:forEach var="i" items="${requestScope.sanpham}">

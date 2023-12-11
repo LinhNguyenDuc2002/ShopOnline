@@ -105,6 +105,9 @@ public class ProductController extends HttpServlet {
         else if(action.equals("show")) {
             getToShowProduct(request, response);
         }
+        else if(action.equals("find")) {
+            getToFindProduct(request, response, user);
+        }
         else {
             response.sendRedirect("/shop/404");
         }
@@ -218,6 +221,19 @@ public class ProductController extends HttpServlet {
         productService.editProduct(input, filePart);
         
         response.sendRedirect("/shop/products?action=edit&id="+id.toString());
+    }
+    
+    private void getToFindProduct(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
+        String key = request.getParameter("key");
+        request.setAttribute("sanpham", productService.getAllProductByKey(key));
+        request.setAttribute("key", key);
+        
+        if(user != null && user.getRole().equals("ADMIN")) {
+            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        }
+        else {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
     }
 
 }

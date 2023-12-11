@@ -65,10 +65,13 @@
             </div>
 
             <div class="right-content">
-                <div class="search">
-                    <input type="text" name="" id="search-text">
-                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-                </div>
+                <form action="/shop/products" method="GET">
+                    <input type="hidden" name="action" value="find">
+                    <div class="search">
+                        <input type="text" name="key" id="search-text" value="${requestScope.key}" >
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                    </div>
+                </form>
 
                 <a href="/shop/carts?action=show"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
             </div>
