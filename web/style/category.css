@@ -183,6 +183,7 @@ footer h3 {
 
 .category-product {
     display: flex;
+    min-height: 120px;
 }
 
 .category-header p {
@@ -228,6 +229,7 @@ footer h3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 18px;
 }
 
 .category-header i {

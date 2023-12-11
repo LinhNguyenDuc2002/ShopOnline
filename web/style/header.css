@@ -193,6 +193,7 @@ input#search-text {
     align-items: center;
     justify-content: center;
     color: black;
+    font-size: 15px;
 }
 .avatar2 p {
     color: white;
