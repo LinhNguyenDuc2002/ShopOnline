@@ -92,6 +92,7 @@ ul.products li {
     box-sizing: border-box;
     margin-bottom: 10px;
     margin-top: 20px;
+    max-width: 306px;
 }
 
 ul.products li img {
@@ -146,6 +147,7 @@ ul.products li:hover a.buy-now {
 
 ul.products li .product-info {
     padding-top: 15px;
+    width: 100%;
 }
 
 ul.products li .product-info a {
@@ -154,10 +156,13 @@ ul.products li .product-info a {
 
 ul.products li .product-info a.product-name {
     color: black;
-    display: flex;
+    display: block;
     padding: 5px 0px;
     font-size: 20px;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 ul.products li .product-info .product-price {
@@ -167,6 +172,7 @@ ul.products li .product-info .product-price {
 
 .product-item {
     height: 350px;
+    width: 100%;
 }
 
 .button1 {

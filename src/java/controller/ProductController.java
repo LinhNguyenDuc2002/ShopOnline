@@ -166,7 +166,7 @@ public class ProductController extends HttpServlet {
         Part filePart = request.getPart("image");
 
         productService.addProduct(input, filePart);
-        response.sendRedirect("/shop/home");
+        response.sendRedirect("/shop/manage?action=products");
     }
     
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {

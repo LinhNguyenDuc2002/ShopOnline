@@ -77,25 +77,27 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
         User user = userService.getCurrentUser(request);
         
-        if(user != null && user.getRole().equals("USER") && action != null) {
-            request.setAttribute("user", user);
-            
-            switch (action) {
-                case "show":
-                    showCart(request, response, user);
-                    break;
-                case "delete":
-                    deleteCart(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            
+        if(action == null) {
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
-            response.sendRedirect("/shop/users?action=login");
+            if(user != null && user.getRole().equals("USER")) {
+                request.setAttribute("user", user);
+                switch (action) {
+                    case "show":
+                        showCart(request, response, user);
+                        break;
+                    case "delete":
+                        deleteCart(request, response);
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
+            else {
+                response.sendRedirect("/shop/users?action=login");
+            }
         }
-        
     } 
 
     /** 

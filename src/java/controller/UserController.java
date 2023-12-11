@@ -181,8 +181,11 @@ public class UserController extends HttpServlet {
     private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException {
         List<String> errors = new ArrayList<>();
         
-        String errorUsername = InvalidUser.checkUsername(request.getParameter("username"));
-        String errorEmail = InvalidUser.checkEmail(request.getParameter("email"));
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        
+        String errorUsername = InvalidUser.checkUsername(username);
+        String errorEmail = InvalidUser.checkEmail(email);
 
         if(errorUsername != null) {
             errors.add(errorUsername);
@@ -202,14 +205,17 @@ public class UserController extends HttpServlet {
         input.put("email", request.getParameter("email"));
         input.put("phone", request.getParameter("phone"));
         
+        System.out.println(input.values().toString());
+        
         if(!errors.isEmpty()) {
             request.setAttribute("input", input);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
-        
-        userService.addUser(input);
-        request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
+        else {
+            userService.addUser(input);
+            request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
+        } 
     }
     
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {

@@ -38,7 +38,7 @@
                 <div class="avatar2">
                     <p class="user">Hello, ${requestScope.user.getFullname()}</p>
                     <div class="avt">
-                        <i class="fa-solid fa-user fa-xl"></i>
+                        <i class="fa-solid fa-user"></i>
                     </div>
                 </div>
             </div>

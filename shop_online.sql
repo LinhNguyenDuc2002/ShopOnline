@@ -79,5 +79,14 @@ CREATE TABLE comment(
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
-INSERT INTO user(id, username, password, fullname, birthday, phone, email, detail_address, city, country, role, status) 
-			values(1, "linhnguyenduc", "123", "Nguyễn Đức Linh", "16/04/2002", "0395084430", "abc@gmail.com", "Đông Anh", "Hà Nội", "Việt Nam", "ADMIN", true);
+INSERT INTO category VALUES(1, "Pen", "Bút mực, bút bi, ...");
+INSERT INTO category VALUES(2, "Pencil", "Các loại bút chì");
+INSERT INTO category VALUES(3, "Notebook", "Các cuốn sổ tay, vở viết dành cho học sinh, sinh viên, ...");
+INSERT INTO category VALUES(4, "Paper", "Bao gồm nhiều loại giấy A2, A3, A4, ... được cung cấp từ các nhà sản xuất uy tín");
+INSERT INTO category VALUES(5, "Tape", "Băng dính 2 mặt, bắng dính 1 mặt, ...");
+INSERT INTO category VALUES(6, "Marker", "Bút highlight ");
+INSERT INTO category VALUES(7, "Calculator", "Có rất nhiều loại máy tính tay dành cho học sinh FX-570, FX-580, ...");
+INSERT INTO category VALUES(8, "Ruler", "Có đủ loại thước kẻ dành cho sinh viên");
+INSERT INTO category VALUES(9, "Desk calendar ", "Có rất nhiều lịch để bàn dành cho bạn");
+INSERT INTO category VALUES(10, "Stapler", "Đồ bấm ghim chắc chắn, chất lượng cao");
+
