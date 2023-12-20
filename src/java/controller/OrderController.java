@@ -126,8 +126,7 @@ public class OrderController extends HttpServlet {
             //3. Xác nhận đặt hàng thành công            
             cartService.deleteCartAll(user.getId()); // Xóa toàn bộ sản phẩm trong giỏ hàng của người dùng
 
-            request.setAttribute("message", "Đặt hàng thành công!");
-            request.getRequestDispatcher("dathang.jsp").forward(request, response);
+            response.sendRedirect("/shop/carts?action=show");
         } else {
             response.sendRedirect("/shop/users?action=login");
         }

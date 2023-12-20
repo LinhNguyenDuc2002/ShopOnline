@@ -56,7 +56,7 @@
                             <input type="text" name="username" value="${requestScope.user.getUsername()}" required>
 
                             <p>Birthday</p>
-                            <input type="date" name="birthday" value="${requestScope.user.getBirthday()}">
+                            <input type="date" name="birthday" value="${requestScope.user.getBirthday()}" required>
 
                             <p>Phone number</p>
                             <input type="text" pattern="[0-9]{10,11}" name="phone" value="${requestScope.user.getPhone()}" required>
@@ -68,13 +68,11 @@
                         <div class="edit-right">
                             <p>Gender</p>
                             <div class="radio">
-                                <label for="">
-                                    <input type="radio" name="gender" ${requestScope.user.getSex()=="true"
-                                        ? "checked" : "" } required>Male
+                                <label for="male">
+                                    <input type="radio" name="gender" value="male" ${requestScope.user.getSex()=="true" ? "checked" : "" } required>Male
                                 </label>
-                                <label for="">
-                                    <input type="radio" name="gender" ${requestScope.user.getSex()=="false"
-                                        ? "checked" : "" } required>Female
+                                <label for="female">
+                                    <input type="radio" name="gender" value="female" ${requestScope.user.getSex()=="false" ? "checked" : "" } required>Female
                                 </label>
                             </div>
 
