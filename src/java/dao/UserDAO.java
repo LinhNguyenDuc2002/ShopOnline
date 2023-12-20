@@ -165,7 +165,6 @@ public class UserDAO {
                 "    fullname = ?, " +
                 "    birthday = ?, " +
                 "    sex = ?, " +
-//                "    avatar = ?, " +
                 "    phone = ?, " +
                 "    email = ?, " +
                 "    detail_address = ?, " +
@@ -180,7 +179,6 @@ public class UserDAO {
             preparedStatement.setString(2, user.getFullname());
             preparedStatement.setDate(3, (Date) user.getBirthday());
             preparedStatement.setBoolean(4, user.getSex());
-//            preparedStatement.setString(6, user.getAvatar());
             preparedStatement.setString(5, user.getPhone());
             preparedStatement.setString(6, user.getEmail());
             preparedStatement.setString(7, user.getDetail_address());

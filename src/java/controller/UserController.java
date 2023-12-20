@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import service.UserService;
+import util.DateUtil;
 
 /**
  *
@@ -219,49 +220,28 @@ public class UserController extends HttpServlet {
     }
     
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
-        User user = userService.getCurrentUser(request);
+        User currentUser = userService.getCurrentUser(request);
         
-        List<String> errors = new ArrayList<>();
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
+        User user = new User();
+        user.setId(currentUser.getId());
+        user.setFullname(request.getParameter("fullname"));
+        user.setUsername(request.getParameter("username"));
+        user.setPhone(request.getParameter("phone"));
+        user.setEmail(request.getParameter("email"));
+        user.setBirthday(DateUtil.convertStringToDate(request.getParameter("birthday")));
+        user.setCity(request.getParameter("city"));
+        user.setCountry(request.getParameter("country"));
+        user.setDetail_address(request.getParameter("detail_address"));
+        user.setNote(request.getParameter("note"));
+        user.setSex(request.getParameter("gender").equals("male")?true:false);
         
-        if(!user.getUsername().equals(username)) {
-            String errorUsername = InvalidUser.checkUsername(username);
-            if(errorUsername != null) {
-                errors.add(errorUsername);
-            }
-        }
-        
-        if(!user.getEmail().equals(email)) {
-            String errorEmail = InvalidUser.checkEmail(email);
-            if(errorEmail != null) {
-                errors.add(errorEmail);
-            }
-        }
-        
-        if(request.getParameter("birthday") == null) {
-            errors.add("Birthday field is not null");
-        }
-        
+        List<String> errors = userService.updateUser(user, currentUser);
         if(!errors.isEmpty()) {
             request.setAttribute("user", user);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
         }
         else {
-            Map<String, String> input = new HashMap<>();
-            input.put("fullname", request.getParameter("fullname"));
-            input.put("username", request.getParameter("username"));
-            input.put("birthday", request.getParameter("birthday"));
-            input.put("email", request.getParameter("email"));
-            input.put("phone", request.getParameter("phone"));
-            input.put("sex", request.getParameter("gender"));
-            input.put("detail_address", request.getParameter("detail_address"));
-            input.put("city", request.getParameter("city"));
-            input.put("country", request.getParameter("country"));
-            input.put("note", request.getParameter("note"));
-
-            userService.updateUser(input, user.getId());
             response.sendRedirect("/shop/users");
         }
     }

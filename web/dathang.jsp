@@ -56,21 +56,25 @@
                         The order has ${requestScope.cart.size()} products
                     </h2>
 
-                    <table class="san-pham">
-                        <c:forEach items="${requestScope.cart}" var="i">
-                            <tr>
-                                <td><img class="anh-sp" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="">
-                                    <span class="so-san-pham">${i.quantity}</span>
-                                </td>
-                                <td><p>
-                                        ${i.product.productName}
-                                    </p></td>
-                                <td><p>
-                                        ${i.product.price * i.quantity}<sub>đ</sub>
-                                    </p></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                    <c:set var="totalPrice" value="0" />
+                    <div class="san-pham">
+                        <table>
+                            <c:forEach items="${requestScope.cart}" var="i">
+                                <tr>
+                                    <td><img class="anh-sp" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="">
+                                        <span class="so-san-pham">${i.quantity}</span>
+                                    </td>
+                                    <td>
+                                        <p>${i.product.productName}</p>
+                                    </td>
+                                    <td>
+                                        <p class="price">${i.product.price * i.quantity}</p>
+                                        <c:set var="totalPrice" value="${totalPrice + i.product.price * i.quantity}" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
 
                     <div class="ma-giam-gia">
                         <input type="text" placeholder="Nhập mã giảm giá">
@@ -80,9 +84,8 @@
                     <table class="tam-tinh">
                         <tr>
                             <td>Tạm tính</td>
-                            <td><p>
-                                    395.000<sub>đ</sub>
-                                </p>
+                            <td>
+                                <p class="price">${totalPrice}</p>
                             </td>
                         </tr>
                         <tr>
@@ -93,9 +96,8 @@
                     <table class="dat-hang">
                         <tr>
                             <td>Tổng cộng</td>
-                            <td><p class="tong">
-                                    395.000<sub>đ</sub>
-                                </p>
+                            <td>
+                                <p class="tong price">${totalPrice}</p>
                             </td>
                         </tr>
                         <tr>
@@ -110,19 +112,11 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="message">
-                        <% 
-                        String message = (String) request.getAttribute("message");
-                        if (message != null && !message.isEmpty()) {
-                        %>
-                        <p><%= message %></p>
-                        <% 
-                        }
-                        %>
-                    </div>
                 </div>
             </div>
         </form>
         <%@ include file="footer.jsp" %>
+
+        <script src="./script/formatVND.js"></script>
     </body>
 </html>
