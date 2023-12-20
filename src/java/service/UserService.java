@@ -6,6 +6,7 @@ package service;
 
 import config.DBConnection;
 import dao.UserDAO;
+import invalid.InvalidUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import model.User;
@@ -63,21 +65,32 @@ public class UserService {
         return userDAO.getAllUser();
     }
     
-    public boolean updateUser(Map<String, String> map, long id) throws ParseException {
-        User user = new User();
-        user.setId(id);
-        user.setFullname(map.get("fullname"));
-        user.setUsername(map.get("username"));
-        user.setPhone(map.get("phone"));
-        user.setEmail(map.get("email"));
-        user.setBirthday(DateUtil.convertStringToDate(map.get("birthday")));
-        user.setCity(map.get("city"));
-        user.setCountry(map.get("country"));
-        user.setDetail_address(map.get("detail_address"));
-        user.setNote(map.get("note"));
-        user.setSex(map.get("sex")=="1"?true:false);
+    public List<String> updateUser(User user, User currentUser) throws ParseException, IOException {
+        List<String> errors = new ArrayList<>();
         
-        return userDAO.updateUser(user);
+        if(!currentUser.getUsername().equals(user.getUsername())) {
+            String errorUsername = InvalidUser.checkUsername(user.getUsername());
+            if(errorUsername != null) {
+                errors.add(errorUsername);
+            }
+        }
+        
+        if(!currentUser.getEmail().equals(user.getEmail())) {
+            String errorEmail = InvalidUser.checkEmail(user.getEmail());
+            if(errorEmail != null) {
+                errors.add(errorEmail);
+            }
+        }
+        
+        if(user.getBirthday() == null) {
+            errors.add("Birthday field is not null");
+        }
+        
+        if(errors.isEmpty()) {
+            userDAO.updateUser(user);
+        }
+        
+        return errors;
     }
     
     public String changePassword(Map<String, String> input, User user) throws NoSuchAlgorithmException {
