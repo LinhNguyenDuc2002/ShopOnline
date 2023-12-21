@@ -48,7 +48,6 @@
                     <td>${i.phone}</td>
                     <td>${i.email}</td>
                     <td class="actions">
-                        <!-- <a href="/shop/products?action=edit&id=${i.id}">Update</a> -->
                         <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>

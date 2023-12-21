@@ -33,12 +33,12 @@
                 </tr>
 
                 <c:forEach items="${requestScope.sanpham}" var="i">
-                    <tr class="product-list">
+                    <tr class="product-list" link="/shop/products?action=show&id=${i.id}">
                         <td>${i.id}</td>
                         <td>${i.productName}</td>
                         <td>${i.category.name}</td>
                         <td>${i.available}</td>
-                        <td>${i.price}</td>
+                        <td class="price">${i.price}</td>
                         <td>${i.sold}</td>
                         <td>${i.description}</td>
                         <td class="actions">
@@ -54,6 +54,8 @@
     <%@ include file="footer.jsp" %>
 
     <script src="./script/home.js"></script>
+    <script src="./script/manage.js"></script>
+    <script src="./script/formatVND.js"></script>
 
 </body>
 
