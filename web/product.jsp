@@ -118,7 +118,6 @@
 
     <!-- Initialize Swiper -->
     <script src="./script/product-detail.js"></script>
-
     <script src="./script/formatVND.js"></script>
 
 </body>
