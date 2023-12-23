@@ -21,6 +21,8 @@ import util.DateUtil;
  * @author LinhNguyenDuc
  */
 public class ProductService {
+    private final int pageSize = 8;
+    
     private ProductDAO productDAO;
     
     private CategoryDAO categoryDAO;
@@ -55,8 +57,17 @@ public class ProductService {
         productDAO.deleteProduct(id);
     }
     
+    public List<Product> getAllProduct(Integer page) {
+        int start = page * pageSize;
+        return productDAO.getAllProduct(start, pageSize);
+    }
+    
     public List<Product> getAllProduct() {
         return productDAO.getAllProduct();
+    }
+    
+    public int getProductQuantity() {
+        return productDAO.getProductQuantity(pageSize);
     }
     
     public List<Product> getAllProductsByCategory(Long id){
@@ -66,6 +77,7 @@ public class ProductService {
     public List<Product> getAllProductByKey(String key) {
         return productDAO.getAllProductByKey(key);
     }
+    
     public void editProduct(Map<String, String> input, Part filePart) throws IOException {
         Category a = categoryDAO.getCategoryById(Long.parseLong(input.get("category")));
         

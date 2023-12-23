@@ -77,10 +77,16 @@ public class CategoryController extends HttpServlet {
         User user = userService.getCurrentUser(request);
         String id = request.getParameter("id");
         
+        Integer page = 0;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            page = Integer.parseInt(pageParam);
+        }
+        
         List<Category> categories = categoryservice.getAllCategory();
         List<Product> products;
         if(id == null) {
-            products = productService.getAllProduct();
+            products = productService.getAllProduct(page);
         }
         else {
             products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
