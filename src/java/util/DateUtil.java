@@ -13,7 +13,7 @@ import java.util.Calendar;
  *
  * @author LinhNguyenDuc
  */
-public class DateUtil {
+public final class DateUtil {
     public static Date convertStringToDate(String date) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
