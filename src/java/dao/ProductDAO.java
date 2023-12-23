@@ -20,7 +20,6 @@ import model.Product;
  * @author LinhNguyenDuc
  */
 public class ProductDAO {
-
     private Connection connection;
 
     private CategoryDAO categoryDAO;
@@ -84,10 +83,13 @@ public class ProductDAO {
         return null;
     }
 
-    public List<Product> getAllProduct() {
+    public List<Product> getAllProduct(int start, int pageSize) {
         try {
-            String query = "select * from product";
+            String query = "select * from product limit ?, ?";
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, start);
+            ps.setInt(2, pageSize);
+            
             ResultSet rs = ps.executeQuery();
             List<Product> list = new ArrayList<>();
             while (rs.next()) {
@@ -101,6 +103,44 @@ public class ProductDAO {
         } catch (Exception e) {
         }
         return null;
+    }
+    
+    public List<Product> getAllProduct() {
+        try {
+            String query = "select * from product";
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while (rs.next()) {
+                Category category = categoryDAO.getCategoryById(rs.getLong(3));
+                Product a = new Product(rs.getLong(1), rs.getString(2), category, rs.getString(4), rs.getDouble(5), rs.getDouble(6),
+                        rs.getLong(7), rs.getLong(8), rs.getBytes(9), rs.getDate(10), rs.getString(11));
+
+                list.add(a);
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public int getProductQuantity(int pageSize) {
+        int totalElements = 0;
+        
+        try {
+            String countQuery = "SELECT COUNT(*) AS total FROM product";
+            PreparedStatement countPS = connection.prepareStatement(countQuery);
+            ResultSet countResult = countPS.executeQuery();
+
+            if (countResult.next()) {
+                totalElements = countResult.getInt("total");
+            }
+        } catch (Exception e) {
+        }
+        
+        int total = totalElements/pageSize;
+        return (totalElements%pageSize==0)?total:total+1;
     }
 
     public void editProduct(Product a) {

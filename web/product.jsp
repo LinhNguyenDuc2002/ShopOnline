@@ -74,7 +74,7 @@
         <div>
             <h2>Products of the same type</h2>
             <div class="swiper">
-                <ul class="swiper-wrapper products ">
+                <ul class="swiper-wrapper products">
                     <c:forEach var="i" items="${requestScope.list_category}">
                         <li class="swiper-slide">
                             <div class="product-item">
