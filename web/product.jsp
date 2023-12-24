@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="./style/home.css">
+    <!-- <link rel="stylesheet" href="./style/home.css"> -->
     <link rel="stylesheet" href="./style/product-style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -32,8 +32,10 @@
                 </div>
                 <div class="product-right">
                     <h1>${requestScope.sanphamchitiet.getProductName()}</h1>
+
+                    <p class="category">Category: <span>${requestScope.sanphamchitiet.category.name}</span></p>
     
-                    <p class="text">Category: <span>${requestScope.sanphamchitiet.category.name}</span> | Status: 
+                    <p class="text">Status: 
                         <c:choose>
                             <c:when test="${requestScope.sanphamchitiet.available > 0}">
                                 <span id="available">Available: ${requestScope.sanphamchitiet.available}</span>
@@ -43,6 +45,7 @@
                                 <span style="color: red;">Sold out</span>
                             </c:otherwise>
                         </c:choose>
+                        | Sold: ${requestScope.sanphamchitiet.sold}
                     </p>
     
                     <p class="price text main">${requestScope.sanphamchitiet.getPrice()}</p>    

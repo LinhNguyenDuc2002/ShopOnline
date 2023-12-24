@@ -22,7 +22,6 @@ body {
 /*slideShow*/
 ul.products {
     list-style: none;
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 0px;
 }
@@ -172,6 +171,9 @@ ul.products li .product-info .product-price {
     margin-bottom: 30px;
     max-height: 70px;
     width: 100%;
+}
+p.category {
+    margin-bottom: 10px;
 }
 .anh1{
     width: 470px;
