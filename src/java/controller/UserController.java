@@ -180,41 +180,21 @@ public class UserController extends HttpServlet {
     }// </editor-fold>
 
     private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException {
-        List<String> errors = new ArrayList<>();
+        User user = new User();
+        user.setFullname(request.getParameter("fullname"));
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setEmail(request.getParameter("email"));
+        user.setPhone(request.getParameter("phone"));
+        user.setBirthday(DateUtil.convertStringToDate(request.getParameter("birthday")));
         
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        
-        String errorUsername = InvalidUser.checkUsername(username);
-        String errorEmail = InvalidUser.checkEmail(email);
-
-        if(errorUsername != null) {
-            errors.add(errorUsername);
-        }
-        if(errorEmail != null) {
-            errors.add(errorEmail);
-        }
-        if(request.getParameter("birthday") == null) {
-            errors.add("Birthday field is not null");
-        }
-        
-        Map<String, String> input = new HashMap<>();
-        input.put("fullname", request.getParameter("fullname"));
-        input.put("username", request.getParameter("username"));
-        input.put("password", request.getParameter("password"));
-        input.put("birthday", request.getParameter("birthday"));
-        input.put("email", request.getParameter("email"));
-        input.put("phone", request.getParameter("phone"));
-        
-        System.out.println(input.values().toString());
-        
+        List<String> errors = userService.addUser(user);
         if(!errors.isEmpty()) {
-            request.setAttribute("input", input);
+            request.setAttribute("input", user);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         else {
-            userService.addUser(input);
             request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
         } 
     }
@@ -249,8 +229,6 @@ public class UserController extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        
         
         if(userService.authenticate(username, password)) {
             HttpSession session = request.getSession(true);

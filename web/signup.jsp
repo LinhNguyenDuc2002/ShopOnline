@@ -30,31 +30,31 @@
                 <div class="form">
                     <div class="signup-left">
                         <div class="inputBox">
-                            <input type="text" pattern="^[A-Za-z0-9 ]+$" name="fullname" id="fullname" value="${requestScope.input.get("fullname")}" required
+                            <input type="text" pattern="^[A-Za-z0-9 ]+$" name="fullname" id="fullname" value="${requestScope.input.fullname}" required
                             title="Please enter a username without special characters"><i>Name</i>
                         </div>
                         
                         <div class="inputBox">
-                            <input type="text" name="username" id="username" value="${requestScope.input.get("username")}" required><i>Username</i>
+                            <input type="text" name="username" id="username" value="${requestScope.input.username}" required><i>Username</i>
                         </div>
                         
                         <div class="inputBox">
-                            <input type="text" minlength="6" name="password" id="password" value="${requestScope.input.get("password")}" required><i>Password</i>
+                            <input type="text" minlength="6" name="password" id="password" value="${requestScope.input.password}" required><i>Password</i>
                         </div>
                         
                     </div>
                     
                     <div class="signup-right">
                         <div class="inputBox">
-                            <input type="date" name="birthday" id="birthday" value="${requestScope.input.get("birthday")}"><i>Birthday</i>
+                            <input type="date" name="birthday" id="birthday" value="${requestScope.input.birthday}" required><i>Birthday</i>
                         </div>
                         
                         <div class="inputBox">
-                            <input type="tel" pattern="[0-9]{10,11}" name="phone" id="phone" value="${requestScope.input.get("phone")}" required><i>Phone number</i>
+                            <input type="tel" pattern="[0-9]{10,11}" name="phone" id="phone" value="${requestScope.input.phone}" required><i>Phone number</i>
                         </div>
                         
                         <div class="inputBox">
-                            <input type="email" name="email" id="email" value="${requestScope.input.get("email")}" required><i>Email</i>
+                            <input type="email" name="email" id="email" value="${requestScope.input.email}" required><i>Email</i>
                         </div>
                         
                     </div>
