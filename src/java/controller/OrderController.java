@@ -110,7 +110,6 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         User user = userService.getCurrentUser(request);
 
         if (user != null && user.getRole().equals("USER")) {
@@ -122,7 +121,6 @@ public class OrderController extends HttpServlet {
             input.put("detail", request.getParameter("detailAddress"));
 
             billService.addBill(user, input);
-
             //3. Xác nhận đặt hàng thành công            
             cartService.deleteCartAll(user.getId()); // Xóa toàn bộ sản phẩm trong giỏ hàng của người dùng
 

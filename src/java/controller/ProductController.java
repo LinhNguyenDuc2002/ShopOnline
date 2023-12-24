@@ -202,19 +202,14 @@ public class ProductController extends HttpServlet {
     
     private void postToEditProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("id");
-        String product_name = request.getParameter("ten-san-pham");
-        String price = request.getParameter("gia");
-        String available = request.getParameter("so-luong");
-        String category = request.getParameter("category");
-        String description = request.getParameter("mo-ta");
         
         Map<String, String> input = new HashMap<>();
         input.put("id", id);
-        input.put("productName", product_name);
-        input.put("price", price);
-        input.put("available", available);
-        input.put("category", category);
-        input.put("description", description);
+        input.put("productName", request.getParameter("ten-san-pham"));
+        input.put("price", request.getParameter("gia"));
+        input.put("available", request.getParameter("so-luong"));
+        input.put("category", request.getParameter("category"));
+        input.put("description", request.getParameter("mo-ta"));
        
         Part filePart = request.getPart("image");
 
