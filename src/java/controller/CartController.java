@@ -140,6 +140,7 @@ public class CartController extends HttpServlet {
     }// </editor-fold>
     
     private void showCart(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
+        System.out.print("abc"+user.getId());
         List<DetailOrder> cart = cartService.getCart(user);
         request.setAttribute("cart", cart);
         

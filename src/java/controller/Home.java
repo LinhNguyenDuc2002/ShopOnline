@@ -69,7 +69,6 @@ public class Home extends HttpServlet {
     throws ServletException, IOException {
         User user = userService.getCurrentUser(request);
         request.setAttribute("user", user);
-        System.out.println("hello");
         
         request.setAttribute("sanpham", productService.getAllProduct());
         

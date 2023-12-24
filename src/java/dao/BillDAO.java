@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,12 @@ import model.Bill;
 import model.Category;
 import model.DetailOrder;
 import model.Product;
+import model.User;
+import model.detail_order;
 
 public class BillDAO {
     private Connection connection;
+    private UserDAO dao = new UserDAO();
 
     public BillDAO() {
         this.connection = DBConnection.getConnection();
@@ -50,6 +54,49 @@ public class BillDAO {
             e.printStackTrace();
             // Xử lý ngoại lệ nếu cần thiết
         }
+        return null;
+    }
+    
+        public List<detail_order> FindAllDetailsOrder(int id){
+        try{
+            
+            String query = "select * from detail_order where bill_id = "+id+"";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            List<detail_order> list = new ArrayList<detail_order>();
+            while(rs.next()){
+                detail_order a = new detail_order(rs.getInt(1),rs.getInt(2),rs.getInt(4));
+                
+                list.add(a);
+            }
+            return list;
+        }catch(Exception e){
+            e.getMessage();
+        }
+        
+        return null;
+    }
+    
+    public List<Bill> FindAllOrder(int id){
+        try{
+            
+            String query = "select * from bill where user_id = "+id+"";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            List<Bill> list = new ArrayList<>();    
+            while(rs.next()){
+                int idUser = rs.getInt(2);
+                User user = dao.getUser(idUser);
+                Bill a = new Bill(rs.getLong(1),user, rs.getDate(3), rs.getString(4));
+                // long id, User user, Date orderDate, String deliveryAddress, boolean status
+                
+                list.add(a);
+            }
+            return list;
+        }catch(Exception e){
+            e.getMessage();
+        }
+        
         return null;
     }
 }

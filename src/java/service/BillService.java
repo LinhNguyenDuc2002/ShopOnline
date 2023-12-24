@@ -13,6 +13,7 @@ import java.util.Map;
 import model.Bill;
 import model.DetailOrder;
 import model.User;
+import model.detail_order;
 import util.DateUtil;
 
 /**
@@ -53,4 +54,11 @@ public class BillService {
         return input.get("detail") + " - " + input.get("city") + " - " + input.get("country");
     }
     
+    public List<detail_order> FindAllDetailsOrder(int id){
+        return billDAO.FindAllDetailsOrder(id);
+    }
+    
+    public List<Bill> FindAllOrder(int id){
+        return billDAO.FindAllOrder(id);
+    }
 }
