@@ -51,14 +51,30 @@ public class UserService {
         return userDAO.getCurrentUser(username);
     }
     
-    public boolean addUser(Map<String, String> map) throws ParseException, NoSuchAlgorithmException {
-        Date birthdayToDate = DateUtil.convertStringToDate(map.get("birthday"));
+    public List<String> addUser(User user) throws ParseException, NoSuchAlgorithmException, IOException {
+        List<String> errors = new ArrayList<>();
+        
+        String errorUsername = InvalidUser.checkUsername(user.getUsername());
+        String errorEmail = InvalidUser.checkEmail(user.getEmail());
+
+        if(errorUsername != null) {
+            errors.add(errorUsername);
+        }
+        if(errorEmail != null) {
+            errors.add(errorEmail);
+        }
+        if(user.getBirthday() == null) {
+            errors.add("Birthday field is not null");
+        }
+        
         Date now = DateUtil.getDateNow();
+        user.setJoin_date(now);
         
-        User user = new User(map.get("username"), hashPassWord(map.get("password")), map.get("fullname"), 
-                            birthdayToDate, map.get("phone"), map.get("email"), now);
+        if(errors.isEmpty()) {
+            userDAO.addUser(user);
+        }
         
-        return userDAO.addUser(user);
+        return errors;
     }
     
     public List<User> getAllUser() {
