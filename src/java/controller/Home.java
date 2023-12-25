@@ -70,7 +70,15 @@ public class Home extends HttpServlet {
         User user = userService.getCurrentUser(request);
         request.setAttribute("user", user);
         
-        request.setAttribute("sanpham", productService.getAllProduct());
+        Integer page = 0;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            page = Integer.parseInt(pageParam)-1;
+        }
+        
+        request.setAttribute("sanpham", productService.getAllProduct(page));
+        request.setAttribute("totalPage", productService.getProductQuantity());
+        request.setAttribute("currentPage", page);
         
         if(user != null && user.getRole().equals("ADMIN")) {
             request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
