@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import model.TKUser;
 import model.User;
 import util.DateUtil;
 
@@ -48,6 +49,28 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    public void deleteUser(Long id) {
+        try {
+            String query = "delete from user where id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void unenableUser(Long id) {
+        String sql = "UPDATE user SET status = false WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -97,6 +120,47 @@ public class UserDAO {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 User user = new User();
+                user.setId(resultSet.getLong("id"));
+                user.setFullname(resultSet.getString("fullname"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setBirthday(resultSet.getDate("birthday"));
+                user.setCity(resultSet.getString("city"));
+                user.setCountry(resultSet.getString("country"));
+                user.setDetail_address(resultSet.getString("detail_address"));
+                user.setRole(resultSet.getString("role"));
+                user.setNote(resultSet.getString("note"));
+                user.setJoin_date(resultSet.getDate("join_date"));
+                user.setStatus(resultSet.getBoolean("status"));
+                user.setSex(resultSet.getBoolean("sex"));
+                
+                users.add(user);
+            }
+            
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<TKUser> getUsersHaveBill(Date start, Date end) {
+        String sql ="SELECT DISTINCT User.* FROM User " +
+                    "JOIN bill ON bill.user_id = user.id " +
+                    "WHERE bill.order_date >= ? AND bill.order_date <= ? AND user.role = 'USER'";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDate(1, start);
+            preparedStatement.setDate(2, end);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            List<TKUser> users = new ArrayList<>();
+            while (resultSet.next()) {
+                TKUser user = new TKUser();
                 user.setId(resultSet.getLong("id"));
                 user.setFullname(resultSet.getString("fullname"));
                 user.setUsername(resultSet.getString("username"));
@@ -231,7 +295,7 @@ public class UserDAO {
     }
     
     public boolean authenticate(String username, String password) {
-        String sql = "SELECT * FROM user WHERE username = ? and password = ?";
+        String sql = "SELECT * FROM user WHERE username = ? and password = ? and status = true";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

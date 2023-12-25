@@ -47,6 +47,19 @@
             </c:forEach>
         </ul>
 
+        <div class="pages">
+            <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
+                <c:choose>
+                    <c:when test="${requestScope.currentPage == i-1}">
+                        <a class="index-page" href="/shop/home?page=${i}" style="background-color: black"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="index-page" href="/shop/home?page=${i}" style="background-color: lightgrey"></a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+
         <div class="products-button">
             <a href="/shop/categories" class="button1">All product</a>
         </div>

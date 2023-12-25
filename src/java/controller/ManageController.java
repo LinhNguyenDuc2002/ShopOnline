@@ -81,10 +81,10 @@ public class ManageController extends HttpServlet {
             
             switch (action) {
                 case "products":
-                    TKProduct(request, response);
+                    manageProducts(request, response);
                     break;
                 case "users":
-                    TKUsers(request, response);
+                    manageUsers(request, response);
                     break;
                 default:
                     throw new AssertionError();
@@ -117,14 +117,21 @@ public class ManageController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    private void TKProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = productService.getAllProduct();
+    private void manageProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String filter = request.getParameter("filter");
+        String sort = request.getParameter("sort");
+        List<Product> products = productService.getAllProduct(filter, sort);
             
+        if(filter != null && sort != null) {
+            request.setAttribute("filter", filter);
+            request.setAttribute("sort", sort);
+        }
+        request.setAttribute("categories", categoryservice.getAllCategory());
         request.setAttribute("sanpham", products);
         request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
     }
     
-    private void TKUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void manageUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = userService.getAllUser();
             
         request.setAttribute("users", users);

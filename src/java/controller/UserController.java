@@ -79,25 +79,35 @@ public class UserController extends HttpServlet {
         User user = userService.getCurrentUser(request);
         
         request.setAttribute("user", user);
-        if(action == null) {
-            if(user != null) {
-                request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
-            }
-            else {
-                request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
+        if(action == null && user != null) {
+            request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
+        }
+        else if(action != null && user == null) {
+            switch (action) {
+                case "login":
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    break;
+                case "signup":
+                    request.getRequestDispatcher("signup.jsp").forward(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
             }
         }
-        else {
-            if(action.equals("login") && user == null) {
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-            else if(action.equals("signup") && user == null) {
-                request.getRequestDispatcher("signup.jsp").forward(request, response);
-            }
-            else if(action.equals("change-pwd") && user != null) {
+        else if(action != null && user != null) {
+            if(action.equals("change-pwd")) {
                 getToChangePwd(request, response);
             }
-            else if(action.equals("logout") && user != null) {
+            else if(action.equals("delete") && user.getRole().equals("ADMIN")) {
+                userService.deleteUser(Long.valueOf(request.getParameter("id")));
+                response.sendRedirect("/shop/manage?action=users");
+            }
+            else if(action.equals("delete") && user.getRole().equals("USER")) {
+                userService.unenableUser(Long.valueOf(request.getParameter("id")));
+                request.getSession(false).invalidate();
+                response.sendRedirect("/shop/home");
+            }
+            else if(action.equals("logout")) {
                 try {
                     logout(request, response);
                 } catch (ParseException ex) {
@@ -107,9 +117,9 @@ public class UserController extends HttpServlet {
                 }
                 response.sendRedirect("/shop/users?action=login");
             }
-            else {
-                request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
-            }
+        }
+        else {
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     } 
 
@@ -180,41 +190,21 @@ public class UserController extends HttpServlet {
     }// </editor-fold>
 
     private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException {
-        List<String> errors = new ArrayList<>();
+        User user = new User();
+        user.setFullname(request.getParameter("fullname"));
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setEmail(request.getParameter("email"));
+        user.setPhone(request.getParameter("phone"));
+        user.setBirthday(DateUtil.convertStringToDate(request.getParameter("birthday")));
         
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        
-        String errorUsername = InvalidUser.checkUsername(username);
-        String errorEmail = InvalidUser.checkEmail(email);
-
-        if(errorUsername != null) {
-            errors.add(errorUsername);
-        }
-        if(errorEmail != null) {
-            errors.add(errorEmail);
-        }
-        if(request.getParameter("birthday") == null) {
-            errors.add("Birthday field is not null");
-        }
-        
-        Map<String, String> input = new HashMap<>();
-        input.put("fullname", request.getParameter("fullname"));
-        input.put("username", request.getParameter("username"));
-        input.put("password", request.getParameter("password"));
-        input.put("birthday", request.getParameter("birthday"));
-        input.put("email", request.getParameter("email"));
-        input.put("phone", request.getParameter("phone"));
-        
-        System.out.println(input.values().toString());
-        
+        List<String> errors = userService.addUser(user);
         if(!errors.isEmpty()) {
-            request.setAttribute("input", input);
+            request.setAttribute("input", user);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         else {
-            userService.addUser(input);
             request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
         } 
     }
@@ -249,8 +239,6 @@ public class UserController extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, NoSuchAlgorithmException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        
         
         if(userService.authenticate(username, password)) {
             HttpSession session = request.getSession(true);

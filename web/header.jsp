@@ -52,14 +52,7 @@
 
         <div class="content-body">
             <div class="left-content">
-                <c:choose>
-                    <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
-                        <a href="/shop/home?role=admin">HOME</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="/shop/home">HOME</a>
-                    </c:otherwise>
-                </c:choose>
+                <a href="/shop/home">HOME</a>
                 <a href="/shop/categories">CATEGORY</a>
                 <a href="#">CONTACT</a>
             </div>
@@ -103,9 +96,9 @@
 
             <c:choose>
                 <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
-                    <a class="selection" href="#">
+                    <a class="selection" href="/shop/customers">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <p>Invoice list</p>
+                        <p>Customer statistics</p>
                     </a>
                 </c:when>
                 <c:otherwise>

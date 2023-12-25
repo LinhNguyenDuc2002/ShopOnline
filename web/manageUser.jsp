@@ -48,7 +48,7 @@
                     <td>${i.phone}</td>
                     <td>${i.email}</td>
                     <td class="actions">
-                        <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             </c:forEach>

@@ -12,14 +12,29 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.User;
+import service.TKUserService;
+import service.UserService;
 
 /**
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="CommentController", urlPatterns={"/comments"})
-public class CommentController extends HttpServlet {
-   
+@WebServlet(name="ThongKeController", urlPatterns={"/customers"})
+public class ThongKeController extends HttpServlet {
+    private TKUserService tkUserService;
+    
+    private UserService userService;
+    
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        tkUserService = new TKUserService();
+        userService = new UserService();
+    }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,10 +50,10 @@ public class CommentController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CommentController</title>");  
+            out.println("<title>Servlet ThongKeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CommentController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ThongKeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +70,27 @@ public class CommentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        User user = userService.getCurrentUser(request);
+        
+        if(user != null && user.getRole().equals("ADMIN")) {
+            String start = request.getParameter("start");
+            String end = request.getParameter("end");
+            
+            if(start != null && end != null) {
+                request.setAttribute("start", start);
+                request.setAttribute("end", end);
+            }
+            request.setAttribute("user", user);
+            try {
+                request.setAttribute("users", tkUserService.tkUsers(start, end));
+            } catch (ParseException ex) {
+                Logger.getLogger(ThongKeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("tkKhachHang.jsp").forward(request, response);
+        }
+        else {
+            response.sendRedirect("/shop/404");
+        }
     } 
 
     /** 
