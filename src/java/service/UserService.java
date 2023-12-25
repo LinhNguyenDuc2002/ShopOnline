@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import model.TKUser;
 import model.User;
 import util.DateUtil;
 
@@ -69,6 +70,7 @@ public class UserService {
         
         Date now = DateUtil.getDateNow();
         user.setJoin_date(now);
+        user.setPassword(hashPassWord(user.getPassword()));
         
         if(errors.isEmpty()) {
             userDAO.addUser(user);
@@ -107,6 +109,14 @@ public class UserService {
         }
         
         return errors;
+    }
+    
+    public void deleteUser(Long id) {
+        userDAO.deleteUser(id);
+    }
+    
+    public void unenableUser(Long id) {
+        userDAO.unenableUser(id);
     }
     
     public String changePassword(Map<String, String> input, User user) throws NoSuchAlgorithmException {
