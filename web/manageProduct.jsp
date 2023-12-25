@@ -26,16 +26,28 @@
                 <select id="filters" name="category" onchange="sortData()">
                     <option value="0">All items</option>
                     <c:forEach items="${requestScope.categories}" var="i">
-                        <option value="${i.id}">${i.name}</option>
+                        <c:choose>
+                            <c:when test="${i.id eq requestScope.filter}">
+                                <option value="${i.id}" selected>${i.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${i.id}">${i.name}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
 
                 <label for="">Sort by:</label>
                 <select name="" id="sortBy" onchange="sortData()">
-                    <option value="id">ID</option>
-                    <option value="available">Available</option>
-                    <option value="price">Price</option>
-                    <option value="sold">Sold</option>
+                    <c:forEach items="${['id', 'available', 'price', 'sold']}" var="option">
+                        <option value="${option}" <c:if test="${option eq requestScope.sort}">selected</c:if>>
+                            <script>
+                                var optionText = "${option}";
+                                var capitalizedOption = optionText.charAt(0).toUpperCase() + optionText.slice(1);
+                                document.write(capitalizedOption);
+                            </script>
+                        </option>
+                    </c:forEach>
                 </select>
             </div>
         </div>

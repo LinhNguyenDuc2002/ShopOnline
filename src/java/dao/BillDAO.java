@@ -55,12 +55,14 @@ public class BillDAO {
         return null;
     }
     
-    public List<Long> getBillsOfUser(Long id) {
-        String sql = "SELECT id FROM bill WHERE user_id = ? and status = true";
+    public List<Long> getBillsOfUser(Long id, Date start, Date end) {
+        String sql = "SELECT id FROM bill WHERE user_id = ? and status = true and order_date >= ? and order_date <= ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, id);
+            preparedStatement.setDate(2, start);
+            preparedStatement.setDate(3, end);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Long> result = new ArrayList<>();
