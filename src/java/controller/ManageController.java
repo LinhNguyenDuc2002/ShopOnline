@@ -122,6 +122,10 @@ public class ManageController extends HttpServlet {
         String sort = request.getParameter("sort");
         List<Product> products = productService.getAllProduct(filter, sort);
             
+        if(filter != null && sort != null) {
+            request.setAttribute("filter", filter);
+            request.setAttribute("sort", sort);
+        }
         request.setAttribute("categories", categoryservice.getAllCategory());
         request.setAttribute("sanpham", products);
         request.getRequestDispatcher("manageProduct.jsp").forward(request, response);

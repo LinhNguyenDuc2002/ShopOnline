@@ -12,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 import service.TKUserService;
 import service.UserService;
@@ -20,7 +23,7 @@ import service.UserService;
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="ThongKeController", urlPatterns={"/tk"})
+@WebServlet(name="ThongKeController", urlPatterns={"/customers"})
 public class ThongKeController extends HttpServlet {
     private TKUserService tkUserService;
     
@@ -70,8 +73,19 @@ public class ThongKeController extends HttpServlet {
         User user = userService.getCurrentUser(request);
         
         if(user != null && user.getRole().equals("ADMIN")) {
+            String start = request.getParameter("start");
+            String end = request.getParameter("end");
+            
+            if(start != null && end != null) {
+                request.setAttribute("start", start);
+                request.setAttribute("end", end);
+            }
             request.setAttribute("user", user);
-            request.setAttribute("users", tkUserService.tkUsers());
+            try {
+                request.setAttribute("users", tkUserService.tkUsers(start, end));
+            } catch (ParseException ex) {
+                Logger.getLogger(ThongKeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.getRequestDispatcher("tkKhachHang.jsp").forward(request, response);
         }
         else {

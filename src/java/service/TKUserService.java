@@ -6,11 +6,14 @@ package service;
 
 import dao.BillDAO;
 import dao.UserDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.sql.Date;
 import java.util.List;
 import model.TKUser;
 import model.User;
+import util.DateUtil;
 
 /**
  *
@@ -26,10 +29,17 @@ public class TKUserService {
         billDAO = new BillDAO();
     }
     
-    public List<TKUser> tkUsers() {
-        List<TKUser> users = userDAO.getAllUsers();
+    public List<TKUser> tkUsers(String start, String end) throws ParseException {
+        if(start == null || end == null) {
+            return List.of();
+        }
+        
+        Date startAt = DateUtil.convertStringToDate(start);
+        Date endAt = DateUtil.convertStringToDate(end);
+        
+        List<TKUser> users = userDAO.getUsersHaveBill(startAt, endAt);
         for(TKUser user : users) {
-            List<Long> billId = billDAO.getBillsOfUser(user.getId());
+            List<Long> billId = billDAO.getBillsOfUser(user.getId(), startAt, endAt);
 
             double total = 0;
             for(Long it : billId) {

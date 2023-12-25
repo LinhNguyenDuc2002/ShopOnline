@@ -1,0 +1,22 @@
+.time {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.time-filter {
+    height: 100%;
+}
+
+.time-filter label {
+    margin-right: 10px;
+}
+
+.time-filter input {
+    height: 100%;
+    width: 150px;
+}
+
+input#startAt {
+    margin-right: 100px;
+}

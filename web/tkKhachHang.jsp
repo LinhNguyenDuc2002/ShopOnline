@@ -19,11 +19,25 @@
     <div class="content">
         <div class="title">THỐNG KÊ KHÁCH HÀNG</div>
 
+        <div class="time">
+            <div class="time-filter">
+                <label for="">Start at:</label>
+                <input type="date" name="start" id="startAt" value="${requestScope.start}" onchange="find()">
+            </div>
+            
+            <div class="time-filter">
+                <label for="">End at:</label>
+                <input type="date" name="end" id="endAt" value="${requestScope.end}" onchange="find()">
+            </div>
+        </div>
+
         <table>
             <tr class="field">
                 <td>STT</td>
                 <td>Full name</td>
                 <td>Birthday</td>
+                <td>Address</td>
+                <td>Phone number</td>
                 <td>Total amount</td>
                 <td>Joined date</td>
             </tr>
@@ -34,6 +48,8 @@
                     <td>${stt}</td>
                     <td>${i.fullname}</td>
                     <td>${i.birthday}</td>
+                    <td>${i.city} - ${i.country}</td>
+                    <td>${i.phone}</td>
                     <td class="price">${i.totalAmount}</td>
                     <td>${i.join_date}</td>
                 </tr>
@@ -46,6 +62,7 @@
 
     <script src="./script/home.js"></script>
     <script src="./script/formatVND.js"></script>
+    <script src="./script/thongke.js"></script>
 </body>
 
 </html>

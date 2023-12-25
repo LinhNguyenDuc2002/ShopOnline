@@ -146,11 +146,15 @@ public class UserDAO {
         return null;
     }
     
-    public List<TKUser> getAllUsers() {
-        String sql = "SELECT * FROM User";
+    public List<TKUser> getUsersHaveBill(Date start, Date end) {
+        String sql ="SELECT DISTINCT User.* FROM User " +
+                    "JOIN bill ON bill.user_id = user.id " +
+                    "WHERE bill.order_date >= ? AND bill.order_date <= ? AND user.role = 'USER'";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDate(1, start);
+            preparedStatement.setDate(2, end);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             
