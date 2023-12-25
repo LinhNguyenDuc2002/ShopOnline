@@ -12,31 +12,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Product;
 import model.User;
-import service.CategoryService;
-import service.ProductService;
+import service.TKUserService;
 import service.UserService;
 
 /**
  *
  * @author LinhNguyenDuc
  */
-@WebServlet(name="ManageController", urlPatterns={"/manage"})
-public class ManageController extends HttpServlet {
-    private ProductService productService;
+@WebServlet(name="ThongKeController", urlPatterns={"/tk"})
+public class ThongKeController extends HttpServlet {
+    private TKUserService tkUserService;
     
     private UserService userService;
     
-    private CategoryService categoryservice;
-    
     @Override
     public void init() throws ServletException {
-         super.init();
-         productService = new ProductService();
-         userService = new UserService();
-         categoryservice = new CategoryService();
+        super.init();
+        tkUserService = new TKUserService();
+        userService = new UserService();
     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -53,10 +47,10 @@ public class ManageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TKProduct</title>");  
+            out.println("<title>Servlet ThongKeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TKProduct at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ThongKeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,21 +68,11 @@ public class ManageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         User user = userService.getCurrentUser(request);
-        String action = request.getParameter("action");
         
-        if(user != null && user.getRole().equals("ADMIN") && action != null){
+        if(user != null && user.getRole().equals("ADMIN")) {
             request.setAttribute("user", user);
-            
-            switch (action) {
-                case "products":
-                    manageProducts(request, response);
-                    break;
-                case "users":
-                    manageUsers(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
+            request.setAttribute("users", tkUserService.tkUsers());
+            request.getRequestDispatcher("tkKhachHang.jsp").forward(request, response);
         }
         else {
             response.sendRedirect("/shop/404");
@@ -116,22 +100,5 @@ public class ManageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private void manageProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String filter = request.getParameter("filter");
-        String sort = request.getParameter("sort");
-        List<Product> products = productService.getAllProduct(filter, sort);
-            
-        request.setAttribute("categories", categoryservice.getAllCategory());
-        request.setAttribute("sanpham", products);
-        request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
-    }
-    
-    private void manageUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = userService.getAllUser();
-            
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("manageUser.jsp").forward(request, response);
-    }
 
 }

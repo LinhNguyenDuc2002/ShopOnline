@@ -192,7 +192,8 @@ public class ProductDAO {
             ResultSet rs = ps.executeQuery();
             List<Product> list = new ArrayList<>();
             while (rs.next()) {
-                Product a = new Product(rs.getLong(1), rs.getString(2), rs.getString(4), rs.getDouble(5), rs.getDouble(6),
+                Category category = categoryDAO.getCategoryById(id);
+                Product a = new Product(rs.getLong(1), rs.getString(2), category, rs.getString(4), rs.getDouble(5), rs.getDouble(6),
                         rs.getLong(7), rs.getLong(8), rs.getBytes(9), rs.getDate(10), rs.getString(11));
 
                 list.add(a);

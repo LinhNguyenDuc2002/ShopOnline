@@ -10,6 +10,8 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import model.Category;
@@ -62,8 +64,38 @@ public class ProductService {
         return productDAO.getAllProduct(start, pageSize);
     }
     
-    public List<Product> getAllProduct() {
-        return productDAO.getAllProduct();
+    public List<Product> getAllProduct(String filterParam, String sort) {
+        Long filter = 0L;
+        try {
+            filter = Long.valueOf(filterParam);
+            List<Product> products; 
+            if(filter == 0) {
+                products = productDAO.getAllProduct();
+            }
+            else {
+                products = productDAO.getAllProductsByCategory(filter);
+            }
+            
+            switch (sort) {
+                case "ID":
+                    break;
+                case "available":
+                    products = sortByAvailable(products);
+                    break;
+                case "price":
+                    products = sortByPrice(products);
+                    break;
+                case "sold":
+                    products = sortBySold(products);
+                    break;
+                default:
+                    break;
+            }
+            return products;
+        }
+        catch(Exception e) {
+            return productDAO.getAllProduct();
+        }
     }
     
     public int getProductQuantity() {
@@ -116,6 +148,39 @@ public class ProductService {
         byte[] imageBytes = buffer.toByteArray();
         
         return imageBytes;
+    }
+    
+    private List<Product> sortByAvailable(List<Product> products) {
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return Double.compare(p2.getAvailable(), p1.getAvailable());
+            }
+        });
+        
+        return products;
+    }
+    
+    private List<Product> sortByPrice(List<Product> products) {
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return Double.compare(p2.getPrice(), p1.getPrice());
+            }
+        });
+        
+        return products;
+    }
+    
+    private List<Product> sortBySold(List<Product> products) {
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return Double.compare(p2.getSold(), p1.getSold());
+            }
+        });
+        
+        return products;
     }
 
 }

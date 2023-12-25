@@ -28,7 +28,7 @@
                     <div class="button-edit">
                         <a>Change avatar</a>
                         <a href="/shop/users?action=change-pwd">Change password</a>
-                        <a>Delete account</a>
+                        <a href="/shop/users?action=delete&id=${requestScope.user.id}">Delete account</a>
                     </div>
 
                     <div id="general-info">
