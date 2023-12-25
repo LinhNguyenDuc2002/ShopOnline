@@ -10,47 +10,34 @@
     <title>Header</title>
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./style/manage.css">
+    <link rel="stylesheet" href="./style/thongke.css">
 </head>
 
 <body >
     <%@ include file="header.jsp" %> 
     
     <div class="content">
-        <div class="title">USER LIST</div>
-        <!-- <a href="/shop/products?action=add" class="add-product">Add a product</a> -->
+        <div class="title">THỐNG KÊ KHÁCH HÀNG</div>
+
         <table>
             <tr class="field">
-                <td>ID</td>
+                <td>STT</td>
                 <td>Full name</td>
-                <td>Username</td>
                 <td>Birthday</td>
-                <td>Sex</td>
-                <td>Phone number</td>
-                <td>Email</td>
-                <td>Actions</td>
+                <td>Total amount</td>
+                <td>Joined date</td>
             </tr>
-
+            
+            <c:set var="stt" value="1" />
             <c:forEach items="${requestScope.users}" var="i">
                 <tr class="product-list">
-                    <td>${i.id}</td>
+                    <td>${stt}</td>
                     <td>${i.fullname}</td>
-                    <td>${i.username}</td>
                     <td>${i.birthday}</td>
-                    <c:choose>
-                        <c:when test="${i.sex == true}">
-                            <td>female</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>male</td>
-                        </c:otherwise>
-                    </c:choose>
-                    
-                    <td>${i.phone}</td>
-                    <td>${i.email}</td>
-                    <td class="actions">
-                        <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
-                    </td>
+                    <td class="price">${i.totalAmount}</td>
+                    <td>${i.join_date}</td>
                 </tr>
+                <c:set var="stt" value="${stt + 1}" />
             </c:forEach>
         </table>
     </div>
@@ -58,7 +45,7 @@
     <%@ include file="footer.jsp" %>
 
     <script src="./script/home.js"></script>
-
+    <script src="./script/formatVND.js"></script>
 </body>
 
 </html>

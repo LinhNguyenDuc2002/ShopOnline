@@ -17,11 +17,33 @@
     
     <div class="content">
         <div class="title">PRODUCT LIST</div>
-        <a href="/shop/products?action=add" class="add-product-btn"><i class="fa-solid fa-plus"></i>Add a product</a>
+
+        <div class="sort">
+            <a href="/shop/products?action=add" class="add-product-btn"><i class="fa-solid fa-plus"></i>Add a product</a>
+            
+            <div class="sort-right">
+                <label for="">Filter:</label>
+                <select id="filters" name="category" onchange="sortData()">
+                    <option value="0">All items</option>
+                    <c:forEach items="${requestScope.categories}" var="i">
+                        <option value="${i.id}">${i.name}</option>
+                    </c:forEach>
+                </select>
+
+                <label for="">Sort by:</label>
+                <select name="" id="sortBy" onchange="sortData()">
+                    <option value="id">ID</option>
+                    <option value="available">Available</option>
+                    <option value="price">Price</option>
+                    <option value="sold">Sold</option>
+                </select>
+            </div>
+        </div>
+        
         
         <div class="container">
             <table>
-                <tr class="field"> 
+                <thead class="field"> 
                     <td>ID</td>
                     <td>Product name</td>
                     <td>Category</td>
@@ -30,23 +52,25 @@
                     <td>Sold</td>
                     <td>Description</td>
                     <td>Actions</td>
-                </tr>
+                </thead>
 
-                <c:forEach items="${requestScope.sanpham}" var="i">
-                    <tr class="product-list" link="/shop/products?action=show&id=${i.id}">
-                        <td>${i.id}</td>
-                        <td>${i.productName}</td>
-                        <td>${i.category.name}</td>
-                        <td>${i.available}</td>
-                        <td class="price">${i.price}</td>
-                        <td>${i.sold}</td>
-                        <td>${i.description}</td>
-                        <td class="actions">
-                            <a href="/shop/products?action=edit&id=${i.id}"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <tbody class="product-body">
+                    <c:forEach items="${requestScope.sanpham}" var="i">
+                        <tr class="product-list" link="/shop/products?action=show&id=${i.id}">
+                            <td>${i.id}</td>
+                            <td>${i.productName}</td>
+                            <td>${i.category.name}</td>
+                            <td>${i.available}</td>
+                            <td class="price">${i.price}</td>
+                            <td>${i.sold}</td>
+                            <td>${i.description}</td>
+                            <td class="actions">
+                                <a href="/shop/products?action=edit&id=${i.id}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="/shop/products?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>
     </div>

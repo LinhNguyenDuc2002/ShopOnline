@@ -112,10 +112,37 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 30px;
 }
 
 td.actions {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sort-right {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-right select {
+    height: 100%;
+    width: 120px;
+}
+
+.sort-right label {
+    margin-right: 10px;
+}
+
+select#filters {
+    margin-right: 50px;
 }
