@@ -1,7 +1,7 @@
-var prices = document.getElementsByClassName('price');
+var prices = document.querySelectorAll('.price');
 
-for (var i = 0; i < prices.length; i++) {
-    var priceElement = prices[i];
+for (var a = 0; a < prices.length; a++) {
+    var priceElement = prices[a];
     var priceValue = parseFloat(priceElement.textContent);
 
     priceElement.innerHTML = formatCurrency(priceValue);

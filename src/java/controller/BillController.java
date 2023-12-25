@@ -61,13 +61,15 @@ public class BillController extends HttpServlet {
         if(listBill != null){
             
             for(Bill bill : listBill){
-                int sum = 0;
+                
                 Bill bills = new Bill();
                 
                 List<Product> productList = new ArrayList<>();
                 List<detail_order> listDetai = billDao.FindAllDetailsOrder((int) bill.getId());
                 if(listDetai != null){
+                    int sum = 0;
                     for(detail_order details : listDetai){
+                        
                         Product prooduct = productService.getProduct((long)details.getProduct_id());
                         if(prooduct != null){
                             productList.add(prooduct);
@@ -81,7 +83,7 @@ public class BillController extends HttpServlet {
                 bills.setOrderDate(bill.getOrderDate());
                 bills.setStatus(bill.isStatus());
                 bills.setDeliveryAddress(bill.getDeliveryAddress());
-                listData listdata = new listData(bills, productList, sum);
+                listData listdata = new listData(bills, productList,0);
                 data.add(listdata);
             }
             

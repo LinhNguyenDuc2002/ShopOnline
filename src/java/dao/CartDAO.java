@@ -91,10 +91,8 @@ public class CartDAO {
                                 rs.getString(6)
                         ));
             }
-            System.out.println("dao.CartDAO.getCart()");
             return map;
         } catch (Exception e) {
-            System.out.println("dao.CartDAO.getCart()1111");
         }
         return null;
     }

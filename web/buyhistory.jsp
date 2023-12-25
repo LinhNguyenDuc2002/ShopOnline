@@ -41,7 +41,7 @@
                                     <tr class="b_${i.getBill().getId()}" style="position: relative; ">
                                         <td>${i.getBill().getId()}</td>
                                         <td>${i.getBill().isStatus()}</td>
-                                        <td>${i.getTotal()}</td>
+                                        <td class="price">i.getTotal()</td>
                                         <td>${i.getBill().getOrderDate()}</td>
                                         <td>
                                             <div>
@@ -162,7 +162,7 @@
                             }
 
                         </script>
-
+            <script src="./script/formatVND.js"></script>
             </body>
 
             </html>
