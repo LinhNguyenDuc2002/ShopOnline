@@ -96,7 +96,7 @@
 
             <c:choose>
                 <c:when test="${not empty requestScope.user and requestScope.user.role eq 'ADMIN'}">
-                    <a class="selection" href="/shop/tk">
+                    <a class="selection" href="/shop/customers">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Customer statistics</p>
                     </a>
