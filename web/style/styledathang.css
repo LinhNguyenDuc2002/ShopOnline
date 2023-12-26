@@ -70,6 +70,7 @@ body {
     cursor: pointer;
     max-height: 250px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .san-pham td {
@@ -94,13 +95,6 @@ body {
     opacity:0.5;
 }
 
-.ma-giam-gia input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
 .ap-dung {
     padding: 10px 20px;
     background-color: #0abde3;
@@ -116,8 +110,19 @@ body {
     border-bottom: 1px solid #ccc;
 }
 
-.ma-giam-gia {
+.ship {
+    display: grid;
     margin-bottom: 10px;
+}
+
+.ship label {
+    margin-bottom: 5px;
+    color: blue;
+}
+
+.ship select {
+    height: 30px;
+    width: 200px;
 }
 
 .tong {
@@ -154,10 +159,7 @@ body {
     transform: scale(1.1);
     transition: background-color 0.3s, transform 0.3s;
 }
-.ma-giam-gia input:hover {
-    background-color: #eee;
-    transition: background-color 0.3s;
-}
+
 .san-pham td:hover {
     background-color: #f0f0f0;
     transform: scale(1.05);
