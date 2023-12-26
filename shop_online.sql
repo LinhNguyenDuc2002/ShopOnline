@@ -40,14 +40,24 @@ CREATE TABLE user(
     note TEXT
 );
 
+CREATE TABLE transport (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(100),
+    price DOUBLE,
+    description TEXT
+);
+
 CREATE TABLE bill(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT NOT NULL,
+    transport_id BIGINT NOT NULL,
     order_date DATE NOT NULL,
     delivery_address VARCHAR(255) NOT NULL,
     status BOOLEAN,
+    total DOUBLE NOT NULL,
     note TEXT,
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (transport_id) REFERENCES transport(id)
 );
 
 CREATE TABLE detail_order(
@@ -61,6 +71,10 @@ CREATE TABLE detail_order(
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+INSERT INTO transport VALUES(1, "Express Shipping", 50000, "");
+INSERT INTO transport VALUES(2, "Standard Shipping", 20000, "");
+INSERT INTO transport VALUES(3, "International Shipping", 100000, "");
 
 INSERT INTO category VALUES(1, "Pen", "Bút mực, bút bi, ...");
 INSERT INTO category VALUES(2, "Pencil", "Các loại bút chì");

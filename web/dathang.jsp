@@ -76,20 +76,27 @@
                         </table>
                     </div>
 
-                    <div class="ma-giam-gia">
-                        <input type="text" placeholder="Nhập mã giảm giá">
-                        <button class="ap-dung">Áp dụng</button>
+                    <div class="ship">
+                        <label for="">Choose a shipping method</label>
+                        <select id="ship" name="ship" required>
+                            <c:forEach items="${requestScope.ship}" var="i">
+                                <option value="${i.id}" price="${i.price}">${i.name}</option>
+                            </c:forEach>
+                        </select>
                     </div>
 
                     <table class="tam-tinh">
                         <tr>
                             <td>Tạm tính</td>
                             <td>
-                                <p class="price">${totalPrice}</p>
+                                <p class="total price">${totalPrice}</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Phí vận chuyển</td>
+                            <td>
+                                <p class="ship-fee price"></p>
+                            </td>
                         </tr>
                     </table>
 
@@ -97,7 +104,7 @@
                         <tr>
                             <td>Tổng cộng</td>
                             <td>
-                                <p class="tong price">${totalPrice}</p>
+                                <p class="tong price" name="total" value=""></p>
                             </td>
                         </tr>
                         <tr>
@@ -118,5 +125,6 @@
         <%@ include file="footer.jsp" %>
 
         <script src="./script/formatVND.js"></script>
+        <script src="./script/dathang.js"></script>
     </body>
 </html>
