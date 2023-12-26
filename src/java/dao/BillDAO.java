@@ -32,14 +32,16 @@ public class BillDAO {
     }
 
     public Long addBill(Bill bill) {
-        String sql = "INSERT INTO bill (user_id, order_date, delivery_address, status) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO bill (user_id, transport_id, order_date, delivery_address, status, note) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, bill.getUser().getId());
-            preparedStatement.setDate(2, (Date) bill.getOrderDate());
-            preparedStatement.setString(3, bill.getDeliveryAddress());
-            preparedStatement.setBoolean(4, bill.isStatus()); // Trạng thái mặc định là "Pending"
+            preparedStatement.setLong(2, bill.getTransport().getId());
+            preparedStatement.setDate(3, (Date) bill.getOrderDate());
+            preparedStatement.setString(4, bill.getDeliveryAddress());
+            preparedStatement.setBoolean(5, bill.isStatus());
+            preparedStatement.setString(6, bill.getNote());
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
