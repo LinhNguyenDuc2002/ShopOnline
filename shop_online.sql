@@ -50,12 +50,6 @@ CREATE TABLE bill(
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
-CREATE TABLE cart(
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(id)
-);
-
 CREATE TABLE detail_order(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     bill_id BIGINT,
@@ -64,17 +58,6 @@ CREATE TABLE detail_order(
     quantity BIGINT NOT NULL,
     status BOOLEAN NOT NULL,
     FOREIGN KEY (bill_id) REFERENCES bill(id),
-    FOREIGN KEY (product_id) REFERENCES product(id),
-    FOREIGN KEY (user_id) REFERENCES user(id)
-);
-
-CREATE TABLE comment(
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    product_id BIGINT NOT NULL,
-    user_id BIGINT NOT NULL,
-    posting_date DATE NOT NULL,
-    image LONGBLOB,
-    content TEXT,
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );

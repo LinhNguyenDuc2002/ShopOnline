@@ -157,7 +157,7 @@ public class CartDAO {
         }
     }
 
-    public void deleteCart(long userId) {
+    public void deleteCartAll(Long userId) {
         String sql = "DELETE FROM detail_order WHERE user_id = ? AND status = false";
 
         try {
