@@ -57,7 +57,7 @@ public class CartService {
         return cartDAO.addToCart(user.getId());
     }
     
-    public void deleteCartAll(long userId) {
-        cartDAO.deleteCart(userId); // Gọi phương thức từ CartDAO để xóa giỏ hàng của người dùng
+    public void deleteCartAll(Long userId) {
+        cartDAO.deleteCartAll(userId);
     }
 }
