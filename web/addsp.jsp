@@ -27,19 +27,19 @@
 
                 <div class="left-input">
                     <label for="">Price</label>
-                    <input type="text" id="nhap-gia" name="price" required>
+                    <input type="text" id="nhap-gia" name="price" pattern="[0-9]+(\.[0-9]+)?" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" required>
                 </div>
 
                 <div class="left-input">
                     <label for="">Number</label>
-                    <input type="text" id="so-luong" name="available" required>
+                    <input type="text" id="so-luong" name="available" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 </div>
 
                 <div class="left-input">
                     <label for="">Category</label>
                     <select id="cars" name="category" required>
                         <c:forEach items="${requestScope.categories}" var="i">
-                            <option value="${i.name}">${i.name}</option>
+                            <option value="${i.id}">${i.name}</option>
                         </c:forEach>
                     </select>
                 </div>

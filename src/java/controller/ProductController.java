@@ -151,24 +151,20 @@ public class ProductController extends HttpServlet {
     }// </editor-fold>
     
     private void getToAddProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> categories = categoryservice.getAllCategory();
-        request.setAttribute("categories", categories);
-        
+        request.setAttribute("categories", categoryservice.getAllCategory());
         request.getRequestDispatcher("addsp.jsp").forward(request, response);
     }
     
     private void postToAddProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Map<String, String> input = new HashMap<>();
-        
-        input.put("productName",request.getParameter("productName"));
-        input.put("price",request.getParameter("price"));
-        input.put("category",request.getParameter("category"));
-        input.put("available", request.getParameter("available"));
-        input.put("description", request.getParameter("description"));
+        Product product = new Product();
+        product.setProductName(request.getParameter("productName"));
+        product.setPrice(Double.valueOf(request.getParameter("price")));
+        product.setAvailable(Long.valueOf(request.getParameter("available")));
+        product.setDescription(request.getParameter("description"));
         
         Part filePart = request.getPart("image");
 
-        productService.addProduct(input, filePart);
+        productService.addProduct(product, request.getParameter("category"), filePart);
         response.sendRedirect("/shop/manage?action=products");
     }
     
@@ -184,36 +180,31 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("/shop/404");
         }
         else {
-            List<Category> arr = categoryservice.getAllCategory();
             request.setAttribute("sanphamchitiet", a);
-            request.setAttribute("list", arr);
-
+            request.setAttribute("list", categoryservice.getAllCategory());
             request.getRequestDispatcher("fixsp.jsp").forward(request, response);
         }
     }
     
     private void getToShowProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
-        List<Product> list = productService.getAllProductsByCategory(a.getCategory().getId());
-        request.setAttribute("list_category", list);
+        request.setAttribute("list_category", productService.getAllProductsByCategory(String.valueOf(a.getCategory().getId()), null));
         request.setAttribute("sanphamchitiet", a);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }
     
     private void postToEditProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("id");
-        
-        Map<String, String> input = new HashMap<>();
-        input.put("id", id);
-        input.put("productName", request.getParameter("ten-san-pham"));
-        input.put("price", request.getParameter("gia"));
-        input.put("available", request.getParameter("so-luong"));
-        input.put("category", request.getParameter("category"));
-        input.put("description", request.getParameter("mo-ta"));
+        Product product = new Product();
+        product.setId(Long.valueOf(id));
+        product.setProductName(request.getParameter("ten-san-pham"));
+        product.setPrice(Double.valueOf(request.getParameter("gia")));
+        product.setAvailable(Long.valueOf(request.getParameter("so-luong")));
+        product.setDescription(request.getParameter("mo-ta"));
        
         Part filePart = request.getPart("image");
 
-        productService.editProduct(input, filePart);
+        productService.editProduct(product, request.getParameter("category"), filePart);
         
         response.sendRedirect("/shop/products?action=edit&id="+id.toString());
     }

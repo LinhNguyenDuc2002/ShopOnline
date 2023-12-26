@@ -86,12 +86,8 @@ public class OrderController extends HttpServlet {
         User user = userService.getCurrentUser(request);
 
         if (user != null && user.getRole().equals("USER")) {
-            // Hiển thị thông tin người dùng trên trang dathang.jsp
             request.setAttribute("user", user);
-
-            // Lấy danh sách sản phẩm trong giỏ hàng của người dùng
-            List<DetailOrder> cart = cartService.getCart(user);
-            request.setAttribute("cart", cart);
+            request.setAttribute("cart", cartService.getCart(user));
             
             request.getRequestDispatcher("dathang.jsp").forward(request, response);
         } else {
@@ -120,9 +116,8 @@ public class OrderController extends HttpServlet {
             input.put("city", request.getParameter("city"));
             input.put("detail", request.getParameter("detailAddress"));
 
-            billService.addBill(user, input);
-            //3. Xác nhận đặt hàng thành công            
-            cartService.deleteCartAll(user.getId()); // Xóa toàn bộ sản phẩm trong giỏ hàng của người dùng
+            billService.addBill(user, input);           
+            cartService.deleteCartAll(user.getId());
 
             response.sendRedirect("/shop/carts?action=show");
         } else {

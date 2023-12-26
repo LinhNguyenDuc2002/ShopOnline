@@ -23,22 +23,24 @@
                 <div class="left">
                     <div class="left-input">
                         <label for="">Product name</label>
-                        <input type="text" id="ten-san-pham" name="ten-san-pham" value="${requestScope.sanphamchitiet.getProductName()}">
+                        <input type="text" id="ten-san-pham" name="ten-san-pham" value="${requestScope.sanphamchitiet.getProductName()}" required>
                     </div>
                     
                     <div class="left-input">
                         <label for="">Price</label>
-                        <input type="text" id="nhap-gia" name="gia" value="${requestScope.sanphamchitiet.getPrice()}">
+                        <input type="text" id="nhap-gia" name="gia" value="${requestScope.sanphamchitiet.getPrice()}" 
+                        pattern="[0-9]+(\.[0-9]+)?" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" required>
                     </div>
                     
                     <div class="left-input">
                         <label for="">Number</label>
-                        <input type="text" id="so-luong" name="so-luong" value="${requestScope.sanphamchitiet.getAvailable()}">
+                        <input type="text" id="so-luong" name="so-luong" value="${requestScope.sanphamchitiet.getAvailable()}" 
+                        pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                     </div>
                     
                     <div class="left-input">
                         <label for="">Category</label>
-                        <select id="category" value="1" name="category">
+                        <select id="category" value="1" name="category" required>
                             <c:forEach items="${requestScope.list}" var="i">
                                 <c:choose>
                                     <c:when test="${i.id == requestScope.sanphamchitiet.category.id}">

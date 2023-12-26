@@ -160,7 +160,7 @@ public class UserController extends HttpServlet {
             case "update":
                 if(user!=null) {
                     try {
-                        update(request, response);
+                        update(request, response, user);
                     } catch (ParseException ex) {
                         Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -209,9 +209,7 @@ public class UserController extends HttpServlet {
         } 
     }
     
-    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException {
-        User currentUser = userService.getCurrentUser(request);
-        
+    private void update(HttpServletRequest request, HttpServletResponse response, User currentUser) throws IOException, ServletException, ParseException {        
         User user = new User();
         user.setId(currentUser.getId());
         user.setFullname(request.getParameter("fullname"));
@@ -243,7 +241,7 @@ public class UserController extends HttpServlet {
         if(userService.authenticate(username, password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-            session.setMaxInactiveInterval(3600);
+            session.setMaxInactiveInterval(1800);
             
             response.sendRedirect("/shop/home");
         }
