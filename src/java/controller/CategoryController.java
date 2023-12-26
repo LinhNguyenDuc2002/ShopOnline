@@ -76,24 +76,12 @@ public class CategoryController extends HttpServlet {
     throws ServletException, IOException {
         User user = userService.getCurrentUser(request);
         String id = request.getParameter("id");
-        
-        Integer page = 0;
         String pageParam = request.getParameter("page");
-        if (pageParam != null && !pageParam.isEmpty()) {
-            page = Integer.parseInt(pageParam);
-        }
         
-        List<Category> categories = categoryservice.getAllCategory();
-        List<Product> products;
-        if(id == null) {
-            products = productService.getAllProduct(page);
-        }
-        else {
-            products = categoryservice.getAllProductsByCategory(Long.valueOf(id));
-        }
+        List<Product> products = productService.getAllProductsByCategory(id, pageParam);
         
         request.setAttribute("user", user);
-        request.setAttribute("categories", categories);
+        request.setAttribute("categories", categoryservice.getAllCategory());
         request.setAttribute("products", products);
         request.setAttribute("id", id);
         

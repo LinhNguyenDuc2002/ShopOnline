@@ -140,9 +140,7 @@ public class CartController extends HttpServlet {
     }// </editor-fold>
     
     private void showCart(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
-        List<DetailOrder> cart = cartService.getCart(user);
-        request.setAttribute("cart", cart);
-        
+        request.setAttribute("cart", cartService.getCart(user));
         request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
     }
     
