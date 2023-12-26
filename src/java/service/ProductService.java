@@ -34,16 +34,9 @@ public class ProductService {
         this.categoryDAO = new CategoryDAO();
     }
 
-    public void addProduct(Map<String, String> input, Part filePart) throws IOException {
-        Product product = new Product();
-        
-        product.setProductName(input.get("productName"));
-        product.setPrice(Double.valueOf(input.get("price")));
-        product.setAvailable(Long.valueOf(input.get("available")));
-        product.setDescription(input.get("description"));
-        
-        Category category = categoryDAO.getCategory(input.get("category"));
-        product.setCategory(category);
+    public void addProduct(Product product, String category, Part filePart) throws IOException {        
+        Category categoryType = categoryDAO.getCategoryById(Long.parseLong(category));
+        product.setCategory(categoryType);
         product.setSold(0);
         product.setUpdateDay(DateUtil.getDateNow());
         product.setImage(handleImage(filePart));
@@ -102,25 +95,32 @@ public class ProductService {
         return productDAO.getProductQuantity(pageSize);
     }
     
-    public List<Product> getAllProductsByCategory(Long id){
-        return productDAO.getAllProductsByCategory(id);
+    public List<Product> getAllProductsByCategory(String id, String pageParam){
+        List<Product> products;
+        
+        Integer page = 0;
+        if (pageParam != null && !pageParam.isEmpty()) {
+            page = Integer.parseInt(pageParam)-1;
+        }
+        
+        if(id == null) {
+            int start = page * pageSize;
+            products = productDAO.getAllProduct(start, pageSize);
+        }
+        else {
+            products = productDAO.getAllProductsByCategory(Long.valueOf(id));
+        }
+        return products;
     }
     
     public List<Product> getAllProductByKey(String key) {
         return productDAO.getAllProductByKey(key);
     }
     
-    public void editProduct(Map<String, String> input, Part filePart) throws IOException {
-        Category a = categoryDAO.getCategoryById(Long.parseLong(input.get("category")));
-        
-        Product old = new Product();
-
-        old.setId(Long.valueOf(input.get("id")));
-        old.setProductName(input.get("productName"));
-        old.setDescription(input.get("description"));
-        old.setAvailable(Long.parseLong(input.get("available")));
-        old.setPrice(Double.parseDouble(input.get("price")));
+    public void editProduct(Product old, String category, Part filePart) throws IOException {
+        Category a = categoryDAO.getCategoryById(Long.parseLong(category));
         old.setCategory(a);
+        
         if (filePart != null && filePart.getSize() > 0) {
             old.setImage(handleImage(filePart));
             productDAO.editProduct(old);
