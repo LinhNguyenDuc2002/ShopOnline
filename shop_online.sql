@@ -54,7 +54,6 @@ CREATE TABLE bill(
     order_date DATE NOT NULL,
     delivery_address VARCHAR(255) NOT NULL,
     status BOOLEAN,
-    total DOUBLE NOT NULL,
     note TEXT,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (transport_id) REFERENCES transport(id)
