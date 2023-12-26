@@ -4,12 +4,16 @@
  */
 package service;
 
+import cache.TempUser;
+import cache.UserCache;
 import config.DBConnection;
 import dao.UserDAO;
 import invalid.InvalidUser;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -20,16 +24,23 @@ import java.util.Map;
 import model.TKUser;
 import model.User;
 import util.DateUtil;
+import util.OtpUtil;
 
 /**
  *
  * @author LinhNguyenDuc
  */
 public class UserService {
+    private UserCache userCache;
+    
     private UserDAO userDAO;
+    
+    private OtpService otpService;
 
     public UserService() {
-        userDAO = new UserDAO();
+        this.userDAO = new UserDAO();
+        this.userCache = new UserCache();
+        this.otpService = new OtpService();
     }
     
     public boolean authenticate(String username, String password) throws ParseException, NoSuchAlgorithmException {
@@ -52,7 +63,7 @@ public class UserService {
         return userDAO.getCurrentUser(username);
     }
     
-    public List<String> addUser(User user) throws ParseException, NoSuchAlgorithmException, IOException {
+    public List<String> saveTempUser(TempUser user, HttpSession session) throws IOException, UnsupportedEncodingException, MessagingException {
         List<String> errors = new ArrayList<>();
         
         String errorUsername = InvalidUser.checkUsername(user.getUsername());
@@ -68,15 +79,46 @@ public class UserService {
             errors.add("Birthday field is not null");
         }
         
-        Date now = DateUtil.getDateNow();
-        user.setJoin_date(now);
-        user.setPassword(hashPassWord(user.getPassword()));
-        
         if(errors.isEmpty()) {
-            userDAO.addUser(user);
+            session.setAttribute("username", user.getUsername());
+            session.setMaxInactiveInterval(600);
+            
+            String otp = OtpUtil.generateOTP();
+            user.setOtp(otp);
+            otpService.sendOTPViaEmail(otp, user.getEmail(), user.getFullname());
+            userCache.getCache().put(user.getUsername(), user);
         }
         
         return errors;
+    }
+    
+    public String addUser(String username, String otp) throws ParseException, NoSuchAlgorithmException, IOException {
+        String error = "";
+        try {
+            TempUser user = this.userCache.getCache().getIfPresent(username);
+            if(user.getOtp().equals(otp)) {
+                User u = new User();
+                u.setFullname(user.getFullname());
+                u.setUsername(user.getUsername());
+                u.setPhone(user.getPhone());
+                u.setEmail(user.getEmail());
+                u.setPassword(hashPassWord(user.getPassword()));
+                u.setBirthday(user.getBirthday());
+                
+                Date now = DateUtil.getDateNow();
+                u.setJoin_date(now);
+                
+                userDAO.addUser(u); 
+            }
+            else {
+                error = "OTP code is invalid";
+            }
+        }
+        catch(Exception e) {
+            error = "OTP code is invalid";
+        }
+        
+        return error;
     }
     
     public List<User> getAllUser() {

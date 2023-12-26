@@ -1,0 +1,97 @@
+.otp, .otp__form--input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.otp__cover {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0px;
+}
+
+.otp {
+    width: fit-content;
+    background: #fff;
+    padding: 30px 65px;
+    border-radius: 12px;
+    row-gap: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.otp__icon {
+    height: 65px;
+    width: 65px;
+    background: green;
+    color: #fff;
+    font-size: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otp h4 {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.otp__form .otp__form--input {
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.otp__form--input input {
+    height: 45px;
+    width: 42px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1.125rem;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.otp__form--input input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Ẩn các nút tăng giảm mặc định */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.otp__form--btn button {
+    height: 40px;
+    width: 120px;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid red;
+    padding: 9px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: red;
+}
+
+.message {
+    margin: 20px 0px;
+    color: red;
+}
+
+.otp__form--btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.otp__form--btn button:hover {
+    background: white;
+    color: blue;
+}

@@ -5,7 +5,9 @@
 
 package controller;
 
+import cache.TempUser;
 import invalid.InvalidUser;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletConfig;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
+import service.OtpService;
 import service.UserService;
 import util.DateUtil;
 
@@ -35,10 +39,13 @@ import util.DateUtil;
 public class UserController extends HttpServlet {
     private UserService userService;
     
+    private OtpService otpService;
+    
     @Override
     public void init() throws ServletException {
          super.init();
-         userService = new UserService();
+        this.userService = new UserService();
+        this.otpService = new OtpService();
     }
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -77,13 +84,16 @@ public class UserController extends HttpServlet {
     throws ServletException, IOException {
         String action = request.getParameter("action");
         User user = userService.getCurrentUser(request);
-        
         request.setAttribute("user", user);
+        
         if(action == null && user != null) {
             request.getRequestDispatcher("UserInfo.jsp").forward(request, response);
         }
         else if(action != null && user == null) {
             switch (action) {
+                case "verify":
+                    request.getRequestDispatcher("otp.jsp").forward(request, response);
+                    break;
                 case "login":
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                     break;
@@ -95,6 +105,7 @@ public class UserController extends HttpServlet {
             }
         }
         else if(action != null && user != null) {
+            
             if(action.equals("change-pwd")) {
                 getToChangePwd(request, response);
             }
@@ -132,13 +143,16 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException, UnsupportedEncodingException {
         String action = request.getParameter("action");
         User user = userService.getCurrentUser(request);
         
         request.setAttribute("user", user);
         
         switch (action) {
+            case "verify":
+                verify(request, response);
+                break;
             case "login":
                 try {
                     login(request, response);
@@ -154,6 +168,8 @@ public class UserController extends HttpServlet {
                 } catch (ParseException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MessagingException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
@@ -189,8 +205,8 @@ public class UserController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException {
-        User user = new User();
+    private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ParseException, NoSuchAlgorithmException, UnsupportedEncodingException, MessagingException {
+        TempUser user = new TempUser();
         user.setFullname(request.getParameter("fullname"));
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
@@ -198,14 +214,14 @@ public class UserController extends HttpServlet {
         user.setPhone(request.getParameter("phone"));
         user.setBirthday(DateUtil.convertStringToDate(request.getParameter("birthday")));
         
-        List<String> errors = userService.addUser(user);
+        List<String> errors = userService.saveTempUser(user, request.getSession(true));
         if(!errors.isEmpty()) {
             request.setAttribute("input", user);
             request.setAttribute("error", errors);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         else {
-            request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
+            response.sendRedirect("/shop/users?action=verify");
         } 
     }
     
@@ -274,5 +290,32 @@ public class UserController extends HttpServlet {
         request.setAttribute("message", error);
         
         request.getRequestDispatcher("changePwd.jsp").forward(request, response);
+    }
+    
+    private void verify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String digital1 = request.getParameter("digital1");
+        String digital2 = request.getParameter("digital2");
+        String digital3 = request.getParameter("digital3");
+        String digital4 = request.getParameter("digital4");
+        String digital5 = request.getParameter("digital5");
+        String digital6 = request.getParameter("digital6");
+        
+        try {
+            String username = request.getSession(false).getAttribute("username").toString();
+            String otp = digital1+digital2+digital3+digital4+digital5+digital6;
+            
+            String error = userService.addUser(username, otp);
+            if(error.length()>0) {
+                request.setAttribute("error", error);
+                response.sendRedirect("/shop/users?action=verify");
+            }
+            else {
+                request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
+            }
+            
+        }
+        catch(Exception e) {
+            response.sendRedirect("/shop/users?action=signup");
+        }
     }
 }
