@@ -28,7 +28,6 @@ body {
 
 .product-list {
     cursor: pointer;
-    background-color: lightgray;
 }
 
 .product-list:hover {

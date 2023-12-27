@@ -157,8 +157,8 @@ public class UserService {
         userDAO.deleteUser(id);
     }
     
-    public void unenableUser(Long id) {
-        userDAO.unenableUser(id);
+    public void unableUser(Long id) {
+        userDAO.unableUser(id);
     }
     
     public String changePassword(Map<String, String> input, User user) throws NoSuchAlgorithmException {

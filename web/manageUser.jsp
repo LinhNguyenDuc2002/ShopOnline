@@ -17,7 +17,6 @@
     
     <div class="content">
         <div class="title">USER LIST</div>
-        <!-- <a href="/shop/products?action=add" class="add-product">Add a product</a> -->
         <table>
             <tr class="field">
                 <td>ID</td>
@@ -27,30 +26,59 @@
                 <td>Sex</td>
                 <td>Phone number</td>
                 <td>Email</td>
+                <td>Status</td>
                 <td>Actions</td>
             </tr>
 
             <c:forEach items="${requestScope.users}" var="i">
-                <tr class="product-list">
-                    <td>${i.id}</td>
-                    <td>${i.fullname}</td>
-                    <td>${i.username}</td>
-                    <td>${i.birthday}</td>
-                    <c:choose>
-                        <c:when test="${i.sex == true}">
-                            <td>female</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>male</td>
-                        </c:otherwise>
-                    </c:choose>
-                    
-                    <td>${i.phone}</td>
-                    <td>${i.email}</td>
-                    <td class="actions">
-                        <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
-                    </td>
-                </tr>
+                <c:choose>
+                    <c:when test="${i.status == true}">
+                        <tr class="product-list" style="background-color: lightgray;">
+                            <td>${i.id}</td>
+                            <td>${i.fullname}</td>
+                            <td>${i.username}</td>
+                            <td>${i.birthday}</td>
+                            <c:choose>
+                                <c:when test="${i.sex == true}">
+                                    <td>female</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>male</td>
+                                </c:otherwise>
+                            </c:choose>
+                            
+                            <td>${i.phone}</td>
+                            <td>${i.email}</td>
+                            <td style="color: green;">Active</td>
+                            <td class="actions">
+                                <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <tr class="product-list" style="background-color: grey;">
+                            <td>${i.id}</td>
+                            <td>${i.fullname}</td>
+                            <td>${i.username}</td>
+                            <td>${i.birthday}</td>
+                            <c:choose>
+                                <c:when test="${i.sex == true}">
+                                    <td>female</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>male</td>
+                                </c:otherwise>
+                            </c:choose>
+                            
+                            <td>${i.phone}</td>
+                            <td>${i.email}</td>
+                            <td style="color: red;">Inactive</td>
+                            <td class="actions">
+                                <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </table>
     </div>

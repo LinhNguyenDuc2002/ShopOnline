@@ -62,7 +62,7 @@ public class UserDAO {
         }
     }
     
-    public void unenableUser(Long id) {
+    public void unableUser(Long id) {
         String sql = "UPDATE user SET status = false WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
