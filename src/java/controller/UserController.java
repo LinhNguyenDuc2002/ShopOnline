@@ -110,13 +110,13 @@ public class UserController extends HttpServlet {
                 getToChangePwd(request, response);
             }
             else if(action.equals("delete") && user.getRole().equals("ADMIN")) {
-                userService.deleteUser(Long.valueOf(request.getParameter("id")));
+                userService.unableUser(Long.valueOf(request.getParameter("id")));
                 response.sendRedirect("/shop/manage?action=users");
             }
             else if(action.equals("delete") && user.getRole().equals("USER")) {
-                userService.unenableUser(Long.valueOf(request.getParameter("id")));
+                userService.unableUser(user.getId());
                 request.getSession(false).invalidate();
-                response.sendRedirect("/shop/home");
+                response.sendRedirect("/shop/users?action=login");
             }
             else if(action.equals("logout")) {
                 try {
