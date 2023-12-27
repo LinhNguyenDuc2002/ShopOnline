@@ -73,6 +73,7 @@ public class ThongKeController extends HttpServlet {
         User user = userService.getCurrentUser(request);
         
         if(user != null && user.getRole().equals("ADMIN")) {
+            request.setAttribute("user", user);
             String start = request.getParameter("start");
             String end = request.getParameter("end");
             
@@ -80,7 +81,7 @@ public class ThongKeController extends HttpServlet {
                 request.setAttribute("start", start);
                 request.setAttribute("end", end);
             }
-            request.setAttribute("user", user);
+            
             try {
                 request.setAttribute("users", tkUserService.tkUsers(start, end));
             } catch (ParseException ex) {

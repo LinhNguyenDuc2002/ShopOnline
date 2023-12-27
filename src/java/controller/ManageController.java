@@ -120,21 +120,18 @@ public class ManageController extends HttpServlet {
     private void manageProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filter = request.getParameter("filter");
         String sort = request.getParameter("sort");
-        List<Product> products = productService.getAllProduct(filter, sort);
             
         if(filter != null && sort != null) {
             request.setAttribute("filter", filter);
             request.setAttribute("sort", sort);
         }
         request.setAttribute("categories", categoryservice.getAllCategory());
-        request.setAttribute("sanpham", products);
+        request.setAttribute("sanpham", productService.getAllProduct(filter, sort));
         request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
     }
     
-    private void manageUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = userService.getAllUser();
-            
-        request.setAttribute("users", users);
+    private void manageUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {            
+        request.setAttribute("users", userService.getAllUser());
         request.getRequestDispatcher("manageUser.jsp").forward(request, response);
     }
 

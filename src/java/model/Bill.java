@@ -25,6 +25,8 @@ public class Bill {
     private String note;
     
     private List<DetailOrder> detailOrders;
+    
+    private Transport transport;
 
     public Bill() {
     }
@@ -97,7 +99,19 @@ public class Bill {
         this.detailOrders = detailOrders;
     }
 
-    
+    public String getNote() {
+        return note;
+    }
 
-    
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
 }
