@@ -44,7 +44,7 @@
             
             <c:set var="stt" value="1" />
             <c:forEach items="${requestScope.users}" var="i">
-                <tr class="product-list">
+                <tr class="product-list active">
                     <td>${stt}</td>
                     <td>${i.fullname}</td>
                     <td>${i.birthday}</td>

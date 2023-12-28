@@ -33,7 +33,7 @@
             <c:forEach items="${requestScope.users}" var="i">
                 <c:choose>
                     <c:when test="${i.status == true}">
-                        <tr class="product-list" style="background-color: lightgray;">
+                        <tr class="product-list active">
                             <td>${i.id}</td>
                             <td>${i.fullname}</td>
                             <td>${i.username}</td>
@@ -56,7 +56,7 @@
                         </tr>
                     </c:when>
                     <c:otherwise>
-                        <tr class="product-list" style="background-color: grey;">
+                        <tr class="product-list inactive">
                             <td>${i.id}</td>
                             <td>${i.fullname}</td>
                             <td>${i.username}</td>

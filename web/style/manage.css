@@ -30,6 +30,14 @@ body {
     cursor: pointer;
 }
 
+.active {
+    background-color: lightgray;
+}
+
+.inactive {
+    background-color: grey;
+}
+
 .product-list:hover {
     background-color: lightblue;
 }
