@@ -19,7 +19,11 @@
 <body>
     <%@ include file="header.jsp" %>
     
-    <section class="san-pham">
+    <section class="san-pham" <c:if test="${requestScope.user.role == 'ADMIN'}">style="pointer-events: none;"</c:if>>
+        <c:if test="${requestScope.user.role == 'ADMIN'}">
+            <div class="view-mode"><i class="fa-solid fa-eye"></i>View mode</div>
+        </c:if>
+
         <form action="/shop/carts" method="POST">
             <input type="hidden" name="action" value="add">
             <input type="hidden" name="id" value="${requestScope.sanphamchitiet.id}">
