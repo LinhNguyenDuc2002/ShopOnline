@@ -55,18 +55,18 @@
                     <div class="cart-content">
                         <div class="cart-content-top">
                             <table>
-                                <tr>
+                                <thead>
                                     <th>Ảnh sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Đơn giá</th>
                                     <th>Số lượng</th>
                                     <th>Thành tiền</th>
                                     <th>Xóa</th>
-                                </tr>
+                                </thead>
                                     
                                 <c:set var="totalPrice" value="0" />
                                 <c:forEach items="${requestScope.cart}" var="i">
-                                    <tr>
+                                    <tr class="product-list" link="/shop/products?action=show&id=${i.product.id}">
                                         <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
                                         <td><p>${i.product.productName}</p></td>
                                         <td><p style="font-weight: bold;">${i.product.productName}</p></td>
@@ -106,6 +106,7 @@
         </article>
 
         <%@ include file="footer.jsp" %>
+        <script src="./script/manage.js"></script>
         <script src="./script/formatVND.js"></script>
     </body>
 </html>
