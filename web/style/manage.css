@@ -22,8 +22,8 @@ body {
 }
 
 .content table {
-    margin: 10px 0px;
     width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-list {
@@ -133,6 +133,7 @@ td.actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .sort-right {
