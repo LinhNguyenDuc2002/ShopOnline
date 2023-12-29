@@ -27,7 +27,7 @@
                             <a href="/shop/products?action=edit&id=${i.getId()}" class="buy-now">Edit</a>
                         </div>
                         <div class="product-info">
-                            <a href="" class="product-name">${i.getProductName()}</a>
+                            <a href="/shop/products?action=show&id=${i.getId()}" class="product-name">${i.getProductName()}</a>
                             <div class="product-price">
                                 <p class="price">${i.getPrice()}</p>
                                 <p class="status">
