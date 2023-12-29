@@ -249,12 +249,13 @@ span.alert-search {
 .table{
     font-size: 20px;
     text-align: center;
-    width: 100%;
+    width: 100%;    
 }
 tr.start{
-    background-color: #ee1e07;
+    background-color: #ee1e07
 }
-tr{
-    padding: 5px;
-    margin:5px;
+
+th,td{
+    padding: 10px;
+    
 }

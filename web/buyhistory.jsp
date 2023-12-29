@@ -55,7 +55,7 @@
                                                     <c:when test="${i.getBill().isStatus() == 'false'}">
                                                         <a href="UpdateStatusController?id=${i.getBill().getId()}" style="display: block; margin-top: 20px;">
                                                         <button
-                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
+                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #d32e00">
                                                             Đã nhận
                                                         </button>
                                                     </a>
@@ -102,7 +102,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <a href="products?id=${item.getId()}">
+                                                    <a href="products?action=show&id=${item.getId()}">
                                                         <button
                                                             style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
                                                             Mua lại
@@ -123,6 +123,7 @@
 
                                             </td>
                                         </tr>
+                                        <br>
 
                                     </c:forEach>
                                 </c:forEach>
@@ -133,68 +134,7 @@
 
                         <script src="./script/home.js"></script>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                        <script type="text/javascript">
-                            var a = 0;
-                            function Show(type, element, type2) {
-                                a += 1;
-                                let sum = a;
-                                const displays = document.querySelectorAll("." + type + "");
-                                const typeClass = document.querySelector("." + type2 + "");
-                               if (sum % 2 != 0) {
-                                    if (element.classList.contains("fa-chevron-down")) {
-                                        element.classList.remove("fa-chevron-down");
-                                        element.classList.add("fa-chevron-up");
-                                    }
-                                   for (let i = 0; i < displays.length; i++) {
-                                    let node = displays[i];
-                                    // Thực hiện công việc với node tại đây
-                                    node.style.display = "block";
-                                    node.style.transition = "1.5s ease-in-out";
-
-                                    node.style.transform = "translateX(0)";
-                                    
-                                  }
-
-                                    console.log(displays);
-                                } else if (sum % 2 == 0) {
-                                    if (element.classList.contains("fa-chevron-up")) {
-                                        element.classList.remove("fa-chevron-up");
-                                        element.classList.add("fa-chevron-down");
-                                    }
-                                    //                displays.style.display = "none";
-                                    //                console.log("Đã đóng");
-
-                                   for (let i = 0; i < displays.length; i++) {
-                                    let node = displays[i];
-                                    close(node);
-                                    // Thực hiện công việc với node tại đây
-                                    node.style.transform = "translateX(-200%)";
-                                    
-                                  }
-                                    
-                                    typeClass.style.height = "auto";
-                                    
-
-                                }
-                                console.log(sum);
-                                console.log(displays);
-
-
-                            }
-
-                            //        function Show(type){
-                            //            const displays = document.querySelector("."+type+"");
-                            //            displays.style.display = "block";
-                            //                console.log(displays);
-                            //        }
-                            //        
-                            function close(types) {
-//                                const displays1s = document.querySelector("." + types + "");
-                                types.style.display = "none";
-                                console.log(types);
-                            }
-
-                        </script>
+            <script src="./script/buyhistory.js"></script>            
             <script src="./script/formatVND.js"></script>
             </body>
 
