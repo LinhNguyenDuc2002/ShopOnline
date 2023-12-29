@@ -3,84 +3,55 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/OrderController.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/product.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/ManageController.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/header.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/Home.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/BillDAO.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/manageProduct.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/WEB-INF/classes/app-config.properties</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/homeAdmin.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/BillService.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/fixsp.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/addsp.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/Transport.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/Bill.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/ProductController.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/CategoryService.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/script/header.js</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/TKUserService.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/tkKhachHang.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/TransportDAO.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/CategoryController.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/UserInfo.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/ProductService.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/NotFound.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/Product.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/category.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/ProductDAO.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/User.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/script/formatVND.js</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/thanhtoan.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/UserService.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/CartService.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/login.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/manageUser.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/ThongKeController.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/style/home.css</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/Category.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/BillController.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/DetailOrder.java</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/CartDAO.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/script/signup.js</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/OrderController.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/OtpService.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/UserController.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/ManageController.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/header.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/BillDAO.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/buyhistory.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/CategoryService.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/script/header.js</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/tkKhachHang.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/NotFound.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/ProductDAO.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/User.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/thanhtoan.jsp</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/UserService.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/service/CartService.java</file>
+            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/manageUser.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/dathang.jsp</file>
             <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/web/home.jsp</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/controller/CartController.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/model/listData.java</file>
-            <file>file:/C:/Users/Window%2010/Documents/Zalo%20Received%20Files/ShopOnline/src/java/dao/UserDAO.java</file>
-=======
-            <file>file:/D:/ShopOnline/src/java/model/Product.java</file>
-            <file>file:/D:/ShopOnline/web/dathang.jsp</file>
-            <file>file:/D:/ShopOnline/web/script/thanhtoan.js</file>
-            <file>file:/D:/ShopOnline/src/java/dao/BillDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/ManageController.java</file>
-            <file>file:/D:/ShopOnline/web/script/header.js</file>
-            <file>file:/D:/ShopOnline/src/java/controller/UserController.java</file>
-            <file>file:/D:/ShopOnline/web/manageProduct.jsp</file>
-            <file>file:/D:/ShopOnline/src/java/model/User.java</file>
-            <file>file:/D:/ShopOnline/web/UserInfo.jsp</file>
-            <file>file:/D:/ShopOnline/src/java/service/UserService.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/ProductController.java</file>
-            <file>file:/D:/ShopOnline/nbproject/build-impl.xml</file>
-            <file>file:/D:/ShopOnline/web/SignupSuccess.jsp</file>
-            <file>file:/D:/ShopOnline/src/java/service/CartService.java</file>
-            <file>file:/D:/ShopOnline/src/java/dao/CartDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/model/Bill.java</file>
-            <file>file:/D:/ShopOnline/src/java/util/DateUtil.java</file>
-            <file>file:/D:/ShopOnline/src/java/model/Category.java</file>
-            <file>file:/D:/ShopOnline/src/java/service/ProductService.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/Home.java</file>
-            <file>file:/D:/ShopOnline/src/java/service/CategoryService.java</file>
-            <file>file:/D:/ShopOnline/web/script/product.js</file>
-            <file>file:/D:/ShopOnline/src/java/controller/CartController.java</file>
-            <file>file:/D:/ShopOnline/src/java/dao/ProductDAO.java</file>
-            <file>file:/D:/ShopOnline/src/java/controller/BillController.java</file>
-            <file>file:/D:/ShopOnline/src/java/model/DetailOrder.java</file>
-            <file>file:/D:/ShopOnline/web/script/product-detail.js</file>
-            <file>file:/D:/ShopOnline/src/java/service/BillService.java</file>
-            <file>file:/D:/ShopOnline/web/style/login.css</file>
->>>>>>> dev
         </group>
     </open-files>
 </project-private>

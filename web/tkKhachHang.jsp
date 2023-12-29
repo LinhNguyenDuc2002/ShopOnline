@@ -44,14 +44,14 @@
             
             <c:set var="stt" value="1" />
             <c:forEach items="${requestScope.users}" var="i">
-                <tr class="product-list">
-                    <td>${stt}</td>
-                    <td>${i.fullname}</td>
-                    <td>${i.birthday}</td>
-                    <td>${i.city} - ${i.country}</td>
-                    <td>${i.phone}</td>
-                    <td class="price">${i.totalAmount}</td>
-                    <td>${i.join_date}</td>
+                <tr class="product-list" onclick="Next(${i.id})">
+                    <td onclick="Next()">${stt}</td>
+                    <td onclick="Next()">${i.fullname}</td>
+                    <td onclick="Next()">${i.birthday}</td>
+                    <td onclick="Next()">${i.city} - ${i.country}</td>
+                    <td onclick="Next()">${i.phone}</td>
+                    <td onclick="Next()" class="price">${i.totalAmount}</td>
+                    <td onclick="Next()">${i.join_date}</td>
                 </tr>
                 <c:set var="stt" value="${stt + 1}" />
             </c:forEach>
@@ -63,6 +63,14 @@
     <script src="./script/home.js"></script>
     <script src="./script/formatVND.js"></script>
     <script src="./script/thongke.js"></script>
+    <script type="text/javascript">
+        function Next(id){
+            const startAt = document.getElementById("startAt").value;
+            const endAt = document.getElementById("endAt").value;
+            var url = "OrderDetailsProduct?dateStart="+startAt+"&endDate="+endAt+"&id="+id;
+            window.location.href = url;
+        }
+    </script>
 </body>
 
 </html>

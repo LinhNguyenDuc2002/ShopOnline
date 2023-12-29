@@ -8,14 +8,18 @@ import dao.BillDAO;
 import dao.CartDAO;
 import dao.ProductDAO;
 import dao.TransportDAO;
+import dao.UserDAO;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import model.Bill;
 import model.DetailOrder;
+import model.Product;
 import model.Transport;
 import model.User;
 import model.detail_order;
+import model.listData;
 import util.DateUtil;
 
 /**
@@ -32,11 +36,14 @@ public class BillService {
     
     private TransportDAO transportDAO;
 
+    private UserDAO userDAO;
+
     public BillService() {
         this.billDAO = new BillDAO();
         this.cartDAO = new CartDAO();
         this.productDAO = new ProductDAO();
         this.transportDAO = new TransportDAO();
+        this.userDAO = new UserDAO();
     }
 
     public void addBill(User user, Map<String, String> input) {
@@ -63,11 +70,55 @@ public class BillService {
         return input.get("detail") + " - " + input.get("city") + " - " + input.get("country");
     }
     
-    public List<detail_order> FindAllDetailsOrder(int id){
+    public List<DetailOrder> FindAllDetailsOrder(int id){
         return billDAO.FindAllDetailsOrder(id);
     }
     
-    public List<Bill> FindAllOrder(int id){
-        return billDAO.FindAllOrder(id);
+    public List<Bill> FindAllOrder(int id, String dateStar, String dateEnd){
+        return billDAO.FindAllOrder(id, dateStar, dateEnd);
+    }
+    public boolean updateTrangThai(int id){
+        return billDAO.updateTrangThai(id);
+    }
+    
+    public List<listData> FindAllDataOrder(List<Bill> listBill){
+        System.out.println("85-BillService");
+        List<listData> data = new ArrayList<>();
+        
+         if(listBill != null){
+            
+            for(Bill bill : listBill){
+                int sum = 0;
+                Bill bills = new Bill();
+                
+                List<Product> productList = new ArrayList<>();
+                System.out.println("96-BillService");
+                List<DetailOrder> listDetai = billDAO.FindAllDetailsOrder((int) bill.getId());
+                
+                if(listDetai != null){
+                    System.out.println("98-BillService");
+                    for(DetailOrder details : listDetai){
+                        
+                        Product prooduct = productDAO.getProduct((long)details.getProduct().getId());
+                        if(prooduct != null){
+                            productList.add(prooduct);
+                            sum += details.getQuantity() * prooduct.getPrice();
+                        }
+                    }
+                }
+                User findOne = userDAO.getUser(bill.getUser().getId());
+                bills.setId(bill.getId());
+                bills.setUser(findOne);
+                bills.setOrderDate(bill.getOrderDate());
+                bills.setStatus(bill.isStatus());
+                bills.setDeliveryAddress(bill.getDeliveryAddress());
+                listData listdata = new listData(bills, productList,sum);
+                data.add(listdata);
+            }
+            
+        }
+         
+         return data;
     }
 }
+

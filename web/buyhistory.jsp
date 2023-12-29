@@ -39,30 +39,38 @@
                             <tbody>
                                 <c:forEach var="i" items="${sanpham}">
                                     <tr class="b_${i.getBill().getId()}" style="position: relative; ">
-                                        <td>${i.getBill().getId()}</td>
-                                        <td>${i.getBill().isStatus()}</td>
-                                        <td class="price">i.getTotal()</td>
-                                        <td>${i.getBill().getOrderDate()}</td>
-                                        <td>
-                                            <div>
-                                                <p><i class="fa fa-chevron-down"
-                                                        onclick="Show('a_${i.getBill().getId()}', this, 'b_${i.getBill().getId()}')"
-                                                        aria-hidden="true"></i></p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <c:forEach var="item" items="${i.getProducts()}">
-
-                                        <tr class="a_${i.getBill().getId()}"
-                                            style="display: none; transform: translateX(-1000%); width: 0;">
-
-
+                                            <td>${i.getBill().getId()}</td>
+                                            <td>${i.getBill().isStatus() == "true" ? "Đã nhận" : "Chưa nhận"}</td>
+                                            <td class="price">${i.getTotal()}</td>
+                                            <td>${i.getBill().getOrderDate()}</td>
                                             <td>
-                                                <div onclick="close('a_${i.getBill().getId()}')"
-                                                    style="margin-left: 200px;">
-                                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                                <div>
+                                                    <p><i class="fa fa-chevron-down"
+                                                            onclick="Show('a_${i.getBill().getId()}', this, 'b_${i.getBill().getId()}')"
+                                                            aria-hidden="true"></i></p>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${i.getBill().isStatus() == 'false'}">
+                                                        <a href="UpdateStatusController?id=${i.getBill().getId()}" style="display: block; margin-top: 20px;">
+                                                        <button
+                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
+                                                            Đã nhận
+                                                        </button>
+                                                    </a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p>Đã nhận</p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    <c:forEach var="item" items="${i.getProducts()}">
+                                        
+
+                                        <tr class="a_${i.getBill().getId()}"
+                                            style="display: none; transform: translateX(-1000%); width: 0; margin-bottom: 15px; ">
                                             <td>
                                                 <div class="product-top"
                                                     style=" width: 100px; height:  100px; margin: 0 350px; border: 1px solid black;">
@@ -70,8 +78,6 @@
                                                         <img src="data:image/png;base64, ${Base64.encodeBase64String(item.getImage())}"
                                                             style="width: 100px; height: 100px;" alt="Picture" />
                                                     </a>
-                                                    <a href="/shop/products?action=show&id=${i.getBill().getId()}"
-                                                        class="buy-now">${i.getBill().getDeliveryAddress()}</a>
                                                 </div>
                                             </td>
                                             <td>
@@ -96,14 +102,26 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <button
-                                                        style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
-                                                        Mua lại
-                                                    </button>
+                                                    <a href="products?id=${item.getId()}">
+                                                        <button
+                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
+                                                            Mua lại
+                                                        </button>
+                                                    </a>
+                                                    <c:choose>
+                                                        <c:when test="${i.getBill().isStatus() == 'true'}">
+                                                            
+                                                        <p>Đơn hàng đã nhận</p>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <p>Đơn hàng chưa nhận</p>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    
+                                                    
                                                 </div>
 
                                             </td>
-
                                         </tr>
 
                                     </c:forEach>
@@ -120,17 +138,22 @@
                             function Show(type, element, type2) {
                                 a += 1;
                                 let sum = a;
-                                const displays = document.querySelector("." + type + "");
+                                const displays = document.querySelectorAll("." + type + "");
                                 const typeClass = document.querySelector("." + type2 + "");
-                                if (sum % 2 != 0) {
+                               if (sum % 2 != 0) {
                                     if (element.classList.contains("fa-chevron-down")) {
                                         element.classList.remove("fa-chevron-down");
                                         element.classList.add("fa-chevron-up");
                                     }
-                                    displays.style.display = "block";
-                                    displays.style.transition = "1.5s ease-in-out";
+                                   for (let i = 0; i < displays.length; i++) {
+                                    let node = displays[i];
+                                    // Thực hiện công việc với node tại đây
+                                    node.style.display = "block";
+                                    node.style.transition = "1.5s ease-in-out";
 
-                                    displays.style.transform = "translateX(0)";
+                                    node.style.transform = "translateX(0)";
+                                    
+                                  }
 
                                     console.log(displays);
                                 } else if (sum % 2 == 0) {
@@ -141,12 +164,22 @@
                                     //                displays.style.display = "none";
                                     //                console.log("Đã đóng");
 
-                                    close(type);
+                                   for (let i = 0; i < displays.length; i++) {
+                                    let node = displays[i];
+                                    close(node);
+                                    // Thực hiện công việc với node tại đây
+                                    node.style.transform = "translateX(-200%)";
+                                    
+                                  }
+                                    
                                     typeClass.style.height = "auto";
-                                    displays.style.transform = "translateX(-200%)";
+                                    
 
                                 }
                                 console.log(sum);
+                                console.log(displays);
+
+
                             }
 
                             //        function Show(type){
@@ -156,8 +189,8 @@
                             //        }
                             //        
                             function close(types) {
-                                const displays1s = document.querySelector("." + types + "");
-                                displays1s.style.display = "none";
+//                                const displays1s = document.querySelector("." + types + "");
+                                types.style.display = "none";
                                 console.log(types);
                             }
 

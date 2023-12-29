@@ -52,42 +52,20 @@ public class BillController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String role = request.getParameter("role");
         
+        String role = request.getParameter("role");
+        String dateStar = request.getParameter("dateStart");
+        String dateEnd = request.getParameter("endDate");
+        String idUser = request.getParameter("id");
+        int ids = 0;
+        if(idUser != null || idUser != "" || idUser != "0"){
+            ids = Integer.parseInt(idUser);
+        }
         User user = userService.getCurrentUser(request);
         request.setAttribute("user", user);
-        List<listData> data = new ArrayList<>();
-        List<Bill> listBill = billDao.FindAllOrder((int) user.getId());
-        if(listBill != null){
-            
-            for(Bill bill : listBill){
-                
-                Bill bills = new Bill();
-                
-                List<Product> productList = new ArrayList<>();
-                List<detail_order> listDetai = billDao.FindAllDetailsOrder((int) bill.getId());
-                if(listDetai != null){
-                    int sum = 0;
-                    for(detail_order details : listDetai){
-                        
-                        Product prooduct = productService.getProduct((long)details.getProduct_id());
-                        if(prooduct != null){
-                            productList.add(prooduct);
-                            sum += details.getQuantity() * prooduct.getPrice();
-                        }
-                    }
-                }
-                User findOne = userDAO.getUser(bill.getUser().getId());
-                bills.setId(bill.getId());
-                bills.setUser(findOne);
-                bills.setOrderDate(bill.getOrderDate());
-                bills.setStatus(bill.isStatus());
-                bills.setDeliveryAddress(bill.getDeliveryAddress());
-                listData listdata = new listData(bills, productList,0);
-                data.add(listdata);
-            }
-            
-        }
+        List<Bill> listBill = billDao.FindAllOrder(ids, dateStar, dateEnd);
+        
+        List<listData> data = billDao.FindAllDataOrder(listBill);
         
         request.setAttribute("sanpham", data);
         
@@ -112,43 +90,25 @@ public class BillController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String role = request.getParameter("role");
-        
+        String dateStar = request.getParameter("dateStart");
+        String dateEnd = request.getParameter("endDate");
+        String idUser = request.getParameter("id");
+        int ids;
+        if(idUser != null){
+            ids = Integer.parseInt(idUser);
+        }else{
+            ids = 0;
+        }
+        System.out.println("Ngày " + dateStar + ", Ngày End " + dateEnd);
         User user = userService.getCurrentUser(request);
         request.setAttribute("user", user);
-        List<listData> data = new ArrayList<>();
-        List<Bill> listBill = billDao.FindAllOrder((int) user.getId());
+        List<Bill> listBill = billDao.FindAllOrder(ids, dateStar, dateEnd);
+        System.out.println("Id: " + ids);
         
-        if(listBill != null){
-            
-            for(Bill bill : listBill){
-                int sum = 0;
-                Bill bills = new Bill();
-                
-                List<Product> productList = new ArrayList<>();
-                List<detail_order> listDetai = billDao.FindAllDetailsOrder((int) bill.getId());
-                if(listDetai != null){
-                    for(detail_order details : listDetai){
-                        Product prooduct = productService.getProduct((long)details.getProduct_id());
-                        if(prooduct != null){
-                            productList.add(prooduct);
-                            sum += details.getQuantity() * prooduct.getPrice();
-                        }
-                    }
-                }
-                User findOne = userDAO.getUser(bill.getUser().getId());
-                bills.setId(bill.getId());
-                bills.setUser(findOne);
-                bills.setOrderDate(bill.getOrderDate());
-                bills.setStatus(bill.isStatus());
-                bills.setDeliveryAddress(bill.getDeliveryAddress());
-                listData listdata = new listData(bills, productList, sum);
-                data.add(listdata);
-                
-            }
-            
-        }
+        List<listData> data = billDao.FindAllDataOrder(listBill);
         
         request.setAttribute("sanpham", data);
+        
         if(role != null && role.equals("ADMIN")) {
             request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
         }
