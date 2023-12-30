@@ -1,5 +1,6 @@
 var bar = document.querySelector(".category-bar");
 var menu = document.querySelector(".category-content");
+var value = "asc";
 
 let show = false;
 
@@ -15,38 +16,87 @@ bar.addEventListener("click", function(event) {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var categoryElement = document.querySelector('.category-title');
-    var idCategory = 0;
-    if (categoryElement) {
-        idCategory = categoryElement.getAttribute('idCategory');
-    }
+    var sort = document.getElementById('sort-price');
+    var sortBy = document.getElementById('sort-by');
 
-    var price = document.getElementById('sort-price');
-    var seller = document.getElementById('sort-selling');
+    sort.addEventListener('click', function() {
+        if (sort.classList.contains('fa-arrow-up')) {
+            sort.classList.remove('fa-arrow-up');
+            sort.classList.add('fa-arrow-down');
 
-    price.addEventListener('click', function() {
-        if (price.classList.contains('fa-arrow-up')) {
-            price.classList.remove('fa-arrow-up');
-            price.classList.add('fa-arrow-down');
-
-            
+            value = "desc";
         } else {
-            price.classList.remove('fa-arrow-down');
-            price.classList.add('fa-arrow-up');
+            sort.classList.remove('fa-arrow-down');
+            sort.classList.add('fa-arrow-up');
+
+            value = "asc";
         }
+
+        loadPageFirst();
     });
 
-    seller.addEventListener('click', function() {
-        if (seller.classList.contains('fa-arrow-up')) {
-            seller.classList.remove('fa-arrow-up');
-            seller.classList.add('fa-arrow-down');
-        } else {
-            seller.classList.remove('fa-arrow-down');
-            seller.classList.add('fa-arrow-up');
-        }
+    sortBy.addEventListener('change', function() {
+        loadPageFirst();
     });
 });
 
 function send(id, price, seller) {
     window.location.href = "/shop/categories?id="+ id + "&price=" + price + "&seller=" + seller;
+}
+
+function loadPage(clicked) {
+    var page = clicked.getAttribute('page');
+    var btn = document.querySelectorAll('.index-page');
+    var id = document.querySelector(".category-title").getAttribute("idCategory");
+    var by = document.getElementById("sort-by").value;
+
+    btn.forEach(btn => {
+        btn.style.backgroundColor = 'lightgrey';
+    });
+    clicked.style.backgroundColor = 'black';
+
+    $.ajax ({
+        url: "/shop/categories",
+        method: "GET",
+        data: {
+            id: id,
+            page: page,
+            by: by,
+            sort: value
+        },
+        success: function(response) {
+            var row = document.querySelector(".products");
+            row.innerHTML = response;
+
+            formatVND();
+        },
+        error: function(error) {
+
+        }
+    });
+}
+
+function loadPageFirst() {
+    var id = document.querySelector(".category-title").getAttribute("idCategory");
+    var by = document.getElementById("sort-by").value;
+
+    $.ajax ({
+        url: "/shop/categories",
+        method: "GET",
+        data: {
+            id: id,
+            page: 0,
+            by: by,
+            sort: value
+        },
+        success: function(response) {
+            var row = document.querySelector(".products");
+            row.innerHTML = response;
+
+            formatVND();
+        },
+        error: function(error) {
+
+        }
+    });
 }

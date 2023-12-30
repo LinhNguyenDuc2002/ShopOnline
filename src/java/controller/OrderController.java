@@ -87,7 +87,7 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
 
         if (user != null && user.getRole().equals("USER")) {
             request.setAttribute("user", user);
@@ -111,7 +111,7 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
 
         if (user != null && user.getRole().equals("USER")) {
             request.setAttribute("user", user);
