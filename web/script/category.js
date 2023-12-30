@@ -80,6 +80,13 @@ function loadPageFirst() {
     var id = document.querySelector(".category-title").getAttribute("idCategory");
     var by = document.getElementById("sort-by").value;
 
+    var btn = document.querySelectorAll('.index-page');
+
+    btn.forEach(btn => {
+        btn.style.backgroundColor = 'lightgrey';
+    });
+    btn[0].style.backgroundColor = 'black';
+
     $.ajax ({
         url: "/shop/categories",
         method: "GET",
