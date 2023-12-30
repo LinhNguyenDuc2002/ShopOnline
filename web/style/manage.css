@@ -111,6 +111,8 @@ body {
     height: 35px;
     color: darkred;
     background-color: burlywood;
+    position: sticky;
+    top: 0px;
 }
 
 .content td {

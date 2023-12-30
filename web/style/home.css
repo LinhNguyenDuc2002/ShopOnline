@@ -236,7 +236,8 @@ footer h3 {
 }
 
 .product-price .status {
-    font-size: 16px;
+    font-size: 13px;
+    color: grey;
 }
 
 span.alert-search {

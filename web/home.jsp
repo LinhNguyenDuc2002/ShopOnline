@@ -58,7 +58,7 @@
                                 <p class="status">
                                     <c:choose>
                                         <c:when test="${i.available > 0}">
-                                            <span>Available: ${i.available}</span>
+                                            <span>Available: ${i.available} | Sold: ${i.sold}</span>
                                         </c:when>
                                         <c:otherwise>
                                             <span style="color: red;">Sold out</span>
