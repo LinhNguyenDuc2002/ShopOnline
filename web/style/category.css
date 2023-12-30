@@ -239,3 +239,15 @@ footer h3 {
 .active {
     background-color: whitesmoke;
 }
+
+.sort-price {
+    margin-right: 30px;
+}
+
+.sort {
+    display: flex;
+}
+
+.sort i {
+    cursor: pointer;
+}

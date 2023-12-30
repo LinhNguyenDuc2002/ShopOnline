@@ -40,12 +40,21 @@
                         </c:if>
                     </c:forEach>
 
-                    <p class="category-title">${category}</p>
+                    <p class="category-title" idCategory="${requestScope.id}">${category}</p>
 
                     <div class="sort">
+                        <div class="sort-price">
+                            <label for="">Price</label>
+                            <i class="fa-solid fa-arrow-up sort-price" id="sort-price"></i>
+                        </div>
 
+                        <div class="sort-selling">
+                            <label for="">Best selling</label>
+                            <i class="fa-solid fa-arrow-up sort-selling" id="sort-selling"></i>
+                        </div>
                     </div>
                 </div>
+                
                 <ul class="products">   
                     <c:forEach var="i" items="${requestScope.products}">
                         <li>
