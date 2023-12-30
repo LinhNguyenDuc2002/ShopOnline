@@ -83,9 +83,15 @@ public class ProductDAO {
         return null;
     }
 
-    public List<Product> getAllProduct(int start, int pageSize) {
+    public List<Product> getAllProduct(int start, int pageSize, String sort, String by) {
+        String query;
+        if(sort != null && by != null) {
+            query = "SELECT * FROM product ORDER BY " + by + " " + sort.toUpperCase() + " LIMIT ?, ?";
+        }
+        else {
+            query = "SELECT * FROM product LIMIT ?, ?";
+        }
         try {
-            String query = "select * from product limit ?, ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, start);
             ps.setInt(2, pageSize);
@@ -131,6 +137,25 @@ public class ProductDAO {
         try {
             String countQuery = "SELECT COUNT(*) AS total FROM product";
             PreparedStatement countPS = connection.prepareStatement(countQuery);
+            ResultSet countResult = countPS.executeQuery();
+
+            if (countResult.next()) {
+                totalElements = countResult.getInt("total");
+            }
+        } catch (Exception e) {
+        }
+        
+        int total = totalElements/pageSize;
+        return (totalElements%pageSize==0)?total:total+1;
+    }
+    
+    public int getProductQuantity(Long id, int pageSize) {
+        int totalElements = 0;
+        
+        try {
+            String countQuery = "SELECT COUNT(*) AS total FROM product WHERE product.category_id = ?";
+            PreparedStatement countPS = connection.prepareStatement(countQuery);
+            countPS.setLong(1, id);
             ResultSet countResult = countPS.executeQuery();
 
             if (countResult.next()) {
@@ -188,6 +213,35 @@ public class ProductDAO {
 
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while (rs.next()) {
+                Category category = categoryDAO.getCategoryById(id);
+                Product a = new Product(rs.getLong(1), rs.getString(2), category, rs.getString(4), rs.getDouble(5), rs.getDouble(6),
+                        rs.getLong(7), rs.getLong(8), rs.getBytes(9), rs.getDate(10), rs.getString(11));
+
+                list.add(a);
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public List<Product> getAllProductsByCategory(int start, int pageSize, Long id, String sort, String by) {
+        String query;
+        if(sort != null && by != null) {
+            query = "SELECT * FROM product WHERE category_id = ? ORDER BY " + by + " " + sort.toUpperCase() + " LIMIT ?, ?";
+        }
+        else {
+            query = "SELECT * FROM product WHERE category_id = ? LIMIT ?, ?";
+        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, id);
+            ps.setInt(2, start);
+            ps.setInt(3, pageSize);
 
             ResultSet rs = ps.executeQuery();
             List<Product> list = new ArrayList<>();

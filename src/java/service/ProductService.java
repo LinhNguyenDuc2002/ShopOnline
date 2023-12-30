@@ -10,6 +10,7 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -23,8 +24,6 @@ import util.DateUtil;
  * @author LinhNguyenDuc
  */
 public class ProductService {
-    private final int pageSize = 8;
-    
     private ProductDAO productDAO;
     
     private CategoryDAO categoryDAO;
@@ -52,9 +51,9 @@ public class ProductService {
         productDAO.deleteProduct(id);
     }
     
-    public List<Product> getAllProduct(Integer page) {
+    public List<Product> getAllProduct(Integer page, Integer pageSize) {
         int start = page * pageSize;
-        return productDAO.getAllProduct(start, pageSize);
+        return productDAO.getAllProduct(start, pageSize, null, null);
     }
     
     public List<Product> getAllProduct(String filterParam, String sort) {
@@ -91,24 +90,34 @@ public class ProductService {
         }
     }
     
-    public int getProductQuantity() {
-        return productDAO.getProductQuantity(pageSize);
-    }
-    
-    public List<Product> getAllProductsByCategory(String id, String pageParam){
-        List<Product> products;
-        
-        Integer page = 0;
-        if (pageParam != null && !pageParam.isEmpty()) {
-            page = Integer.parseInt(pageParam)-1;
-        }
-        
+    public int getProductQuantity(String id, Integer pageSize) {
         if(id == null) {
-            int start = page * pageSize;
-            products = productDAO.getAllProduct(start, pageSize);
+            return productDAO.getProductQuantity(pageSize);
         }
         else {
-            products = productDAO.getAllProductsByCategory(Long.valueOf(id));
+            return productDAO.getProductQuantity(Long.valueOf(id), pageSize);
+        }
+    }
+    
+    public List<Product> getAllProductsByCategory(String id, Integer page, Integer pageSize, String sort, String by){
+        List<Product> products;
+        
+        if(page == null) {
+            page = 0;
+        }
+        if(sort == null) {
+            sort = "asc";
+        }
+        if(by == null) {
+            by = "price";
+        }
+        
+        int start = page * pageSize;
+        if(id == null || id.isEmpty()) {
+            products = productDAO.getAllProduct(start, pageSize, sort, by);
+        }
+        else {
+            products = productDAO.getAllProductsByCategory(start, pageSize, Long.valueOf(id), sort, by);
         }
         return products;
     }
