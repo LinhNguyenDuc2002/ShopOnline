@@ -72,18 +72,20 @@
             </c:forEach>
         </ul>
 
-        <div class="pages">
-            <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
-                <c:choose>
-                    <c:when test="${requestScope.currentPage == i-1}">
-                        <a class="index-page" href="/shop/home?page=${i}" style="background-color: black"></a>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="index-page" href="/shop/home?page=${i}" style="background-color: lightgrey"></a>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </div>
+        <c:if test="${requestScope.totalPage > 1}">
+            <div class="pages">
+                <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
+                    <c:choose>
+                        <c:when test="${requestScope.currentPage == i-1}">
+                            <button class="index-page" page="${i-1}" onclick="loadPage(this)" style="background-color: black"></button>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="index-page" page="${i-1}" onclick="loadPage(this)" style="background-color: lightgrey"></button>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </div>
+        </c:if>
 
         <div class="products-button">
             <a href="/shop/categories" class="button1">All product</a>
@@ -91,7 +93,9 @@
     </div>
     <%@ include file="footer.jsp" %>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/formatVND.js"></script>
+    <script src="./script/home.js"></script>
 
 </body>
 

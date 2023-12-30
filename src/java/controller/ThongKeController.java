@@ -70,7 +70,7 @@ public class ThongKeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         if(user != null && user.getRole().equals("ADMIN")) {
             request.setAttribute("user", user);

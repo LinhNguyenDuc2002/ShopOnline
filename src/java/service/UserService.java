@@ -43,17 +43,13 @@ public class UserService {
         this.otpService = new OtpService();
     }
     
-    public boolean authenticate(String username, String password) throws ParseException, NoSuchAlgorithmException {
-        boolean checkuser = userDAO.authenticate(username, hashPassWord(password));
+    public String authenticate(String username, String password) throws ParseException, NoSuchAlgorithmException {
+        String checkuser = userDAO.authenticate(username, hashPassWord(password));
         
-        if(!checkuser) {
-            return false;
-        }
-        return true;
+        return checkuser;
     }
     
-    public User getCurrentUser(HttpServletRequest request) {
-        HttpSession session = getSession(request);
+    public User getCurrentUser(HttpSession session) {
         if(session == null || session.getAttribute("username") == null) {
             return null;
         }
@@ -191,9 +187,5 @@ public class UserService {
         }
 
         return hexString.toString();
-    }
-    
-    private HttpSession getSession(HttpServletRequest request) {
-        return request.getSession(false);
     }
 }
