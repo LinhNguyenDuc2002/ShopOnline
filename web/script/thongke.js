@@ -2,9 +2,24 @@ function find() {
     var start = document.getElementById("startAt").value;
     var end = document.getElementById("endAt").value;
 
-    console.log(end)
     if(isValidDate(start) && isValidDate(end)) {
-        window.location.href = "/shop/customers?start="+ start + "&end=" + end;
+        $.ajax ({
+            url: "/shop/customers",
+            method: "GET",
+            data: {
+                start: start,
+                end: end
+            },
+            success: function(response) {
+                var row = document.querySelector(".customer");
+                row.innerHTML = response;
+    
+                formatVND();
+            },
+            error: function(error) {
+    
+            }
+        });
     }
 }
 

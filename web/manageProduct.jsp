@@ -89,7 +89,7 @@
 
     <%@ include file="footer.jsp" %>
 
-    <script src="./script/home.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/manage.js"></script>
     <script src="./script/formatVND.js"></script>
 

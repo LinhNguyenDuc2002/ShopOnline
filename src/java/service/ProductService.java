@@ -69,7 +69,7 @@ public class ProductService {
             }
             
             switch (sort) {
-                case "ID":
+                case "id":
                     break;
                 case "available":
                     products = sortByAvailable(products);
