@@ -109,7 +109,7 @@ public class ProductController extends HttpServlet {
             getToFindProduct(request, response, user);
         }
         else {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     } 
 
@@ -137,7 +137,7 @@ public class ProductController extends HttpServlet {
             }
         }
         else {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     }
 
@@ -177,7 +177,7 @@ public class ProductController extends HttpServlet {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
         
         if(a == null) {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
             request.setAttribute("sanphamchitiet", a);
