@@ -91,9 +91,6 @@ public class UserController extends HttpServlet {
         }
         else if(action != null && user == null) {
             switch (action) {
-                case "verify":
-                    request.getRequestDispatcher("otp.jsp").forward(request, response);
-                    break;
                 case "login":
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                     break;
@@ -221,7 +218,7 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         else {
-            response.sendRedirect("/shop/users?action=verify");
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
         } 
     }
     
@@ -309,7 +306,7 @@ public class UserController extends HttpServlet {
             String error = userService.addUser(username, otp);
             if(error.length()>0) {
                 request.setAttribute("error", error);
-                response.sendRedirect("/shop/users?action=verify");
+                request.getRequestDispatcher("otp.jsp").forward(request, response);
             }
             else {
                 HttpSession session = request.getSession(false);
