@@ -312,6 +312,8 @@ public class UserController extends HttpServlet {
                 response.sendRedirect("/shop/users?action=verify");
             }
             else {
+                HttpSession session = request.getSession(false);
+                session.invalidate();
                 request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
             }
             
