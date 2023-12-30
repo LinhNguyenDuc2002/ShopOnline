@@ -77,7 +77,7 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
         User user = userService.getCurrentUser(request.getSession(false));
         
-        if(action == null) {
+        if(action == null || (user != null && !user.getRole().equals("USER"))) {
             request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
