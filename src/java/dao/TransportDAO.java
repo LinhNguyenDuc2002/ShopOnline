@@ -64,4 +64,25 @@ public class TransportDAO {
         }
         return null;
     }
+    
+    public Transport getTransportByBillId(Long id) {
+        String sql = "SELECT transport.* FROM transport " +
+                    "JOIN bill ON bill.transport_id = transport.id " +
+                    "WHERE bill.id = ?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                Transport transport = new Transport(resultSet.getLong(1), resultSet.getString(2), resultSet.getDouble(3), resultSet.getString(4));
+                return transport;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

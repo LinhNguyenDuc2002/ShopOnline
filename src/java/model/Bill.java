@@ -38,7 +38,31 @@ public class Bill {
         this.deliveryAddress = deliveryAddress;
         this.status = status;
     }
-
+    public Bill(long id, User user, Date orderDate, String deliveryAddress) {
+        this.id = id;
+        this.user = user;
+        this.orderDate = orderDate;
+        this.deliveryAddress = deliveryAddress;
+    }
+    public Bill(long id, Date orderDate, String deliveryAddress, boolean status) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.deliveryAddress = deliveryAddress;
+        this.status = status;
+    }
+    
+    public double getTotal() {
+        double total = 0;
+        
+        for(DetailOrder it :  detailOrders) {
+            total += (it.getQuantity() * it.getProduct().getPrice());
+        }
+        
+        total += transport.getPrice();
+        
+        return total;
+    }
+    
     public long getId() {
         return id;
     }

@@ -1,0 +1,144 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Quicksand&family=Rubik&display=swap');
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#wrapper {
+    margin: 20px 150px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.15;
+    font-family: 'Quicksand', sans-serif;
+   
+}
+/*slideShow*/
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.field{
+    font-size: 16px;
+    height: 35px;
+    color: darkred;
+    background-color: burlywood;
+    position: sticky;
+    top: 0px;
+}
+
+.image {
+    height: 150px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content td {
+    padding: 0px 5px;
+    text-align: center;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    font-size: 16px;
+}
+
+td.confirm {
+    width: 80px;
+    padding: 0px;
+}
+
+.confirm button {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    font-weight: bold;
+    border: 1px solid red;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.confirm button:hover {
+    color: blue;
+    background-color: white;
+    border: 1px solid red;
+}
+
+.product-list {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.product-list:hover {
+    background-color: lightblue;
+}
+
+.sub-product-list {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 10px 0px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+.sub-product-list:hover {
+    background-color: lightblue;
+}
+
+.sub-product-list div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sub-name {
+    height: auto;
+    max-width: 100%;
+}
+
+.sub-name p {
+    max-width: 100%;
+    height: auto;
+    white-space: normal;
+}
+
+p.number {
+    margin-left: 20px;
+}
+
+.total-payment {
+    display: grid;
+}
+
+.sub-total {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sub-total div {
+    display: flex;
+    margin: 5px 0px 5px 200px;
+}

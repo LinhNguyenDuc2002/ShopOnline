@@ -7,12 +7,10 @@ package service;
 import dao.BillDAO;
 import dao.UserDAO;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.sql.Date;
 import java.util.List;
 import model.TKUser;
-import model.User;
 import util.DateUtil;
 
 /**

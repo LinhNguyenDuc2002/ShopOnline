@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 CREATE DATABASE shop_online;
 
 CREATE TABLE category(
@@ -86,3 +88,4 @@ INSERT INTO category VALUES(8, "Ruler", "Có đủ loại thước kẻ dành ch
 INSERT INTO category VALUES(9, "Desk calendar ", "Có rất nhiều lịch để bàn dành cho bạn");
 INSERT INTO category VALUES(10, "Stapler", "Đồ bấm ghim chắc chắn, chất lượng cao");
 
+>>>>>>> dev
