@@ -53,7 +53,7 @@ public class ThongKeController extends HttpServlet {
         int stt = 1;
         PrintWriter out = response.getWriter();
         for(TKUser i : tkUserService.tkUsers(start, end)) {
-            out.println("<tr class='product-list active'>");
+            out.println("<tr class='product-list active' link='/shop/bill?id=" + i.getId() + "'>");
             out.println("<td>" + stt++ + "</td>");
             out.println("<td>" + i.getFullname() + "</td>");
             out.println("<td>" + i.getBirthday() + "</td>");

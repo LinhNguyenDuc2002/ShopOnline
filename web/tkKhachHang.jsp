@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="org.apache.tomcat.util.codec.binary.Base64" %>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +43,7 @@
             <tbody class="customer">
                 <c:set var="stt" value="1" />
                 <c:forEach items="${requestScope.users}" var="i">
-                    <tr class="product-list active">
+                    <tr class="product-list active" link="/shop/bill?id=${i.id}">
                         <td>${stt}</td>
                         <td>${i.fullname}</td>
                         <td>${i.birthday}</td>
@@ -66,5 +64,4 @@
     <script src="./script/formatVND.js"></script>
     <script src="./script/thongke.js"></script>
 </body>
-
 </html>

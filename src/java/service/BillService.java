@@ -8,7 +8,10 @@ import dao.BillDAO;
 import dao.CartDAO;
 import dao.ProductDAO;
 import dao.TransportDAO;
-import java.util.Date;
+import dao.UserDAO;
+import java.text.ParseException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import model.Bill;
@@ -31,11 +34,14 @@ public class BillService {
     
     private TransportDAO transportDAO;
 
+    private UserDAO userDAO;
+
     public BillService() {
         this.billDAO = new BillDAO();
         this.cartDAO = new CartDAO();
         this.productDAO = new ProductDAO();
         this.transportDAO = new TransportDAO();
+        this.userDAO = new UserDAO();
     }
 
     public void addBill(User user, Map<String, String> input) {
@@ -58,8 +64,36 @@ public class BillService {
         }
     }
     
+    public List<Bill> getAllBillByUserId(Long id, String start, String end) throws ParseException {
+        Date startAt = null;
+        Date endAt = null;
+        
+        if(start != null && end != null) {
+            startAt = DateUtil.convertStringToDate(start);
+            endAt = DateUtil.convertStringToDate(end);
+        }
+        
+        List<Bill> bills = billDAO.getAllBillByUserId(id, startAt, endAt);
+        
+        for(Bill it : bills) {
+            List<DetailOrder> detailOrders = cartDAO.getAllDetailsOrder(it.getId());
+            Transport transport = transportDAO.getTransportByBillId(it.getId());
+            
+            it.setDetailOrders(detailOrders);
+            it.setTransport(transport);
+        }
+
+        return bills;
+    }
+    
+    public void update(Long id) {
+        billDAO.update(id);
+    }
+    
     private String formatAddress(Map<String, String> input) {
         return input.get("detail") + " - " + input.get("city") + " - " + input.get("country");
     }
     
+
 }
+

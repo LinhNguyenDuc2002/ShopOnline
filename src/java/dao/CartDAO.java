@@ -23,11 +23,16 @@ import model.Product;
  * @author LinhNguyenDuc
  */
 public class CartDAO {
-
     private Connection connection;
+    
+    private UserDAO userDAO;
+    
+    private ProductDAO productDAO;
 
     public CartDAO() {
         this.connection = DBConnection.getConnection();
+        this.userDAO = new UserDAO();
+        this.productDAO = new ProductDAO();
     }
 
     public boolean addCart(Long userId, Long productId, Long quantity) {
@@ -70,6 +75,33 @@ public class CartDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public List<DetailOrder> getAllDetailsOrder(Long id) {
+        try {
+            String query = "select * from detail_order where bill_id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ps.setLong(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            List<DetailOrder> list = new ArrayList<>();
+            
+            while (rs.next()) {
+                DetailOrder a = new DetailOrder(rs.getLong(1), 
+                                                userDAO.getUser(rs.getLong(4)), 
+                                                productDAO.getProduct(rs.getLong(3)),
+                                                rs.getLong(5), 
+                                                rs.getBoolean(6));
+
+                list.add(a);
+            }
+            return list;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        return List.of();
     }
 
     public Map<Integer, List<String>> getCart(Long id) {

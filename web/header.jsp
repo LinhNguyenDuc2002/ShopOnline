@@ -102,7 +102,7 @@
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a class="selection" href="#">
+                    <a class="selection" href="/shop/bill">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Purchase history</p>
                     </a>

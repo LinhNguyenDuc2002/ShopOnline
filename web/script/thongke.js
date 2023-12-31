@@ -1,3 +1,17 @@
+var product_line = document.querySelectorAll(".product-list");
+            
+product_line.forEach(row => {
+    row.addEventListener('click', function() {
+        var start = document.getElementById("startAt").value;
+        var end = document.getElementById("endAt").value;
+
+        if (isValidDate(start) && isValidDate(end)) {
+            const url = this.getAttribute('link');
+            window.location.href = "http://localhost:9999" + url + "&start=" + start + "&end=" + end;
+        }
+    });
+});
+
 function find() {
     var start = document.getElementById("startAt").value;
     var end = document.getElementById("endAt").value;
@@ -15,6 +29,20 @@ function find() {
                 row.innerHTML = response;
     
                 formatVND();
+
+                var product_line = document.querySelectorAll(".product-list");
+            
+                product_line.forEach(row => {
+                    row.addEventListener('click', function() {
+                        var start = document.getElementById("startAt").value;
+                        var end = document.getElementById("endAt").value;
+
+                        if (isValidDate(start) && isValidDate(end)) {
+                            const url = this.getAttribute('link');
+                            window.location.href = "http://localhost:9999" + url + "&start=" + start + "&end=" + end;
+                        }
+                    });
+                });
             },
             error: function(error) {
     
