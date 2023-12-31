@@ -18,7 +18,7 @@ import model.DetailOrder;
 import model.Product;
 import model.Transport;
 import model.User;
-import model.detail_order;
+
 import model.listData;
 import util.DateUtil;
 
@@ -102,7 +102,7 @@ public class BillService {
                         Product prooduct = productDAO.getProduct((long)details.getProduct().getId());
                         if(prooduct != null){
                             productList.add(prooduct);
-                            sum += details.getQuantity() * prooduct.getPrice();
+                            sum += (details.getQuantity() * prooduct.getPrice()) + bill.getTransport().getPrice();
                         }
                     }
                 }

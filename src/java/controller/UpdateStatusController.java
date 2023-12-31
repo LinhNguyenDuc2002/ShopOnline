@@ -62,7 +62,7 @@ public class UpdateStatusController extends HttpServlet {
             throws ServletException, IOException {
        String id = request.getParameter("id");
         if(dao.updateTrangThai(Integer.parseInt(id))){
-            response.sendRedirect("OrderDetailsProduct");
+            response.sendRedirect("bill");
         }else{
             response.sendRedirect("home");
         }

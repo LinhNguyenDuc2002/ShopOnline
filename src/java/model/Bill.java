@@ -51,6 +51,18 @@ public class Bill {
         this.status = status;
     }
 
+    public Bill(long id, User user, Date orderDate, String deliveryAddress, boolean status, Transport transport) {
+        this.id = id;
+        this.user = user;
+        this.orderDate = orderDate;
+        this.deliveryAddress = deliveryAddress;
+        this.status = status;
+        this.note = note;
+        this.detailOrders = detailOrders;
+        this.transport = transport;
+    }
+    
+
     public long getId() {
         return id;
     }

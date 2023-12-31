@@ -104,6 +104,7 @@ ul.products li .product-top {
     height: 75%;
     position: relative;
     overflow: hidden;
+    
 }
 
 ul.products li .product-top .hien-thi {
@@ -249,13 +250,48 @@ span.alert-search {
 .table{
     font-size: 20px;
     text-align: center;
-    width: 100%;    
+    width: 100%;  
 }
-tr.start{
+th{
     background-color: #ee1e07
 }
-
 th,td{
     padding: 10px;
-    
+    font-size: 20px;
+}
+.bill_id{
+    font-weight: 600;
+    color: black;
+    border-top:0px ;
+    border-left: 1px;
+    border-right: 0px;
+    border-bottom: 1px; 
+    border-style: solid; 
+    border-color:black;
+}
+.bill_confirm{
+    font-weight: 600;
+    color: black;
+    border-top:0px ;
+    border-left: 1px;
+    border-right: 1px;
+    border-bottom: 1px; 
+    border-style: solid; 
+    border-color:black;
+}
+.bill_status,.bill_price,.order_date,.more_info_bill{
+    font-weight: 600;
+    color: black;
+    border-top:0px ;
+    border-left: 1px;
+    border-right: 0px;
+    border-bottom: 1px; 
+    border-style: solid; 
+    border-color:black;
+}
+.bill_confirm{
+    border-right: 1px;
+}
+.button2:hover{
+    color: black;
 }

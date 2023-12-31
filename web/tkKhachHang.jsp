@@ -67,7 +67,7 @@
         function Next(id){
             const startAt = document.getElementById("startAt").value;
             const endAt = document.getElementById("endAt").value;
-            var url = "OrderDetailsProduct?dateStart="+startAt+"&endDate="+endAt+"&id="+id;
+            var url = "bill?dateStart="+startAt+"&endDate="+endAt+"&id="+id;
             window.location.href = url;
         }
     </script>

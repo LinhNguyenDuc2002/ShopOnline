@@ -33,94 +33,74 @@
                                     <th>Giá trị</th>
                                     <th>Ngày mua</th>
                                     <th>Xem</th>
+                                    <th>Xác nhận</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <c:forEach var="i" items="${sanpham}">
+
                                     <tr class="b_${i.getBill().getId()}" style="position: relative; ">
-                                            <td>${i.getBill().getId()}</td>
-                                            <td>${i.getBill().isStatus() == "true" ? "Đã nhận" : "Chưa nhận"}</td>
-                                            <td class="price">${i.getTotal()}</td>
-                                            <td>${i.getBill().getOrderDate()}</td>
-                                            <td>
-                                                <div>
-                                                    <p><i class="fa fa-chevron-down"
-                                                            onclick="Show('a_${i.getBill().getId()}', this, 'b_${i.getBill().getId()}')"
-                                                            aria-hidden="true"></i></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${i.getBill().isStatus() == 'false'}">
-                                                        <a href="UpdateStatusController?id=${i.getBill().getId()}" style="display: block; margin-top: 20px;">
-                                                        <button
-                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #d32e00">
-                                                            Đã nhận
+                                        <td class="bill_id">${i.getBill().getId()}</td>
+                                        <td class="bill_status">${i.getBill().isStatus() == "true" ? "Đã nhận" : "Chưa
+                                            nhận"}</td>
+                                        <td class="bill_price">
+                                            <div class="price">${i.getTotal()}</div>
+                                        </td>
+                                        <td class="order_date">${i.getBill().getOrderDate()}</td>
+                                        <td class="more_info_bill">
+                                            <div>
+                                                <p><i class="fa fa-chevron-down"
+                                                        onclick="Show('a_${i.getBill().getId()}', this, 'b_${i.getBill().getId()}')"
+                                                        aria-hidden="true"></i></p>
+                                            </div>
+                                        </td>
+                                        <td class="bill_confirm">
+                                            <c:choose>
+                                                <c:when
+                                                    test="${i.getBill().isStatus() == 'false' && requestScope.user.role != 'ADMIN'}">
+                                                    <a href="UpdateStatusController?id=${i.getBill().getId()}"
+                                                        style="display: block;">
+                                                        <button class="button2" style="padding: 5px 10px;
+                                                        font-size:20px; 
+                                                        border: none; 
+                                                        outline: none; 
+                                                        background-color: #d32e00;
+                                                        color: white;">
+                                                            Đã nhận được hàng
                                                         </button>
                                                     </a>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <p>Đã nhận</p>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                        </tr>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <p style="padding: 5px 5px;
+                                                    font-size:20px; 
+                                                    ">Đã nhận</p>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
                                     <c:forEach var="item" items="${i.getProducts()}">
-                                        
-
                                         <tr class="a_${i.getBill().getId()}"
                                             style="display: none; transform: translateX(-1000%); width: 0; margin-bottom: 15px; ">
-                                            <td>
-                                                <div class="product-top"
-                                                    style=" width: 100px; height:  100px; margin: 0 350px; border: 1px solid black;">
-                                                    <a href="" class="hien-thi">
-                                                        <img src="data:image/png;base64, ${Base64.encodeBase64String(item.getImage())}"
-                                                            style="width: 100px; height: 100px;" alt="Picture" />
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div style="margin-right: 420px;">
-                                                    <p>${item.getProductName()}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product-price">
-                                                    <p class="price">${item.getPrice()}</p>
-                                                    <p class="status" style="margin: 0 100px;">
-                                                        <c:choose>
-                                                            <c:when test="${item.getAvailable() > 0}">
-                                                                <span>Available: ${item.getAvailable()}</span>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <span style="color: red;">Sold out</span>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="products?action=show&id=${item.getId()}">
-                                                        <button
-                                                            style="padding: 2px 30px; border: none; outline: none; background-color: #00d2d3">
-                                                            Mua lại
-                                                        </button>
-                                                    </a>
-                                                    <c:choose>
-                                                        <c:when test="${i.getBill().isStatus() == 'true'}">
-                                                            
-                                                        <p>Đơn hàng đã nhận</p>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <p>Đơn hàng chưa nhận</p>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    
-                                                    
-                                                </div>
-
+                                            <td colspan="6">
+                                                <a href="products?action=show&id=${item.getId()}"
+                                                            class="hien-thi">
+                                                    <div class="product-name">
+                                                        <p>${item.getProductName()}</p>
+                                                    </div>
+                                                    <div class="product-top"
+                                                        style="width: 100px; height:  100px; margin: 0 350px; border: 1px solid black;">
+                                                        
+                                                            <img src="data:image/png;base64, ${Base64.encodeBase64String(item.getImage())}"
+                                                                style="width: 100px; height: 100px;" alt="Picture" />
+                                                        
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <p class="price">${item.getPrice()}</p>
+                                                    </div>
+                                                    <div>
+                                                    </div>
+                                                </a>
                                             </td>
                                         </tr>
                                         <br>
@@ -134,8 +114,8 @@
 
                         <script src="./script/home.js"></script>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-            <script src="./script/buyhistory.js"></script>            
-            <script src="./script/formatVND.js"></script>
+                        <script src="./script/buyhistory.js"></script>
+                        <script src="./script/formatVND.js"></script>
             </body>
 
             </html>

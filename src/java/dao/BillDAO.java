@@ -22,8 +22,8 @@ import model.Bill;
 import model.Category;
 import model.DetailOrder;
 import model.Product;
+import model.Transport;
 import model.User;
-import model.detail_order;
 
 
 public class BillDAO {
@@ -31,6 +31,7 @@ public class BillDAO {
     private Connection connection;
     private UserDAO dao = new UserDAO();
     private ProductDAO productDAO = new ProductDAO();
+    private TransportDAO vanchuyenDao = new TransportDAO();
 
     public BillDAO() {
         this.connection = DBConnection.getConnection();
@@ -90,17 +91,17 @@ public class BillDAO {
     public List<Bill> FindAllOrder(int id, String dateStar, String endStart) {
         try {
             String query = "";
-            if(id != 0 && (dateStar != "" || dateStar != null) && (endStart != null || endStart != "")){
+            if(id != 0 && dateStar != null&& endStart != null ){
                 query = "select * from bill where user_id = " + id + " and order_date BETWEEN ? and ?";
-            }else if(id != 0 && (dateStar == "" || dateStar == null) && (endStart == null || endStart == "")){
+            }else if(id != 0 &&  dateStar == null && endStart == null){
                 query = "select * from bill where user_id = " + id + "";
-            }else if(id == 0 && (dateStar == "" || dateStar == null) && (endStart == null || endStart == "")){
+            }else if(id == 0 &&  dateStar == null && endStart == null){
                 query = "select * from bill";
             }
             
 //            query = "select * from bill";
             PreparedStatement ps = connection.prepareStatement(query);
-           if(id != 0 && (dateStar != "" || dateStar != null) && (endStart != null || endStart != "")){
+           if(id != 0 && dateStar != null && endStart != null){
                 ps.setString(1, dateStar);
                 ps.setString(2, endStart);
            }
@@ -109,8 +110,12 @@ public class BillDAO {
             while (rs.next()) {
                 int idUser = rs.getInt(2);
                 User user = dao.getUser(idUser);
+                Transport vanchuyen = vanchuyenDao.getTransportById(rs.getLong(3));
+                if(user == null && vanchuyen == null){
+                    return null;
+                }
                 
-                Bill a = new Bill(rs.getLong(1), user, rs.getDate(4), rs.getString(5), rs.getBoolean(6));
+                Bill a = new Bill(rs.getLong(1), user, rs.getDate(4), rs.getString(5), rs.getBoolean(6), vanchuyen);
                 // long id, User user, Date orderDate, String deliveryAddress, boolean status
 
                 list.add(a);
