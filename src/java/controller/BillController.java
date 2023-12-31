@@ -89,7 +89,7 @@ public class BillController extends HttpServlet {
                 } catch (ParseException ex) {
                     Logger.getLogger(BillController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                request.getRequestDispatcher("buyhistory.jsp").forward(request, response);
+                request.getRequestDispatcher("listBill.jsp").forward(request, response);
             }
         }
     }

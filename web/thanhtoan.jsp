@@ -69,8 +69,9 @@
                                     <tr class="product-list" link="/shop/products?action=show&id=${i.product.id}">
                                         <td><img class="anh1" src="data:image/jpg;base64,${Base64.encodeBase64String(i.product.image)}" alt="picture"></td>
                                         <td><p>${i.product.productName}</p></td>
-                                        <td><p style="font-weight: bold;">${i.product.productName}</p></td>
-                                        <td><input type="number" value="${i.quantity}" min="1" max="${i.product.available}" required></td>
+                                        <td><p style="font-weight: bold;" class="price">${i.product.price}</p></td>
+                                        <!-- <td><input type="number" value="${i.quantity}" min="1" max="${i.product.available}" readonly></td> -->
+                                        <td><p>${i.quantity} products</td>
                                         <td><p style="font-weight: bold;" class="price">${i.product.price * i.quantity}</p></td>
                                         <td><a href="/shop/carts?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>

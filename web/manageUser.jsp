@@ -16,7 +16,7 @@
     <%@ include file="header.jsp" %> 
     
     <div class="content">
-        <div class="title">USER LIST</div>
+        <div class="title">ACCOUNT LIST</div>
         <table>
             <tr class="field">
                 <td>ID</td>
