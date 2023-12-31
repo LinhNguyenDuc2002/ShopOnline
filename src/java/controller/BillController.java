@@ -4,11 +4,7 @@
  */
 package controller;
 
-import dao.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Bill;
-import model.Product;
 import model.User;
-import model.listData;
 import service.BillService;
 import service.ProductService;
 import service.UserService;
