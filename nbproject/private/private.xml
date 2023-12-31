@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/ShopOnline/src/java/service/UserService.java</file>
             <file>file:/D:/ShopOnline/src/java/model/Product.java</file>
@@ -20,5 +21,8 @@
             <file>file:/D:/ShopOnline/web/WEB-INF/classes/app-config.properties</file>
             <file>file:/D:/ShopOnline/src/java/model/User.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> dev
     </open-files>
 </project-private>
