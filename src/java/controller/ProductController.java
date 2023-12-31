@@ -86,7 +86,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         request.setAttribute("user", user);
         
@@ -109,7 +109,7 @@ public class ProductController extends HttpServlet {
             getToFindProduct(request, response, user);
         }
         else {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     } 
 
@@ -124,7 +124,7 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         request.setAttribute("user", user);
         
@@ -137,7 +137,7 @@ public class ProductController extends HttpServlet {
             }
         }
         else {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     }
 
@@ -177,7 +177,7 @@ public class ProductController extends HttpServlet {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
         
         if(a == null) {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
             request.setAttribute("sanphamchitiet", a);
@@ -188,7 +188,7 @@ public class ProductController extends HttpServlet {
     
     private void getToShowProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product a = productService.getProduct(Long.valueOf(request.getParameter("id")));
-        request.setAttribute("list_category", productService.getAllProductsByCategory(String.valueOf(a.getCategory().getId()), null));
+        request.setAttribute("list_category", productService.getAllProductsByCategory(String.valueOf(a.getCategory().getId()), null, 8, null, null));
         request.setAttribute("sanphamchitiet", a);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }

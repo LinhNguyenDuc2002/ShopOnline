@@ -35,17 +35,16 @@
 
                 <div class="order-left">
                     <div class="main-order-left">
-                        <h2>
-                            Thông tin nhận hàng
-                        </h2>
+                        <h2>Delivery information</h2>
+                        
                         <div class="nhap">
-                            <input type="text" placeholder="Email" value="${requestScope.user.email}"><br/>
-                            <input type="text" placeholder="Fullname" value="${requestScope.user.fullname}"><br/>
-                            <input type="text" placeholder="Phone number" value="${requestScope.user.phone}"><br/>
-                            <input type="text" name="country" placeholder="Country" value="${requestScope.user.country}"><br/>
-                            <input type="text" name="city" placeholder="City" value="${requestScope.user.city}"><br/>
-                            <input type="text" name="detailAddress" placeholder="Detail Address" value="${requestScope.user.detail_address}" required><br/>
-                            <textarea id="w3review" name="note" rows="4" cols="50" placeholder="Note"></textarea><br/>
+                            <input type="text" placeholder="Email" value="${requestScope.user.email}">
+                            <input type="text" placeholder="Fullname" value="${requestScope.user.fullname}">
+                            <input type="text" placeholder="Phone number" value="${requestScope.user.phone}">
+                            <input type="text" name="country" placeholder="Country" value="${requestScope.user.country}">
+                            <input type="text" name="city" placeholder="City" value="${requestScope.user.city}">
+                            <input type="text" name="detailAddress" placeholder="Detail Address" value="${requestScope.user.detail_address}" required>
+                            <textarea id="w3review" name="note" rows="4" cols="50" placeholder="Note"></textarea>
                         </div>
                     </div>
 

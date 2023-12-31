@@ -320,3 +320,15 @@ p.error-quantity {
     color: red;
     display: none;
 }
+
+.view-mode {
+    margin-bottom: 20px;
+    color: grey;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.view-mode i {
+    margin-right: 10px;
+}

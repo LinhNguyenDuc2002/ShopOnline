@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.TKUser;
 import model.User;
 import service.TKUserService;
 import service.UserService;
@@ -43,19 +44,24 @@ public class ThongKeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ThongKeController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ThongKeController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
+            
+        int stt = 1;
+        PrintWriter out = response.getWriter();
+        for(TKUser i : tkUserService.tkUsers(start, end)) {
+            out.println("<tr class='product-list active'>");
+            out.println("<td>" + stt++ + "</td>");
+            out.println("<td>" + i.getFullname() + "</td>");
+            out.println("<td>" + i.getBirthday() + "</td>");
+            out.println("<td>" + i.getCity() + " - " + i.getCountry() + "</td>");
+            out.println("<td>" + i.getPhone() + "</td>");
+            out.println("<td class='price'>" + i.getTotalAmount() + "</td>");
+            out.println("<td>" + i.getJoin_date() + "</td>");
+            out.println("</tr>");
         }
     } 
 
@@ -70,27 +76,27 @@ public class ThongKeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         if(user != null && user.getRole().equals("ADMIN")) {
             request.setAttribute("user", user);
+            
             String start = request.getParameter("start");
             String end = request.getParameter("end");
             
-            if(start != null && end != null) {
-                request.setAttribute("start", start);
-                request.setAttribute("end", end);
+            if(start == null || end == null) {
+                request.getRequestDispatcher("tkKhachHang.jsp").forward(request, response);
             }
-            
-            try {
-                request.setAttribute("users", tkUserService.tkUsers(start, end));
-            } catch (ParseException ex) {
-                Logger.getLogger(ThongKeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.getRequestDispatcher("tkKhachHang.jsp").forward(request, response);
+            else {
+                try {
+                    processRequest(request, response);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ThongKeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }  
         }
         else {
-            response.sendRedirect("/shop/404");
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
     } 
 
@@ -104,7 +110,6 @@ public class ThongKeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 

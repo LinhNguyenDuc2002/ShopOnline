@@ -22,8 +22,8 @@ body {
 }
 
 .content table {
-    margin: 10px 0px;
     width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-list {
@@ -111,6 +111,8 @@ body {
     height: 35px;
     color: darkred;
     background-color: burlywood;
+    position: sticky;
+    top: 0px;
 }
 
 .content td {
@@ -133,6 +135,7 @@ td.actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .sort-right {

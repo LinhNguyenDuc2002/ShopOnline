@@ -18,11 +18,10 @@ body {
 .general-info {
     margin: 10px 50px;
     padding: 20px;
-    border: 1px solid black;
     display: flex;
     align-items: center;
     border-radius: 10px;
-    /* background-image: url(../image/348318079_595197412721739_9122079256357154697_n.jpg); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .image {
     height: 150px;

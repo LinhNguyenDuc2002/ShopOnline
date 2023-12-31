@@ -75,9 +75,9 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
-        if(action == null) {
+        if(action == null || (user != null && !user.getRole().equals("USER"))) {
             request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
@@ -111,7 +111,7 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         if(user != null && user.getRole().equals("USER") && action != null) {
             request.setAttribute("user", user);

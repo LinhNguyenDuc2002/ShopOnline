@@ -12,7 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
 import model.User;
+import org.apache.tomcat.util.codec.binary.Base64;
 import service.ProductService;
 import service.UserService;
 
@@ -22,6 +24,8 @@ import service.UserService;
  */
 @WebServlet(name="Home", urlPatterns={"/home"})
 public class Home extends HttpServlet {
+    private final Integer pageSize = 8;
+    
     private ProductService productService;
     
     private UserService userService;
@@ -42,17 +46,44 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Home</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        int page = Integer.parseInt(request.getParameter("page"));
+        
+        PrintWriter out = response.getWriter();
+        for(Product i : productService.getAllProduct(page, pageSize)) {
+            out.println("<li>");
+            out.println("<div class='product-item'>");
+            out.println("<div class='product-top'>");
+            out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='hien-thi'>");
+            out.println("<img src='data:image/png;base64, " + Base64.encodeBase64String(i.getImage()) + "' alt='Picture' />");
+            out.println("</a>");
+            
+            String role = (String) request.getSession(false).getAttribute("role");
+            if(role == null || !role.equals("ADMIN")) {
+                out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='buy-now'>Buy now</a>");
+            }
+            else {
+                out.println("<a href='/shop/products?action=edit&id=" + i.getId() + "' class=\"buy-now\">Edit</a>");
+            }
+            out.println("</div>");
+            out.println("<div class='product-info'>");
+            out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='product-name'>" + i.getProductName() + "</a>");
+            out.println("<div class='product-price'>");
+            out.println("<p class='price'>" + i.getPrice() + "</p>");
+            out.println("<p class='status'>");
+            
+            if(i.getAvailable()>0) {
+                out.println("<span>Available: " + i.getAvailable() + " | Sold: " + i.getSold() + "</span>");
+            }
+            else {
+                out.println("<span style='color: red;'>Sold out</span>");
+            }
+            
+            out.println("</p>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</li>");
         }
     } 
 
@@ -67,24 +98,12 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
-        request.setAttribute("user", user);
-        
-        Integer page = 0;
-        String pageParam = request.getParameter("page");
-        if (pageParam != null && !pageParam.isEmpty()) {
-            page = Integer.parseInt(pageParam)-1;
-        }
-        
-        request.setAttribute("sanpham", productService.getAllProduct(page));
-        request.setAttribute("totalPage", productService.getProductQuantity());
-        request.setAttribute("currentPage", page);
-        
-        if(user != null && user.getRole().equals("ADMIN")) {
-            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        String page = request.getParameter("page");
+        if(page == null) {
+            getHome(request, response);
         }
         else {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            processRequest(request, response);
         }
     } 
 
@@ -98,7 +117,6 @@ public class Home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 
@@ -109,5 +127,20 @@ public class Home extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    private void getHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = userService.getCurrentUser(request.getSession(false));
+        request.setAttribute("user", user);
+        
+        request.setAttribute("sanpham", productService.getAllProduct(0, pageSize));
+        request.setAttribute("totalPage", productService.getProductQuantity(null, pageSize));
+        request.setAttribute("currentPage", 0);
+        
+        if(user != null && user.getRole().equals("ADMIN")) {
+            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        }
+        else {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
+    }
 }

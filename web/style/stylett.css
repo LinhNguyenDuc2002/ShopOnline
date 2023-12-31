@@ -104,8 +104,8 @@ input[type="number"] {
 
 /* Điều chỉnh phần tạm tính và tổng tiền */
 .cart-content-bottom table {
-    margin-top: 20px;
-    width: 100%;
+    margin: 20px 0px 20px 50%;
+    width: 50%;
 }
 
 .cart-content-bottom td {
@@ -147,6 +147,10 @@ input[type="number"] {
     transition: background-color 0.3s, transform 0.2s;
     margin-right: 10px;
     text-decoration: none;
+}
+
+.cart-content-bottom {
+    display: grid;
 }
 
 /* Hiệu ứng hover */
@@ -267,4 +271,12 @@ article {
     display: grid;
     align-items: center;
     justify-content: center;
+}
+
+.product-list {
+    cursor: pointer;
+}
+
+.product-list:hover {
+    background-color: lightblue;
 }
