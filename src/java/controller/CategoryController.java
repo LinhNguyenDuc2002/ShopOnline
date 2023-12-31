@@ -16,6 +16,7 @@ import java.util.List;
 import model.Category;
 import model.Product;
 import model.User;
+import org.apache.tomcat.util.codec.binary.Base64;
 import service.CategoryService;
 import service.ProductService;
 import service.UserService;
@@ -26,6 +27,8 @@ import service.UserService;
  */
 @WebServlet(name="CategoryController", urlPatterns={"/categories"})
 public class CategoryController extends HttpServlet {
+    private final Integer pageSize = 6;
+    
     private ProductService productService;
     
     private UserService userService;
@@ -49,18 +52,49 @@ public class CategoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CategoryController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CategoryController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String id = request.getParameter("id");
+        String sort = request.getParameter("sort");
+        String by = request.getParameter("by");
+        int page = Integer.parseInt(request.getParameter("page"));
+        
+        PrintWriter out = response.getWriter();
+        for(Product i : productService.getAllProductsByCategory(id, page, pageSize, sort, by)) {
+            out.println("<li>");
+            out.println("<div class='product-item'>");
+            out.println("<div class='product-top'>");
+            out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='hien-thi'>");
+            out.println("<img src='data:image/png;base64, " + Base64.encodeBase64String(i.getImage()) + "' alt='Picture' />");
+            out.println("</a>");
+            
+            String role = (String) request.getSession(false).getAttribute("role");
+            if(role == null || !role.equals("ADMIN")) {
+                out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='buy-now'>Buy now</a>");
+            }
+            else {
+                out.println("<a href='/shop/products?action=edit&id=" + i.getId() + "' class=\"buy-now\">Edit</a>");
+            }
+            out.println("</div>");
+            out.println("<div class='product-info'>");
+            out.println("<a href='/shop/products?action=show&id=" + i.getId() + "' class='product-name'>" + i.getProductName() + "</a>");
+            out.println("<div class='product-price'>");
+            out.println("<p class='price'>" + i.getPrice() + "</p>");
+            out.println("<p class='status'>");
+            
+            if(i.getAvailable()>0) {
+                out.println("<span>Available: " + i.getAvailable() + " | Sold: " + i.getSold() + "</span>");
+            }
+            else {
+                out.println("<span style='color: red;'>Sold out</span>");
+            }
+            
+            out.println("</p>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</li>");
         }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,18 +108,13 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user = userService.getCurrentUser(request);
-        String id = request.getParameter("id");
         String pageParam = request.getParameter("page");
-        
-        List<Product> products = productService.getAllProductsByCategory(id, pageParam);
-        
-        request.setAttribute("user", user);
-        request.setAttribute("categories", categoryservice.getAllCategory());
-        request.setAttribute("products", products);
-        request.setAttribute("id", id);
-        
-        request.getRequestDispatcher("category.jsp").forward(request, response);
+        if(pageParam == null) {
+            getCategory(request, response);
+        }
+        else {
+            processRequest(request, response);
+        }
     } 
 
     /** 
@@ -98,7 +127,6 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 
@@ -109,5 +137,22 @@ public class CategoryController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    private void getCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = userService.getCurrentUser(request.getSession(false));
+        String id = request.getParameter("id");
+        String sort = request.getParameter("sort");
+        String by = request.getParameter("by");
+        
+        List<Product> products = productService.getAllProductsByCategory(id, 0, pageSize, sort, by);
+        
+        request.setAttribute("user", user);
+        request.setAttribute("categories", categoryservice.getAllCategory());
+        request.setAttribute("products", products);
+        request.setAttribute("id", id);
+        request.setAttribute("totalPage", productService.getProductQuantity(id, pageSize));
+        request.setAttribute("currentPage", 0);
+        
+        request.getRequestDispatcher("category.jsp").forward(request, response);
+    }
 }

@@ -15,25 +15,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.Bill;
-import model.Category;
 import model.DetailOrder;
-import model.Product;
-import model.User;
-import model.detail_order;
 
 
 public class BillDAO {
-
     private Connection connection;
-    private UserDAO dao = new UserDAO();
-    private ProductDAO productDAO = new ProductDAO();
+    
+    private UserDAO userDAO;
+    
+    private ProductDAO productDAO;
+    
+    private TransportDAO transportDAO;
 
     public BillDAO() {
         this.connection = DBConnection.getConnection();
+        this.userDAO = new UserDAO();
+        this.productDAO = new ProductDAO();
+        this.transportDAO = new TransportDAO();
     }
 
     public Long addBill(Bill bill) {
@@ -61,84 +61,93 @@ public class BillDAO {
         }
         return null;
     }
-
-//<<<<<<< HEAD
-    public List<DetailOrder> FindAllDetailsOrder(int id) {
+    
+    public List<Long> getAllBillByUserId(Long id) {
         try {
-
-            String query = "select * from detail_order where bill_id = " + id + "";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            List<DetailOrder> list = new ArrayList<DetailOrder>();
-            while (rs.next()) {
-                int product_id = rs.getInt(3);
-                int user_id = rs.getInt(4);
-                Product pr = productDAO.getProduct((long) product_id);
-                User users = dao.getUser((long) user_id);
-                DetailOrder a = new DetailOrder(rs.getInt(1), users, pr, rs.getInt(5), rs.getBoolean(6));
-
-                list.add(a);
-            }
-            return list;
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        return null;
-    }
-
-    public List<Bill> FindAllOrder(int id, String dateStar, String endStart) {
-        try {
-            String query = "";
-            if(id != 0 && (dateStar != "" || dateStar != null) && (endStart != null || endStart != "")){
-                query = "select * from bill where user_id = " + id + " and order_date BETWEEN ? and ?";
-            }else if(id != 0 && (dateStar == "" || dateStar == null) && (endStart == null || endStart == "")){
-                query = "select * from bill where user_id = " + id + "";
-            }else if(id == 0 && (dateStar == "" || dateStar == null) && (endStart == null || endStart == "")){
-                query = "select * from bill";
+            String sql = "SELECT id FROM bill WHERE user.id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            List<Long> bill = new ArrayList<>();
+            while(resultSet.next()) {
+                bill.add(resultSet.getLong(1));
             }
             
-//            query = "select * from bill";
-            PreparedStatement ps = connection.prepareStatement(query);
-           if(id != 0 && (dateStar != "" || dateStar != null) && (endStart != null || endStart != "")){
-                ps.setString(1, dateStar);
-                ps.setString(2, endStart);
-           }
-            ResultSet rs = ps.executeQuery();
-            List<Bill> list = new ArrayList<>();
-            while (rs.next()) {
-                int idUser = rs.getInt(2);
-                User user = dao.getUser(idUser);
-                
-                Bill a = new Bill(rs.getLong(1), user, rs.getDate(4), rs.getString(5), rs.getBoolean(6));
-                // long id, User user, Date orderDate, String deliveryAddress, boolean status
-
-                list.add(a);
-                System.out.println("Tên" + user.getFullname());
-            }
-            return list;
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        return null;
-    }
-    
-    public boolean updateTrangThai(int id){
-        String sql = "Update bill set status = true where id = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, id);
-            if(preparedStatement.executeUpdate() > 0){
-                return true;
-            }
-            return false;
+            return bill;
         } catch (SQLException e) {
             e.printStackTrace();
             // Xử lý ngoại lệ nếu cần thiết
-            return false;
+        }
+        return List.of();
+    }
+    
+    public List<Bill> getAllBillByUserId(Long id, Date start, Date end) {
+        List<Bill> bills = new ArrayList<>();
+        
+        if(start == null || end == null) {
+            try {
+                String sql = "SELECT * FROM bill WHERE user_id = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, id);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+                
+                while(resultSet.next()) {
+                    Bill bill = new Bill();
+                    bill.setId(resultSet.getLong(1));
+                    bill.setOrderDate(resultSet.getDate(4));
+                    bill.setDeliveryAddress(resultSet.getString(5));
+                    bill.setStatus(resultSet.getBoolean(6));
+                    bill.setNote(resultSet.getString(7));
+                    
+                    bills.add(bill);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Xử lý ngoại lệ nếu cần thiết
+            }
+        }
+        else {
+            try {
+                String sql = "SELECT * FROM bill WHERE user_id = ? and order_date >= ? and order_date <= ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, id);
+                preparedStatement.setDate(2, start);
+                preparedStatement.setDate(3, end);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+                
+                while(resultSet.next()) {
+                    Bill bill = new Bill();
+                    bill.setId(resultSet.getLong(1));
+                    bill.setOrderDate(resultSet.getDate(4));
+                    bill.setDeliveryAddress(resultSet.getString(5));
+                    bill.setStatus(resultSet.getBoolean(6));
+                    bill.setNote(resultSet.getString(7));
+                    
+                    bills.add(bill);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Xử lý ngoại lệ nếu cần thiết
+            }
         }
         
+        return bills;
+    }
+
+    public void update(Long id){
+        String sql = "UPDATE bill SET status = true WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setLong(1, id);
+            
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Long> getBillsOfUser(Long id, Date start, Date end) {

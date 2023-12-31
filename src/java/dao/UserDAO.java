@@ -294,7 +294,7 @@ public class UserDAO {
         }
     }
     
-    public boolean authenticate(String username, String password) {
+    public String authenticate(String username, String password) {
         String sql = "SELECT * FROM user WHERE username = ? and password = ? and status = true";
         
         try {
@@ -304,13 +304,12 @@ public class UserDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
-                return true;
+                return resultSet.getString(14);
             }
-            return false;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return null;
     }
     
     public void changePassword(String password, Long id) {

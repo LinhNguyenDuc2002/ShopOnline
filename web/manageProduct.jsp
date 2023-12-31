@@ -68,7 +68,7 @@
 
                 <tbody class="product-body">
                     <c:forEach items="${requestScope.sanpham}" var="i">
-                        <tr class="product-list active" link="/shop/products?action=show&id=${i.id}" >
+                        <tr class="product-list active" link="/shop/products?action=show&id=${i.id}">
                             <td>${i.id}</td>
                             <td>${i.productName}</td>
                             <td>${i.category.name}</td>
@@ -89,7 +89,7 @@
 
     <%@ include file="footer.jsp" %>
 
-    <script src="./script/home.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/manage.js"></script>
     <script src="./script/formatVND.js"></script>
 

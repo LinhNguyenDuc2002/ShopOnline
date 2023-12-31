@@ -14,10 +14,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Bill;
 import model.Product;
 import model.User;
-import model.detail_order;
 import model.listData;
 import service.BillService;
 import service.ProductService;
@@ -27,20 +29,22 @@ import service.UserService;
  *
  * @author ASUS
  */
-@WebServlet(name = "OrderDetailsProduct", urlPatterns = {"/OrderDetailsProduct"})
+@WebServlet(name = "BillController", urlPatterns = {"/bill"})
 public class BillController extends HttpServlet {
     private ProductService productService;
-    private BillService billDao = new BillService();
-    private UserDAO userDAO = new UserDAO();
     
+    private BillService billService;
+
     private UserService userService;
-    
+
     @Override
     public void init() throws ServletException {
-         super.init();
-         productService = new ProductService();
-         userService = new UserService();
+        super.init();
+        productService = new ProductService();
+        billService = new BillService();
+        userService = new UserService();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,29 +56,6 @@ public class BillController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String role = request.getParameter("role");
-        String dateStar = request.getParameter("dateStart");
-        String dateEnd = request.getParameter("endDate");
-        String idUser = request.getParameter("id");
-        int ids = 0;
-        if(idUser != null || idUser != "" || idUser != "0"){
-            ids = Integer.parseInt(idUser);
-        }
-        User user = userService.getCurrentUser(request);
-        request.setAttribute("user", user);
-        List<Bill> listBill = billDao.FindAllOrder(ids, dateStar, dateEnd);
-        
-        List<listData> data = billDao.FindAllDataOrder(listBill);
-        
-        request.setAttribute("sanpham", data);
-        
-        if(role != null && role.equals("ADMIN")) {
-            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
-        }
-        else {
-            request.getRequestDispatcher("buyhistory.jsp").forward(request, response);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,31 +70,34 @@ public class BillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String role = request.getParameter("role");
-        String dateStar = request.getParameter("dateStart");
-        String dateEnd = request.getParameter("endDate");
-        String idUser = request.getParameter("id");
-        int ids;
-        if(idUser != null){
-            ids = Integer.parseInt(idUser);
-        }else{
-            ids = 0;
-        }
-        System.out.println("Ngày " + dateStar + ", Ngày End " + dateEnd);
-        User user = userService.getCurrentUser(request);
-        request.setAttribute("user", user);
-        List<Bill> listBill = billDao.FindAllOrder(ids, dateStar, dateEnd);
-        System.out.println("Id: " + ids);
+        User user = userService.getCurrentUser(request.getSession(false));
         
-        List<listData> data = billDao.FindAllDataOrder(listBill);
-        
-        request.setAttribute("sanpham", data);
-        
-        if(role != null && role.equals("ADMIN")) {
-            request.getRequestDispatcher("homeAdmin.jsp").forward(request, response);
+        if(user == null) {
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
         else {
-            request.getRequestDispatcher("buyhistory.jsp").forward(request, response);
+            request.setAttribute("user", user);
+            String dateStart = request.getParameter("start");
+            String dateEnd = request.getParameter("end");
+            
+            if(user.getRole().equals("USER")) {
+                try {
+                    request.setAttribute("bill", billService.getAllBillByUserId(user.getId(), dateStart, dateEnd));
+                } catch (ParseException ex) {
+                    Logger.getLogger(BillController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.getRequestDispatcher("buyhistory.jsp").forward(request, response);
+            }
+            else if(user.getRole().equals("ADMIN")){
+                String id = request.getParameter("id");
+
+                try {
+                    request.setAttribute("bill", billService.getAllBillByUserId(Long.valueOf(id), dateStart, dateEnd));
+                } catch (ParseException ex) {
+                    Logger.getLogger(BillController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.getRequestDispatcher("buyhistory.jsp").forward(request, response);
+            }
         }
     }
 
@@ -128,6 +112,17 @@ public class BillController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
+        User user = userService.getCurrentUser(request.getSession(false));
+        
+        if(user == null) {
+            request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
+        }
+        else if(user != null && action.equals("update")) {
+            String id = request.getParameter("id");
+            
+            billService.update(Long.valueOf(id));
+        }
         
     }
 

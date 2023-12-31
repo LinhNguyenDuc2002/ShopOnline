@@ -50,7 +50,19 @@ public class Bill {
         this.deliveryAddress = deliveryAddress;
         this.status = status;
     }
-
+    
+    public double getTotal() {
+        double total = 0;
+        
+        for(DetailOrder it :  detailOrders) {
+            total += (it.getQuantity() * it.getProduct().getPrice());
+        }
+        
+        total += transport.getPrice();
+        
+        return total;
+    }
+    
     public long getId() {
         return id;
     }

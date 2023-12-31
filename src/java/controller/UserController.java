@@ -83,7 +83,7 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         request.setAttribute("user", user);
         
         if(action == null && user != null) {
@@ -91,9 +91,6 @@ public class UserController extends HttpServlet {
         }
         else if(action != null && user == null) {
             switch (action) {
-                case "verify":
-                    request.getRequestDispatcher("otp.jsp").forward(request, response);
-                    break;
                 case "login":
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                     break;
@@ -145,7 +142,7 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, UnsupportedEncodingException {
         String action = request.getParameter("action");
-        User user = userService.getCurrentUser(request);
+        User user = userService.getCurrentUser(request.getSession(false));
         
         request.setAttribute("user", user);
         
@@ -221,7 +218,7 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
         else {
-            response.sendRedirect("/shop/users?action=verify");
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
         } 
     }
     
@@ -254,9 +251,11 @@ public class UserController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
-        if(userService.authenticate(username, password)) {
+        String role = userService.authenticate(username, password);
+        if(role != null) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
+            session.setAttribute("role", role);
             session.setMaxInactiveInterval(1800);
             
             response.sendRedirect("/shop/home");
@@ -282,7 +281,7 @@ public class UserController extends HttpServlet {
         input.put("new", request.getParameter("new"));
         input.put("again", request.getParameter("again"));
         
-        String error = userService.changePassword(input, userService.getCurrentUser(request));
+        String error = userService.changePassword(input, userService.getCurrentUser(request.getSession(false)));
         if(error == null) {
             error = "success";
         }
@@ -307,9 +306,11 @@ public class UserController extends HttpServlet {
             String error = userService.addUser(username, otp);
             if(error.length()>0) {
                 request.setAttribute("error", error);
-                response.sendRedirect("/shop/users?action=verify");
+                request.getRequestDispatcher("otp.jsp").forward(request, response);
             }
             else {
+                HttpSession session = request.getSession(false);
+                session.invalidate();
                 request.getRequestDispatcher("SignupSuccess.jsp").forward(request, response);
             }
             

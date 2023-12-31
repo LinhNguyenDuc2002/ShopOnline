@@ -11,6 +11,23 @@ function sortData() {
     var filter = document.getElementById("filters").value;
     var sort = document.getElementById("sortBy").value;
 
-    window.location.href = "/shop/manage?action=products&filter="+ filter + "&sort=" + sort;
+    $.ajax ({
+        url: "/shop/manage",
+        method: "GET",
+        data: {
+            action: "products",
+            filter: filter,
+            sort: sort
+        },
+        success: function(response) {
+            var row = document.querySelector(".product-body");
+            row.innerHTML = response;
+
+            formatVND();
+        },
+        error: function(error) {
+
+        }
+    });
 }
 

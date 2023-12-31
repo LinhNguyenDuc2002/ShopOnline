@@ -236,7 +236,8 @@ footer h3 {
 }
 
 .product-price .status {
-    font-size: 16px;
+    font-size: 13px;
+    color: grey;
 }
 
 span.alert-search {
@@ -252,9 +253,10 @@ span.alert-search {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
 
-a.index-page {
+button.index-page {
     margin: 0px 5px;
     cursor: pointer;
     text-decoration: none;
@@ -263,8 +265,9 @@ a.index-page {
     width: 10px;
     height: 10px;
     text-align: center;
+    border: 0px;
 }
 
-a.index-page:hover {
+button.index-page:hover {
     background-color: black;
 }

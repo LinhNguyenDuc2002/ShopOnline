@@ -40,12 +40,19 @@
                         </c:if>
                     </c:forEach>
 
-                    <p class="category-title">${category}</p>
+                    <p class="category-title" idCategory="${requestScope.id}">${category}</p>
 
                     <div class="sort">
+                        <label for="">Sort by: </label>
+                        <select id="sort-by">
+                            <option value="price">Price</option>
+                            <option value="sold">Quantity sold</option>
+                        </select>
 
+                        <i class="fa-solid fa-arrow-up sort-price" id="sort-price"></i>
                     </div>
                 </div>
+
                 <ul class="products">   
                     <c:forEach var="i" items="${requestScope.products}">
                         <li>
@@ -63,7 +70,7 @@
                                         <p class="status">
                                             <c:choose>
                                                 <c:when test="${i.available > 0}">
-                                                    <span>Available: ${i.available}</span>
+                                                    <span>Available: ${i.available} | Sold: ${i.sold}</span>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <span style="color: red;">Sold out</span>
@@ -76,12 +83,27 @@
                         </li>
                     </c:forEach>
                 </ul>
+
+                <c:if test="${requestScope.totalPage > 1}">
+                    <div class="pages">
+                        <c:forEach var="i" begin="1" end="${requestScope.totalPage}">
+                            <c:choose>
+                                <c:when test="${requestScope.currentPage == i-1}">
+                                    <button class="index-page" page="${i-1}" onclick="loadPage(this)" style="background-color: black"></button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="index-page" page="${i-1}" onclick="loadPage(this)" style="background-color: lightgrey"></button>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>
     <%@ include file="footer.jsp" %>
 
-    <script src="./script/home.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/category.js"></script>
     <script src="./script/formatVND.js"></script>
 

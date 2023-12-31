@@ -35,6 +35,7 @@ ul.products li {
     box-sizing: border-box;
     margin-bottom: 10px;
     margin-top: 20px;
+    max-width: 306px;
 }
 
 ul.products li img {
@@ -89,6 +90,7 @@ ul.products li:hover a.buy-now {
 
 ul.products li .product-info {
     padding-top: 15px;
+    width: 100%;
 }
 
 ul.products li .product-info a {
@@ -97,10 +99,13 @@ ul.products li .product-info a {
 
 ul.products li .product-info a.product-name {
     color: black;
-    display: flex;
+    display: block;
     padding: 5px 0px;
     font-size: 20px;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 ul.products li .product-info .product-price {
@@ -171,7 +176,8 @@ footer h3 {
 }
 
 .product-price .status {
-    font-size: 16px;
+    font-size: 13px;
+    color: grey;
 }
 
 .category-menu {
@@ -238,4 +244,43 @@ footer h3 {
 
 .active {
     background-color: whitesmoke;
+}
+
+select#sort-by {
+    height: 30px;
+    margin: 0px 10px;
+}
+
+.sort {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 16px;
+}
+
+.sort i {
+    cursor: pointer;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button.index-page {
+    margin: 0px 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    border: 0px;
+}
+
+button.index-page:hover {
+    background-color: black;
 }

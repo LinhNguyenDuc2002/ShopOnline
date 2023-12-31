@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="org.apache.tomcat.util.codec.binary.Base64" %>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +30,7 @@
         </div>
 
         <table>
-            <tr class="field">
+            <thead class="field">
                 <td>STT</td>
                 <td>Full name</td>
                 <td>Birthday</td>
@@ -40,37 +38,30 @@
                 <td>Phone number</td>
                 <td>Total amount</td>
                 <td>Joined date</td>
-            </tr>
-            
-            <c:set var="stt" value="1" />
-            <c:forEach items="${requestScope.users}" var="i">
-                <tr class="product-list" onclick="Next(${i.id})">
-                    <td onclick="Next()">${stt}</td>
-                    <td onclick="Next()">${i.fullname}</td>
-                    <td onclick="Next()">${i.birthday}</td>
-                    <td onclick="Next()">${i.city} - ${i.country}</td>
-                    <td onclick="Next()">${i.phone}</td>
-                    <td onclick="Next()" class="price">${i.totalAmount}</td>
-                    <td onclick="Next()">${i.join_date}</td>
-                </tr>
-                <c:set var="stt" value="${stt + 1}" />
-            </c:forEach>
+            </thead>
+
+            <tbody class="customer">
+                <c:set var="stt" value="1" />
+                <c:forEach items="${requestScope.users}" var="i">
+                    <tr class="product-list active" link="/shop/bill?id=${i.id}">
+                        <td>${stt}</td>
+                        <td>${i.fullname}</td>
+                        <td>${i.birthday}</td>
+                        <td>${i.city} - ${i.country}</td>
+                        <td>${i.phone}</td>
+                        <td class="price">${i.totalAmount}</td>
+                        <td>${i.join_date}</td>
+                    </tr>
+                    <c:set var="stt" value="${stt + 1}" />
+                </c:forEach>
+            </tbody>
         </table>
     </div>
 
     <%@ include file="footer.jsp" %>
 
-    <script src="./script/home.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/formatVND.js"></script>
     <script src="./script/thongke.js"></script>
-    <script type="text/javascript">
-        function Next(id){
-            const startAt = document.getElementById("startAt").value;
-            const endAt = document.getElementById("endAt").value;
-            var url = "OrderDetailsProduct?dateStart="+startAt+"&endDate="+endAt+"&id="+id;
-            window.location.href = url;
-        }
-    </script>
 </body>
-
 </html>
