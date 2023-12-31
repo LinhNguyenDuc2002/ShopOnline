@@ -89,7 +89,7 @@
 
                     <a class="selection" href="/shop/manage?action=users">
                         <i class="fa-solid fa-people-roof"></i>
-                        <p>Manage users</p>
+                        <p>Manage accounts</p>
                     </a>
                 </c:when>
             </c:choose>

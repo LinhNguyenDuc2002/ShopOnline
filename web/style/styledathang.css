@@ -48,8 +48,9 @@ body {
     transition: border-color 0.3s;
 }
 
-.nhap textarea{
-  resize: none;
+.nhap textarea {
+    resize: none;
+    height: 100px;
 }
 
 /* Định dạng đơn hàng */
@@ -68,7 +69,7 @@ body {
     border-collapse: collapse;
     margin-bottom: 10px;
     cursor: pointer;
-    max-height: 250px;
+    height: 220px;
     overflow-y: auto;
     overflow-x: hidden;
 }

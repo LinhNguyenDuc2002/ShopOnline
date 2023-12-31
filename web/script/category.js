@@ -40,10 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function send(id, price, seller) {
-    window.location.href = "/shop/categories?id="+ id + "&price=" + price + "&seller=" + seller;
-}
-
 function loadPage(clicked) {
     var page = clicked.getAttribute('page');
     var btn = document.querySelectorAll('.index-page');
@@ -69,6 +65,7 @@ function loadPage(clicked) {
             row.innerHTML = response;
 
             formatVND();
+
         },
         error: function(error) {
 
@@ -85,7 +82,10 @@ function loadPageFirst() {
     btn.forEach(btn => {
         btn.style.backgroundColor = 'lightgrey';
     });
-    btn[0].style.backgroundColor = 'black';
+
+    if(btn.length > 0) {
+        btn[0].style.backgroundColor = 'black';
+    }
 
     $.ajax ({
         url: "/shop/categories",
@@ -101,6 +101,7 @@ function loadPageFirst() {
             row.innerHTML = response;
 
             formatVND();
+
         },
         error: function(error) {
 
