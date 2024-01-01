@@ -51,7 +51,14 @@
                             <td>${i.email}</td>
                             <td style="color: green;">Active</td>
                             <td class="actions">
-                                <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                                <c:choose>
+                                    <c:when test="${i.role == 'ADMIN'}">
+                                        <p>ADMIN</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/shop/users?action=delete&id=${i.id}"><i class="fa-solid fa-trash"></i></a>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </tr>
                     </c:when>
