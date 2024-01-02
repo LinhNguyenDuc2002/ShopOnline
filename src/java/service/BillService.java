@@ -92,7 +92,5 @@ public class BillService {
     private String formatAddress(Map<String, String> input) {
         return input.get("detail") + " - " + input.get("city") + " - " + input.get("country");
     }
-    
-
 }
 

@@ -11,6 +11,8 @@ package model;
 public class DetailOrder {
     private long id;
     
+    private double unit_price;
+    
     private User user;
     
     private Product product;
@@ -22,12 +24,21 @@ public class DetailOrder {
     public DetailOrder() {
     }
 
-    public DetailOrder(long id, User user, Product product, long quantity, boolean status) {
+    public DetailOrder(long id, double unit_price, User user, Product product, long quantity, boolean status) {
         this.id = id;
+        this.unit_price = unit_price;
         this.user = user;
         this.product = product;
         this.quantity = quantity;
         this.status = status;
+    }
+
+    public double getUnit_price() {
+        return unit_price;
+    }
+
+    public void setUnit_price(double unit_price) {
+        this.unit_price = unit_price;
     }
 
     public long getId() {
