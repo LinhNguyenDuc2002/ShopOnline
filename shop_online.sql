@@ -55,7 +55,7 @@ CREATE TABLE bill(
     delivery_address VARCHAR(255) NOT NULL,
     status BOOLEAN,
     note TEXT,
-    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
     FOREIGN KEY (transport_id) REFERENCES transport(id)
 );
 
@@ -67,9 +67,9 @@ CREATE TABLE detail_order(
     user_id BIGINT NOT NULL,
     quantity BIGINT NOT NULL,
     status BOOLEAN NOT NULL,
-    FOREIGN KEY (bill_id) REFERENCES bill(id),
-    FOREIGN KEY (product_id) REFERENCES product(id),
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (bill_id) REFERENCES bill(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 INSERT INTO transport VALUES(1, "Express Shipping", 50000, "");
