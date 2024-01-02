@@ -234,7 +234,7 @@ public class UserController extends HttpServlet {
         user.setCountry(request.getParameter("country"));
         user.setDetail_address(request.getParameter("detail_address"));
         user.setNote(request.getParameter("note"));
-        user.setSex(request.getParameter("gender").equals("male")?true:false);
+        user.setSex(request.getParameter("gender").equals("female")?true:false);
         
         List<String> errors = userService.updateUser(user, currentUser);
         if(!errors.isEmpty()) {

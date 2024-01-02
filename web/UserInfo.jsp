@@ -69,10 +69,10 @@
                             <p>Gender</p>
                             <div class="radio">
                                 <label for="male">
-                                    <input type="radio" name="gender" value="male" ${requestScope.user.getSex()=="true" ? "checked" : "" } required>Male
+                                    <input type="radio" name="gender" value="male" ${requestScope.user.getSex()=="false" ? "checked" : "" } required>Male
                                 </label>
                                 <label for="female">
-                                    <input type="radio" name="gender" value="female" ${requestScope.user.getSex()=="false" ? "checked" : "" } required>Female
+                                    <input type="radio" name="gender" value="female" ${requestScope.user.getSex()=="true" ? "checked" : "" } required>Female
                                 </label>
                             </div>
 
