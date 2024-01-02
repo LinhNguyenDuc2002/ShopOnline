@@ -39,7 +39,7 @@
 
                     <p class="category">Category: <span>${requestScope.sanphamchitiet.category.name}</span></p>
     
-                    <p class="text">Status: 
+                    <p class="text"> 
                         <c:choose>
                             <c:when test="${requestScope.sanphamchitiet.available > 0}">
                                 <span id="available">Available: ${requestScope.sanphamchitiet.available}</span>
@@ -72,7 +72,7 @@
         
         <!-- MÔ TẢ -->
         <div class="mo-ta">
-                 <h2 >MÔ TẢ</h2>
+                 <h2>DESCRIPTION</h2>
                  <div class="khung-mo-ta">
                      <p>${requestScope.sanphamchitiet.getDescription()}<p>
                  </div>
