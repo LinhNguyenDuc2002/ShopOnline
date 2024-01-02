@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 CREATE DATABASE shop_online;
 
 CREATE TABLE category(
@@ -14,7 +12,7 @@ CREATE TABLE product(
     category_id BIGINT NOT NULL,
     unit VARCHAR(255),
     price DOUBLE NOT NULL,
-    discount DOUBLE,
+    status BOOLEAN,
     available BIGINT NOT NULL,
     sold BIGINT NOT NULL,
     image LONGBLOB,
@@ -63,6 +61,7 @@ CREATE TABLE bill(
 
 CREATE TABLE detail_order(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    unit_price DOUBLE,
     bill_id BIGINT,
     product_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
@@ -87,5 +86,3 @@ INSERT INTO category VALUES(7, "Calculator", "Có rất nhiều loại máy tín
 INSERT INTO category VALUES(8, "Ruler", "Có đủ loại thước kẻ dành cho sinh viên");
 INSERT INTO category VALUES(9, "Desk calendar ", "Có rất nhiều lịch để bàn dành cho bạn");
 INSERT INTO category VALUES(10, "Stapler", "Đồ bấm ghim chắc chắn, chất lượng cao");
-
->>>>>>> dev

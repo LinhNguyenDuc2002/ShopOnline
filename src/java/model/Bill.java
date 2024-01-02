@@ -55,7 +55,7 @@ public class Bill {
         double total = 0;
         
         for(DetailOrder it :  detailOrders) {
-            total += (it.getQuantity() * it.getProduct().getPrice());
+            total += (it.getQuantity() * it.getUnit_price());
         }
         
         total += transport.getPrice();

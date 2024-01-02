@@ -111,7 +111,7 @@ public class BillController extends HttpServlet {
         if(user == null) {
             request.getRequestDispatcher("PageNotFound.jsp").forward(request, response);
         }
-        else if(user != null && action.equals("update")) {
+        else if(user.getRole().equals("USER") && action.equals("update")) {
             String id = request.getParameter("id");
             
             billService.update(Long.valueOf(id));

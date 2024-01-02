@@ -19,7 +19,7 @@ public class UserCache {
 
     public UserCache() {
         this.cache = CacheBuilder.newBuilder()
-                .expireAfterWrite(2, TimeUnit.MINUTES) // Thiết lập thời gian hết hạn
+                .expireAfterWrite(5, TimeUnit.MINUTES) // Thiết lập thời gian hết hạn
                 .build();
     }
 

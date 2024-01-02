@@ -51,9 +51,9 @@
                                     <div class="sub-product-list" link="/shop/products?action=show&id=${a.product.id}">
                                         <div class="image"><img class="anh1" src="data:image/png;base64, ${Base64.encodeBase64String(a.product.image)}" alt="picture"></div>
                                         <div class="sub-name"><p>${a.product.productName}</p></div>
-                                        <div>Unit price:<p class="price number">${a.product.price}</p></div>
+                                        <div>Unit price:<p class="price number">${a.unit_price}</p></div>
                                         <div>Quantity:<p class="number">${a.quantity}</p></div>
-                                        <div>Total:<p class="price number">${a.product.price * a.quantity}</p></div>
+                                        <div>Total:<p class="price number">${a.unit_price * a.quantity}</p></div>
                                     </div>
                                 </c:forEach>
     

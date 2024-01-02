@@ -89,10 +89,11 @@ public class CartDAO {
             
             while (rs.next()) {
                 DetailOrder a = new DetailOrder(rs.getLong(1), 
-                                                userDAO.getUser(rs.getLong(4)), 
-                                                productDAO.getProduct(rs.getLong(3)),
-                                                rs.getLong(5), 
-                                                rs.getBoolean(6));
+                                                rs.getDouble(2),
+                                                userDAO.getUser(rs.getLong(5)), 
+                                                productDAO.getProduct(rs.getLong(4)),
+                                                rs.getLong(6), 
+                                                rs.getBoolean(7));
 
                 list.add(a);
             }
@@ -117,10 +118,10 @@ public class CartDAO {
                 map.put(i++,
                         List.of(
                                 rs.getString(1),
-                                rs.getString(3),
                                 rs.getString(4),
                                 rs.getString(5),
-                                rs.getString(6)
+                                rs.getString(6),
+                                rs.getString(7)
                         ));
             }
             return map;
@@ -147,15 +148,18 @@ public class CartDAO {
     }
     
     public void updateDetailOrder(Long id, Long billId) {
+        double unit = getPriceOfProduct(id);
         String sql = "UPDATE detail_order SET " +
+                "    unit_price = ?, " +
                 "    bill_id = ?, " +
                 "    status = true " +
                 "    WHERE id = ?";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, billId);
-            preparedStatement.setLong(2, id);
+            preparedStatement.setDouble(1, unit);
+            preparedStatement.setLong(2, billId);
+            preparedStatement.setLong(3, id);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -201,5 +205,26 @@ public class CartDAO {
             e.printStackTrace();
             // Xử lý ngoại lệ nếu cần thiết
         }
+    }
+    
+    private double getPriceOfProduct(Long id) {
+        String sql = "SELECT product.price FROM detail_order " + 
+                "JOIN product ON detail_order.product_id = product.id " + 
+                "WHERE detail_order.id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần thiết
+        }
+        return 0;
     }
 }
